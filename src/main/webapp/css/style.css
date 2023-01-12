@@ -1,0 +1,284 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-flow: column;
+    width: 98vw;
+    height: 100vh;
+    align-items: center;
+}
+
+#navbar {
+    width: 98vw;
+    height: 10vh;
+    margin-bottom: 30px;
+}
+
+#navbar-logo {
+    justify-self: left;
+    margin-left: 30px;
+}
+
+#navbar-table {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.item-wrapper {
+    margin-left: 10px;
+    margin-top: 0px;
+}
+
+#lang-dropdown {
+    padding-right: 20px;
+    padding-left: 10px;
+}
+
+#signInText {
+    margin-top: 30px;
+}
+
+#main-content {
+    display: flex;
+    height: 65vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#signInForm {
+    padding: 30px;
+    margin: 10px;
+    border-width: thin;
+    border-style: solid;
+    width: 400px;
+    height: 280px;
+    border-color: rgb(175, 175, 175);
+    border-radius: 2%;
+}
+
+#addingTest {
+    margin: 10px;
+    border-width: thin;
+    border-style: solid;
+    border-color: rgb(175, 175, 175);
+    border-radius: 1%;
+    padding: 20px;
+}
+
+#signUpForm {
+    padding: 30px;
+    margin: 10px;
+    border-width: thin;
+    border-style: solid;
+    width: 400px;
+    height: 515px;
+    border-color: rgb(175, 175, 175);
+    border-radius: 2%;
+}
+
+#signUpButton {
+    margin: 10px auto;
+    display: block;
+}
+
+#profileForm {
+    padding: 30px;
+    margin: 10px;
+    border-width: thin;
+    border-style: solid;
+    width: 400px;
+    height: 350px;
+    border-color: rgb(175, 175, 175);
+    border-radius: 2%;
+}
+
+#tests{
+    display: grid;
+    width: 70vw;
+    margin-left: 15%;
+    margin-right: 20%;
+    justify-content: center;
+    grid-template-columns: 3fr;
+}
+
+#passedTests{
+    display: grid;
+    width: 70vw;
+    margin-left: 15%;
+    margin-right: 20%;
+    justify-content: center;
+    grid-template-columns: 3fr;
+}
+
+#users{
+    display: grid;
+    width: 70vw;
+    margin-left: 15%;
+    margin-right: 20%;
+    justify-content: center;
+    grid-template-columns: 3fr;
+}
+
+#test-item{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#test-item:hover{
+    transform: scale(1.02);
+}
+
+#pagination-nav{
+    margin-top: 30px;
+}
+
+#choice{
+    display: grid;
+    width: 70vw;
+    margin-top: 20px;
+    margin-left: 15%;
+    margin-right: 20%;
+    justify-content: center;
+    grid-template-columns: 3fr;
+}
+
+#main-screen{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#timer{
+    padding-left: 10px;
+    width: 120px;
+    height: 70px;
+}
+
+#question{
+    padding-left: 10px;
+    color: rgb(5, 5, 5);
+    width: 70vw;
+    height: 70vh;
+}
+
+#button-group{
+    margin: 20px;
+}
+.sort{
+    color: gray;
+    margin-left: auto;
+    margin-top: 10px;
+}
+
+.sort > a{
+    color: black;
+    margin: 0 20px  0 20px;
+}
+
+.sort>a:hover {
+    text-decoration: underline dotted ;
+    padding-bottom: 5px;
+}
+
+.sort > span{
+    margin: 0 20px 0 20px;
+}
+
+#uaDropdown, #engDropdown{
+    text-align: center;
+    cursor: pointer;
+}
+
+#dropdown-menu{
+    min-width: 0px;
+
+    height: 80px;
+    margin-left: 9px;
+    margin-top: 9px;
+    padding: 0;
+}
+
+.dropdown-menu > #engDropdown{
+    border-bottom: 1px solid #D9D9D9;
+    margin-bottom: 0;
+    padding: 5px 0 10px 0;
+}
+
+.dropdown-menu > #engDropdown>img{
+    height: 15px;
+}
+
+.dropdown-menu > #uaDropdown{
+    margin-bottom: 0;
+    padding-top: 5px;
+}
+
+.dropdown-menu > #uaDropdown>img{
+    height: 19px;
+}
+
+#editTestButton {
+    background-color: red;
+    border:none
+}
+
+#testText {
+    font-weight: bold;
+}
+
+.spanName{
+    font-weight: bold;
+}
+
+.questionCard {
+    width: 12rem;
+    height: min-content;
+    /*padding-bottom: 2px;*/
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    :root {
+        scroll-behavior: smooth;
+    }
+}
+
+.timer__items {
+    display: flex;
+    font-size: 32px;
+}
+
+.timer__item {
+    position: relative;
+    min-width: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.timer__item::before {
+    content: attr(data-title);
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    font-size: 14px;
+}
+
+.timer__item:not(:last-child)::after {
+    content: ':';
+    position: absolute;
+    right: -15px;
+}
+
+#submitTestInfoButton {
+    margin: 10px auto;
+    display: block;
+    width: 220px;
+}
