@@ -21,31 +21,21 @@
                 </div>
             </div>
 
-            <div id="lang-dropdown" class="dropdown">
-                <button id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <fmt:message key="lang"/>
-                </button>
-                <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <p onclick="window.location.href=
-                            '/controller?action=i18n&en&command=/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}'"
-                       id="engDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/en-flag.webp" alt="ENG"></p>
-                    <p onclick="window.location.href=
-                            '/controller?action=i18n&ua&command=/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}'"
-                       id="uaDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/ua-flag.png" alt="UA"></p>
-                </div>
-            </div>
+            <jsp:include page="/WEB-INF/templates/_lang-drop-down.jsp">
+                <jsp:param name="command"
+                           value="/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}"/>
+            </jsp:include>
         </nav>
 
         <div id="choice">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a id="tests-choice" class="nav-link <c:if test="${requestScope.activeTab eq 'tests'}">active</c:if>"
-                       href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=default"><fmt:message key="user-main.tab.tests"/></a>
+                       href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=default"><fmt:message key="tab.tests"/></a>
                 </li>
                 <li class="nav-item">
                     <a id="users-choice" class="nav-link <c:if test="${requestScope.activeTab eq 'passedTests'}">active</c:if>"
-                       href="${pageContext.request.contextPath}/controller?action=userMain&tab=passedTests"><fmt:message key="user-main.tab.passedTests"/></a>
+                       href="${pageContext.request.contextPath}/controller?action=userMain&tab=passedTests"><fmt:message key="tab.passedTests"/></a>
             </ul>
 
             <c:if test="${requestScope.activeTab eq 'tests'}">
@@ -76,23 +66,35 @@
                     <h5 class="card-header">${test.name}</h5>
                     <div class="card-body">
                         <h4 class="card-title">${test.subject}</h4>
-                        <p class="card-text"><span class="spanName"><fmt:message key="user-main.testCard.difficulty.label"/>: </span>${test.difficulty.name}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="user-main.testCard.duration.label"/>: </span>${test.duration} minutes</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="user-main.testCard.numOfQuest.label"/>: </span>${test.numberOfQuestions}</p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
+                            <c:choose>
+                                <c:when test="${test.difficulty.name eq 'easy'}">
+                                    <fmt:message key="testCard.difficulty.easy"/>
+                                </c:when>
+                                <c:when test="${test.difficulty.name eq 'medium'}">
+                                    <fmt:message key="testCard.difficulty.medium"/>
+                                </c:when>
+                                <c:when test="${test.difficulty.name eq 'hard'}">
+                                    <fmt:message key="testCard.difficulty.hard"/>
+                                </c:when>
+                            </c:choose>
+                        </p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>${test.duration} <fmt:message key="testCard.minutes"/></p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.numOfQuest.label"/>: </span>${test.numberOfQuestions}</p>
 
                         <c:choose>
                             <c:when test="${test.status.value eq 'not_started'}">
                                 <a href="${pageContext.request.contextPath}/controller?action=startTest&testId=${test.id}"
-                                   class="btn btn-success"><fmt:message key="user-main.testCard.button.startTest"/></a>
+                                   class="btn btn-success"><fmt:message key="testCard.button.startTest"/></a>
                             </c:when>
 
                             <c:when test="${test.status.value eq 'started'}">
                                 <a href="${pageContext.request.contextPath}/controller?action=passTest&testId=${test.id}"
-                                   class="btn btn-primary"><fmt:message key="user-main.testCard.button.continue"/></a>
+                                   class="btn btn-primary"><fmt:message key="testCard.button.continue"/></a>
                             </c:when>
 
                             <c:when test="${test.status.value eq 'passed'}">
-                                <a class="btn btn-primary disabled"><fmt:message key="user-main.testCard.button.passed"/></a>
+                                <a class="btn btn-primary disabled"><fmt:message key="testCard.button.passed"/></a>
                             </c:when>
                         </c:choose>
                     </div>
@@ -107,18 +109,28 @@
                     <div class="card-body">
                         <h3 class="card-title">${testInfo.testSubject}</h3>
                         <p class="card-text">
-                            <span class="spanName"><fmt:message key="user-main.testCard.difficulty.label"/>: </span>
-                                ${testInfo.testDifficulty.name}
+                            <span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
+                            <c:choose>
+                                <c:when test="${testInfo.testDifficulty.name eq 'easy'}">
+                                    <fmt:message key="testCard.difficulty.easy"/>
+                                </c:when>
+                                <c:when test="${testInfo.testDifficulty.name eq 'medium'}">
+                                    <fmt:message key="testCard.difficulty.medium"/>
+                                </c:when>
+                                <c:when test="${testInfo.testDifficulty.name eq 'hard'}">
+                                    <fmt:message key="testCard.difficulty.hard"/>
+                                </c:when>
+                            </c:choose>
                         </p>
                         <p class="card-text">
-                            <span class="spanName"><fmt:message key="user-main.testCard.startingTime.label"/>: </span>
+                            <span class="spanName"><fmt:message key="testCard.startingTime.label"/>: </span>
                                 ${testInfo.startingTime}
                         </p>
                         <p class="card-text">
-                            <span class="spanName"><fmt:message key="user-main.testCard.endingTime.label"/>: </span>
+                            <span class="spanName"><fmt:message key="testCard.endingTime.label"/>: </span>
                             <c:choose>
                                 <c:when  test="${testInfo.endingTime eq 'not ended'}">
-                                    <fmt:message key="user-main.testCard.notEnded"/>
+                                    <fmt:message key="testCard.notEnded"/>
                                 </c:when>
                                 <c:otherwise>
                                     ${testInfo.endingTime}
@@ -126,7 +138,7 @@
                             </c:choose>
                         </p>
                         <p class="card-text">
-                            <span class="spanName"><fmt:message key="user-main.testCard.result.label"/>: </span>
+                            <span class="spanName"><fmt:message key="testCard.result.label"/>: </span>
                                 ${testInfo.result} %
                         </p>
                     </div>

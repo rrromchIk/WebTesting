@@ -2,11 +2,16 @@ package com.epam.testing.model.service;
 
 import com.epam.testing.model.dao.impl.UserDAOImpl;
 import com.epam.testing.model.entity.User;
+import com.epam.testing.model.entity.UserStatus;
 
 import java.util.List;
 
 public class UserService {
     private static final UserDAOImpl dao = new UserDAOImpl();
+
+    public boolean userIsBlocked(String login) {
+        return dao.getByLogin(login).getStatus().equals(UserStatus.BLOCKED);
+    }
 
     public int getAmountOfUsers() {
         return dao.getAmountOfRecords();
@@ -24,7 +29,7 @@ public class UserService {
         return dao.getByLogin(login);
     }
 
-    public boolean isUserExist(String login, String password) {
+    public boolean userExists(String login, String password) {
         return dao.getByLoginAndPassword(login, password) != null;
     }
 

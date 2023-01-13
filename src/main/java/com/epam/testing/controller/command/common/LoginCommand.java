@@ -19,7 +19,7 @@ public class LoginCommand implements Command {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        if(userService.isUserExist(login, password)) {
+        if(userService.userExists(login, password)) {
             User user = userService.getByLogin(login);
             if(login.equals("admin") && password.equals("admin")) {
                 page = Path.COMMAND_ADMIN_MAIN;

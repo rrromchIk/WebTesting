@@ -14,6 +14,7 @@ public class ChangeUserStatusCommand implements Command {
     private final UserService userService = new UserService();
     private static final UserStatus ACTIVE_STATUS = UserStatus.ACTIVE;
     private static final UserStatus BLOCKED_STATUS = UserStatus.BLOCKED;
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         int activePage = (int)req.getSession().getAttribute("activePage");

@@ -14,9 +14,8 @@ public class SubmitTestInfoCommand implements Command {
     private final TestsService testsService = new TestsService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.PAGE_ADD_TEST;
-        boolean redirect = false;
-
+        String page = Path.COMMAND_ADD_QUESTIONS;
+        boolean redirect = true;
 
         Test test = new Test.TestBuilder()
                 .name(req.getParameter("name"))
@@ -26,12 +25,17 @@ public class SubmitTestInfoCommand implements Command {
                 .numberOfQuestions(Integer.parseInt(req.getParameter("numOfQuestions")))
                 .build();
         System.out.println(test);
-        if(!testsService.createTest(test)) {
+
+
+        if(testsService.createTest(test)) {
+            page += "&testId=" + test.getId();
+        } else {
             page = Path.PAGE_ERROR_PAGE;
             String errorMessage = "Unable to create test";
             req.setAttribute("errorMessage", errorMessage);
             redirect = false;
         }
+
         return new DispatchInfo(redirect, page);
     }
 }

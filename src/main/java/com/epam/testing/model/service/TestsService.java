@@ -14,6 +14,10 @@ public class TestsService {
         return dao.getById(testId);
     }
 
+    public Test getTestByName(String name) {
+        return dao.getTestByName(name);
+    }
+
     public int getAmountOfTests() {
         return dao.getAmountOfRecords();
     }
@@ -52,6 +56,8 @@ public class TestsService {
     }
 
     public boolean createTest(Test test) {
-        return dao.create(test) != -1;
+        long id = dao.create(test);
+        test.setId(id);
+        return id != -1;
     }
 }

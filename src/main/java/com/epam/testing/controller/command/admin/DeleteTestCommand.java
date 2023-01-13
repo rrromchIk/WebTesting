@@ -14,6 +14,7 @@ public class DeleteTestCommand implements Command {
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         int activePage = (int)req.getSession().getAttribute("activePage");
         long testId = Long.parseLong(req.getParameter("testId"));
+
         boolean redirect = true;
         String page = Path.COMMAND_ADMIN_MAIN + "&page=" + activePage;
 

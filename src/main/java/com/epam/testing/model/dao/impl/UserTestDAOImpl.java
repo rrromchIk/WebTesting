@@ -173,7 +173,7 @@ public class UserTestDAOImpl implements UserTestDAO {
         GET_USERS_TEST_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
                 "WHERE user_id = ? ORDER BY starting_time DESC LIMIT ? OFFSET ?"),
         ADD_RESULT_AND_ENDING_TIME("UPDATE user_test SET result = ?, ending_time = ? " +
-                "WHERE user_id = ? AND test_id = ? ORDER BY starting_time DESC LIMIT 1"),
+                "WHERE user_id = ? AND test_id = ?"),
         GET_AMOUNT_OF_USER_PASSED_TESTS("SELECT COUNT(user_id) FROM user_test WHERE user_id = ?"),
         GET_TEST_STATUS("SELECT status FROM user_test WHERE user_id = ? AND test_id = ?"),
         UPDATE_TEST_STATUS("UPDATE user_test SET status = ? WHERE user_id = ? AND test_id = ?"),

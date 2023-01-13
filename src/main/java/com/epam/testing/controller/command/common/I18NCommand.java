@@ -56,6 +56,14 @@ public class I18NCommand implements Command {
     if(groupBy != null && !groupBy.isEmpty()) {
       command += "&groupBy=" + groupBy;
     }
+    String userId = request.getParameter("userId");
+    if(userId != null && !userId.isEmpty()) {
+      command += "&userId=" + userId;
+    }
+    String testName = request.getParameter("testName");
+    if(testName != null && !testName.isEmpty()) {
+      command += "&testName=" + testName;
+    }
     return command;
   }
 }

@@ -26,7 +26,7 @@ public class UserMainCommand implements Command {
         String tab = req.getParameter("tab");
         long userId = (Long)req.getSession().getAttribute("userId");
 
-        if(tab == null) {
+        if(tab == null || tab.isEmpty()) {
             tab = "tests";
         }
 
@@ -35,9 +35,7 @@ public class UserMainCommand implements Command {
         } else if(tab.equals("passedTests")) {
             processPassedTestsTab(req, userId);
         } else {
-            page = Path.PAGE_ERROR_PAGE;
-            String errorMessage = "";
-            req.setAttribute("errorMessage", errorMessage);
+            processPassedTestsTab(req, userId);
         }
 
         return new DispatchInfo(false, page);

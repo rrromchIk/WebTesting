@@ -9,6 +9,7 @@ import java.util.List;
  */
 
 public interface QuestionDAO {
+    int getAmountOfQuestionsByTestId(long testId);
     List<Question> getQuestionsByTestId(long id);
     long create(long testId, Question question);
     boolean update(Question question);

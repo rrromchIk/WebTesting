@@ -16,6 +16,10 @@ public class TestQuestionService {
     private final CorrectAnswerDAOImpl correctAnswerDAO = new CorrectAnswerDAOImpl();
     private final UserAnswerService userAnswerService = new UserAnswerService();
 
+    public int getAmountOfAddedQuestions(long testId) {
+        return questionDAO.getAmountOfQuestionsByTestId(testId);
+    }
+
     public List<Question> getQuestionsByTestId(long testId) {
         return questionDAO.getQuestionsByTestId(testId);
     }
@@ -28,14 +32,27 @@ public class TestQuestionService {
         return correctAnswerDAO.getCorrectAnswersByQuestionId(questionId);
     }
 
+    public boolean addQuestionAnswer(long questionId, String text) {
+        return answerVariantDAO.create(questionId, text);
+    }
+
+    public boolean addCorrectAnswer(long questionId, String text) {
+        return correctAnswerDAO.create(questionId, text);
+    }
+
     public List<CheckedAnswer> getAnswerVariantsByQuestionIdWithCheckedStatus(long userId, long questionId) {
         List<String> allAnswersToQuestion = answerVariantDAO.getAnswerVariantsByQuestionId(questionId);
         List<String> userAnswers = userAnswerService.getUsersAnswers(userId, questionId);
 
         return allAnswersToQuestion.stream().map(answerStr -> {
             boolean checked = userAnswers.contains(answerStr);
-            CheckedAnswer answer = new CheckedAnswer(answerStr, checked);
-            return answer;
+            return new CheckedAnswer(answerStr, checked);
         }).collect(Collectors.toList());
+    }
+
+    public boolean addQuestionToTheTest(long testId, Question question) {
+        long id = questionDAO.create(testId, question);
+        question.setId(id);
+        return id != -1;
     }
 }

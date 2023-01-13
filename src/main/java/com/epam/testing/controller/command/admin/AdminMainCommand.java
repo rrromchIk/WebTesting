@@ -23,7 +23,8 @@ public class AdminMainCommand implements Command {
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         String page = Path.PAGE_ADMIN_MAIN;
         String tab = req.getParameter("tab");
-        if(tab == null) {
+
+        if(tab == null || tab.isEmpty()) {
             tab = "tests";
         }
 
@@ -32,9 +33,7 @@ public class AdminMainCommand implements Command {
         } else if(tab.equals("users")) {
             processUsersTab(req);
         } else {
-            page = Path.PAGE_ERROR_PAGE;
-            String errorMessage = "";
-            req.setAttribute("errorMessage", errorMessage);
+            processTestsTab(req);
         }
 
         return new DispatchInfo(false, page);

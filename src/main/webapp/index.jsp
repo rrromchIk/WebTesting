@@ -16,16 +16,9 @@
                 <div class="item-wrapper">
                     <a href="signUp.jsp" class="float-right btn btn-outline-primary"><fmt:message key="button.signUp"/> </a>
                 </div>
-                <div id="lang-dropdown" class="dropdown">
-                    <button id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <fmt:message key="lang"/>
-                    </button>
-                    <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <p onclick="window.location.href='/controller?action=i18n&en'" id="engDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/en-flag.webp" alt="ENG"></p>
-                        <p onclick="window.location.href='/controller?action=i18n&ua'" id="uaDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/ua-flag.png" alt="UA"></p>
-                    </div>
-                </div>
+                <jsp:include page="/WEB-INF/templates/_lang-drop-down.jsp">
+                    <jsp:param name="command" value="index.jsp"/>
+                </jsp:include>
             </div>
         </nav>
 

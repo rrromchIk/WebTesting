@@ -1,6 +1,9 @@
 package com.epam.testing.controller.filter;
 import com.epam.testing.controller.Path;
 import com.epam.testing.model.entity.UserRole;
+import com.epam.testing.model.entity.UserStatus;
+import com.epam.testing.model.service.UserService;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
@@ -13,10 +16,13 @@ import java.util.*;
         urlPatterns = "/controller",
         initParams = {
                 @WebInitParam(name = "guest", value = "logIn signUp logOut i18n"),
-                @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest submitAnswers endTest"),
-                @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest changeUserStatus submitTestInfo")
+                @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
+                        "submitAnswers endTest"),
+                @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +
+                        "changeUserStatus submitTestInfo addQuestions submitQuestionInfo")
         })
 public class SecurityFilter implements Filter {
+    private static final UserService userService = new UserService();
     private static final Map<UserRole, List<String>> accessMap = new HashMap<>();
 
     @Override
@@ -50,9 +56,14 @@ public class SecurityFilter implements Filter {
 
         HttpSession session = httpRequest.getSession(false);
         UserRole userRole = (UserRole) session.getAttribute("userRole");
+        String userLogin = (String) session.getAttribute("login");
         if(userRole == null) {
             session.setAttribute("userRole", UserRole.GUEST);
             userRole = UserRole.GUEST;
+        }
+
+        if(userLogin != null && userService.userIsBlocked(userLogin)) {
+            return false;
         }
 
         return accessMap.get(userRole).contains(command);

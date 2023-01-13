@@ -9,24 +9,10 @@
     <body>
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
             <a id="navbar-logo" class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">TestPortal</a>
-
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
-                    <a href="${pageContext.request.contextPath}/controller?action=userMain" class="float-right btn btn-outline-primary">All tests</a>
-                </div>
-                <div class="item-wrapper">
-                    <a href="${pageContext.request.contextPath}/controller?action=profile" class="float-right btn btn-outline-primary">Profile</a>
-                </div>
-            </div>
-
-            <div id="lang-dropdown" class="dropdown">
-                <button id="dropdownMenuButton" class="btn btn-secondary dropdown-toggle" type="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ENG
-                </button>
-                <div class="dropdown-menu" id="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <p id="engDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/en-flag.webp" alt="ENG"></p>
-                    <p id="uaDropdown" class="dropdown-item"><img src="${pageContext.request.contextPath}/img/ua-flag.png" alt="UA"></p>
+                    <a href="${pageContext.request.contextPath}/controller?action=userMain"
+                       class="float-right btn btn-outline-primary"><fmt:message key="test-passing.button.allTests"/></a>
                 </div>
             </div>
         </nav>
@@ -39,7 +25,7 @@
                         <li class="list-group-item question-number <c:if test="${loop.index eq requestScope.currentQuestion.number - 1}">active</c:if>">
                             <a href="${pageContext.request.contextPath}/controller?action=passTest&testId=${requestScope.test.id}&renderQuestion=${question.id}"
                                class="btn">
-                                Question ${question.number}
+                                <fmt:message key="test-passing.question.label"/> ${question.number}
                             </a>
                         </li>
                     </c:forEach>
@@ -53,7 +39,7 @@
                     </h5>
                     <div class="card-body">
                         <h6 class="card-title">
-                            Question ${requestScope.currentQuestion.number}
+                            <fmt:message key="test-passing.question.label"/> ${requestScope.currentQuestion.number}
                         </h6>
                         <h4 class="card-text">
                             ${requestScope.currentQuestion.text}?
@@ -73,7 +59,7 @@
                                     <label for="${loop.index}">${answer.text}</label><br>
                                 </c:forEach>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary"><fmt:message key="button.submit"/></button>
                         </form>
                     </div>
                 </div>
@@ -90,8 +76,9 @@
             </div>
         </div>
 
-        <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}" class="btn btn-danger">
-            End the attempt
+        <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}"
+           class="btn btn-danger">
+            <fmt:message key="test-passing.button.endAttempt"/>
         </a>
 
         <script src="${pageContext.request.contextPath}/js/test-passing.js"></script>

@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Question extends Entity {
     private String text;
     private final QuestionType type;
-    private int maxScore;
+    private final int maxScore;
     private int number;
 
     public int getNumber() {

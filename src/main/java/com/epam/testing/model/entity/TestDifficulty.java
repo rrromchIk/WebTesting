@@ -23,12 +23,6 @@ public enum TestDifficulty {
         else return HARD;
     }
 
-    /*public static TestDifficulty getEnum(String difficulty){
-        if (difficulty.equals("easy")) return EASY;
-        else if (difficulty.equals("medium")) return MEDIUM;
-        else return HARD;
-    }*/
-
     public Integer getValue() {
         return value;
     }

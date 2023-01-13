@@ -18,6 +18,7 @@ public final class Path {
   public static final String PAGE_USER_TEST_PASSING = "/WEB-INF/jsp/client/test-passing.jsp";
   public static final String PAGE_USER_INFO = "/WEB-INF/jsp/admin/user-info.jsp";
   public static final String PAGE_ADD_TEST = "/WEB-INF/jsp/admin/add-test.jsp";
+  public static final String PAGE_ADD_QUESTIONS = "/WEB-INF/jsp/admin/add-questions.jsp";
 
   // common commands
   public static final String COMMAND_LOGIN = "controller?action=logIn";
@@ -28,6 +29,7 @@ public final class Path {
   public static final String COMMAND_ADMIN_MAIN = "controller?action=adminMain";
   public static final String COMMAND_USER_INFO = "controller?action=userInfo";
   public static final String COMMAND_SUBMIT_TEST_INFO = "controller?action=submitTestInfo";
+  public static final String COMMAND_ADD_QUESTIONS = "controller?action=addQuestions";
 
   // client commands
   public static final String COMMAND_USER_MAIN = "controller?action=userMain";

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 public class PassTestCommand implements Command {
     private final TestsService testsService = new TestsService();
@@ -33,26 +34,35 @@ public class PassTestCommand implements Command {
             questions.get(i).setNumber(i + 1);
         }
 
-        Question currentQuestion = questions.get(0);
-        if(isQuestionToRenderValid(questionToRender)) {
-            currentQuestion = questions.stream()
-                    .filter(question -> question.getId() == Integer.parseInt(questionToRender))
-                    .findFirst().get();
+        if(!questions.isEmpty()) {
+            Question currentQuestion = questions.get(0);
+            if(isQuestionToRenderValid(questionToRender)) {
+                Optional<Question> opt = questions.stream()
+                        .filter(question -> question.getId() == Integer.parseInt(questionToRender))
+                        .findFirst();
+                if(opt.isPresent())
+                    currentQuestion = opt.get();
+            }
+
+            List<CheckedAnswer> answerVariants = testQuestionService
+                    .getAnswerVariantsByQuestionIdWithCheckedStatus(userId, currentQuestion.getId());
+
+            String questionType = getQuestionType(currentQuestion);
+            long remainingTime = userTestService.getRemainingTime(userId, testId);
+
+            req.setAttribute("timer", remainingTime);
+            req.setAttribute("questionType", questionType);
+            req.setAttribute("answers", answerVariants);
+            req.setAttribute("test", test);
+            req.setAttribute("questions", questions);
+            req.setAttribute("questionAmount", questions.size());
+            req.setAttribute("currentQuestion", currentQuestion);
+        } else {
+            page = Path.PAGE_ERROR_PAGE;
+            String errorMessage = "No questions";
+            req.setAttribute("errorMessage", errorMessage);
         }
 
-        List<CheckedAnswer> answerVariants = testQuestionService
-                .getAnswerVariantsByQuestionIdWithCheckedStatus(userId, currentQuestion.getId());
-
-        String questionType = getQuestionType(currentQuestion);
-        long remainingTime = userTestService.getRemainingTime(userId, testId);
-
-        req.setAttribute("timer", remainingTime);
-        req.setAttribute("questionType", questionType);
-        req.setAttribute("answers", answerVariants);
-        req.setAttribute("test", test);
-        req.setAttribute("questions", questions);
-        req.setAttribute("questionAmount", questions.size());
-        req.setAttribute("currentQuestion", currentQuestion);
 
         return new DispatchInfo(false, page);
     }

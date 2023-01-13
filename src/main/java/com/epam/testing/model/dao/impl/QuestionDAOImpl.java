@@ -12,6 +12,23 @@ import java.util.List;
 public class QuestionDAOImpl implements QuestionDAO {
     private final DBManager datasource = DBManager.getInstance();
 
+    @Override
+    public int getAmountOfQuestionsByTestId(long testId) {
+        int amount = 0;
+        try (Connection connection = datasource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(
+                     QuestionQueries.GET_AMOUNT_BY_TEST_ID.QUERY)) {
+            statement.setLong(1, testId);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()) {
+                amount = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return amount;
+    }
+
     /**
      * Select Question by test id.
      *
@@ -66,6 +83,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             statement.setLong(1, testId);
             statement.setString( 2, question.getText());
             statement.setString( 3, question.getType().getValue());
+            statement.setInt(4, question.getMaxScore());
             if(statement.executeUpdate() <= 0) {
                 throw new SQLException();
             }
@@ -116,11 +134,12 @@ public class QuestionDAOImpl implements QuestionDAO {
         return result;
     }
 
-    enum QuestionQueries{
-        INSERT("INSERT INTO question(test_id, text, type) values(?, ?, ?)"),
+    enum QuestionQueries {
+        INSERT("INSERT INTO question(test_id, text, type, max_score) values(?, ?, ?, ?)"),
         UPDATE("UPDATE question SET text = ? WHERE id = ?"),
         GET_BY_TEST_ID("SELECT * FROM question WHERE test_id = ?"),
-        DELETE("DELETE FROM question WHERE id = ?");
+        DELETE("DELETE FROM question WHERE id = ?"),
+        GET_AMOUNT_BY_TEST_ID("SELECT COUNT(id) FROM question WHERE test_id = ?");
 
         final String QUERY;
 

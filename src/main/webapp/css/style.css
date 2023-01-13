@@ -282,3 +282,7 @@ body {
     display: block;
     width: 220px;
 }
+
+#addQuestionsMain {
+    width: 50em;
+}

@@ -34,11 +34,11 @@ public interface AnswerDAO {
 
     static boolean create(long questionId, String text, String table) {
         boolean result = false;
+        String query = AnswerQueries.INSERT.QUERY.replace("tableName", table);
         try(Connection connection = DB_MANAGER.getConnection();
-            PreparedStatement statement = connection.prepareStatement(AnswerQueries.INSERT.QUERY)) {
-            statement.setString(1, table);
-            statement.setLong( 2, questionId);
-            statement.setString(3, text);
+            PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong( 1, questionId);
+            statement.setString(2, text);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,11 +48,11 @@ public interface AnswerDAO {
 
     static boolean update(long questionId, String text, String table) {
         boolean result = false;
+        String query = AnswerQueries.UPDATE.QUERY.replace("tableName", table);
         try(Connection connection  = DB_MANAGER.getConnection();
-            PreparedStatement statement = connection.prepareStatement(AnswerQueries.UPDATE.QUERY)) {
-            statement.setString(1, table);
-            statement.setLong(2, questionId);
-            statement.setString( 3, text);
+            PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setLong(1, questionId);
+            statement.setString( 2, text);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,9 +62,9 @@ public interface AnswerDAO {
 
     static boolean delete(String text, String table) {
         boolean result = false;
+        String query = AnswerQueries.DELETE.QUERY.replace("tableName", table);
         try (Connection connection = DB_MANAGER.getConnection();
-             PreparedStatement statement = connection.prepareStatement(AnswerQueries.DELETE.QUERY)) {
-            statement.setString(1, table);
+             PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(2, text);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -74,9 +74,9 @@ public interface AnswerDAO {
     }
 
     enum AnswerQueries {
-        INSERT("INSERT INTO ?(question_id, text) VALUES(?, ?)"),
-        UPDATE("UPDATE ? SET text = ? WHERE text = ?"),
-        DELETE("DELETE FROM ? WHERE text = ?"),
+        INSERT("INSERT INTO tableName(question_id, text) VALUES(?, ?)"),
+        UPDATE("UPDATE tableName SET text = ? WHERE text = ?"),
+        DELETE("DELETE FROM tableName WHERE text = ?"),
         GET_BY_QUESTION_ID("SELECT text FROM tableName WHERE question_id = ?");
 
         public final String QUERY;

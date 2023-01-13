@@ -2,7 +2,6 @@ package com.epam.testing.model.service;
 
 import com.epam.testing.model.dao.UserTestDAO;
 import com.epam.testing.model.dao.impl.UserTestDAOImpl;
-import com.epam.testing.model.entity.RemainingTime;
 import com.epam.testing.model.entity.Test;
 import com.epam.testing.model.entity.TestInfo;
 import com.epam.testing.model.entity.TestStatus;

@@ -44,7 +44,8 @@ public class CommandFactory {
     commands.put("changeuserstatus", new ChangeUserStatusCommand());
     commands.put("addtest", new AddTestCommand());
     commands.put("submittestinfo", new SubmitTestInfoCommand());
-    commands.put("addquestionscommand", new AddQuestionsCommand());
+    commands.put("addquestions", new AddQuestionsCommand());
+    commands.put("submitquestioninfo", new SubmitQuestionInfoCommand());
 
     //client commands
     commands.put("editprofile", new EditProfileCommand());
