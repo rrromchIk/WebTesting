@@ -60,9 +60,10 @@
                         </p>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>${test.duration} <fmt:message key="testCard.minutes"/></p>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.numOfQuest.label"/>: </span>${test.numberOfQuestions}</p>
-                        <a href="#" class="btn btn-primary"><fmt:message key="button.editTest"/></a>
+                        <a href="${pageContext.request.contextPath}/controller?action=testInfo&testId=${test.id}"
+                           class="btn btn-primary"><fmt:message key="button.editTest"/></a>
                         <a href="${pageContext.request.contextPath}/controller?action=deleteTest&testId=${test.id}"
-                           class="btn btn-danger"><fmt:message key="button.deleteTest"/></a>
+                           class="btn btn-danger"><fmt:message key="button.delete"/></a>
                     </div>
                 </div>
             </c:forEach>
@@ -71,35 +72,35 @@
         <div id="users">
             <c:forEach var="user" items="${requestScope.users}">
                 <div id="test-item" class="card">
-                    <h5 class="card-header"><fmt:message key="registration-form.login.label"/> : ${user.login}</h5>
+                    <h5 class="card-header"><fmt:message key="registrationForm.login.label"/> : ${user.login}</h5>
                     <div class="card-body">
-                        <p class="card-text"><span class="spanName"><fmt:message key="registration-form.name.label"/>: </span>${user.name}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="registration-form.surname.label"/>: </span>${user.surname}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="registration-form.email.label"/>: </span>${user.email}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="user-card.role.label"/>: </span>
+                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.name.label"/>: </span>${user.name}</p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.surname.label"/>: </span>${user.surname}</p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.email.label"/>: </span>${user.email}</p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="userCard.role.label"/>: </span>
                             <c:choose>
                                 <c:when test="${user.role.name eq 'client'}">
-                                    <fmt:message key="user-card.role.client"/>
+                                    <fmt:message key="userCard.role.client"/>
                                 </c:when>
                                 <c:when test="${user.role.name eq 'admin'}">
-                                    <fmt:message key="user-card.role.admin"/>
+                                    <fmt:message key="userCard.role.admin"/>
                                 </c:when>
                             </c:choose>
                         </p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="user-card.status.label"/>: </span>
+                        <p class="card-text"><span class="spanName"><fmt:message key="userCard.status.label"/>: </span>
                             <c:choose>
                                 <c:when test="${user.status.name eq 'active'}">
-                                    <fmt:message key="user-card.status.active"/>
+                                    <fmt:message key="userCard.status.active"/>
                                 </c:when>
                                 <c:when test="${user.status.name eq 'blocked'}">
-                                    <fmt:message key="user-card.status.blocked"/>
+                                    <fmt:message key="userCard.status.blocked"/>
                                 </c:when>
                             </c:choose>
                         </p>
-                        <a href="${pageContext.request.contextPath}/controller?action=userInfo&userId=${user.id}" class="btn btn-primary"><fmt:message key="user-card.editUser.button"/></a>
+                        <a href="${pageContext.request.contextPath}/controller?action=userInfo&userId=${user.id}" class="btn btn-primary"><fmt:message key="userCard.editUser.button"/></a>
                         <a href="${pageContext.request.contextPath}/controller?action=changeUserStatus&userId=${user.id}" class="btn btn-danger">
-                            <c:if test="${user.status.name eq 'blocked'}"><fmt:message key="user-card.unblock.button"/></c:if>
-                            <c:if test="${user.status.name eq 'active'}"><fmt:message key="user-card.block.button"/></c:if>
+                            <c:if test="${user.status.name eq 'blocked'}"><fmt:message key="userCard.unblock.button"/></c:if>
+                            <c:if test="${user.status.name eq 'active'}"><fmt:message key="userCard.block.button"/></c:if>
                         </a>
                     </div>
                 </div>

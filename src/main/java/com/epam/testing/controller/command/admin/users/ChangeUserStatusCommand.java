@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.admin;
+package com.epam.testing.controller.command.admin.users;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
@@ -23,19 +23,21 @@ public class ChangeUserStatusCommand implements Command {
         String page = Path.COMMAND_ADMIN_MAIN + "&tab=users&page=" + activePage;
         boolean redirect = true;
 
-        User user = userService.getById(userId);
+        User user = userService.getUserById(userId);
         if(user != null) {
             UserStatus userStatus = user.getStatus();
             user.setStatus(userStatus == UserStatus.ACTIVE ? BLOCKED_STATUS : ACTIVE_STATUS);
             if(!userService.updateUser(user)) {
                 page = Path.PAGE_ERROR_PAGE;
                 String errorMessage = "Update user's status failed";
+                req.setAttribute("commandToGoBack", Path.COMMAND_ADMIN_MAIN);
                 req.setAttribute("errorMessage", errorMessage);
                 redirect = false;
             }
         } else {
             page = Path.PAGE_ERROR_PAGE;
             String errorMessage = "User with such id not found";
+            req.setAttribute("commandToGoBack", Path.COMMAND_ADMIN_MAIN);
             req.setAttribute("errorMessage", errorMessage);
             redirect = false;
         }

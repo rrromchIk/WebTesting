@@ -18,11 +18,11 @@ import java.util.List;
 public class UserTestDAOImpl implements UserTestDAO {
     private final DBManager datasource = DBManager.getInstance();
 
-    public int getAmountOfUserPassedTests(long userId) {
+    public int getAmountOfRecords(long userId) {
         int amount = 0;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     UserTestQueries.GET_AMOUNT_OF_USER_PASSED_TESTS.QUERY)) {
+                     UserTestQueries.GET_AMOUNT_OF_RECORDS.QUERY)) {
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()) {
@@ -41,10 +41,10 @@ public class UserTestDAOImpl implements UserTestDAO {
      * @return true if creating success, else false
      */
     @Override
-    public boolean addUsersTest(long userId, long testId, Timestamp startingTime) {
+    public boolean create(long userId, long testId, Timestamp startingTime) {
         boolean result = false;
         try(Connection connection = datasource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(UserTestQueries.ADD_USERS_TEST.QUERY)) {
+            PreparedStatement statement = connection.prepareStatement(UserTestQueries.CREATE.QUERY)) {
             statement.setLong(1, userId);
             statement.setLong(2, testId);
             statement.setTimestamp(3, startingTime);
@@ -87,11 +87,11 @@ public class UserTestDAOImpl implements UserTestDAO {
      * @return valid entity if it exists, else null.
      */
     @Override
-    public List<TestInfo> getUserTestsInfo(long userId, int limit, int offset) {
+    public List<TestInfo> getTestsInfo(long userId, int limit, int offset) {
         List<TestInfo> userTestsInfo = new ArrayList<>();
         try(Connection connection = datasource.getConnection();
             PreparedStatement statement = connection
-                    .prepareStatement(UserTestQueries.GET_USERS_TEST_INFO.QUERY)) {
+                    .prepareStatement(UserTestQueries.GET_TEST_INFO.QUERY)) {
             statement.setLong(1, userId);
             statement.setInt(2, limit);
             statement.setInt(3, offset);
@@ -115,11 +115,11 @@ public class UserTestDAOImpl implements UserTestDAO {
     }
 
     @Override
-    public TestStatus getTestStatus(long userId, long testId) {
+    public TestStatus getStatus(long userId, long testId) {
         TestStatus testStatus = null;
         try(Connection connection = datasource.getConnection();
             PreparedStatement statement = connection
-                    .prepareStatement(UserTestQueries.GET_TEST_STATUS.QUERY)) {
+                    .prepareStatement(UserTestQueries.GET_STATUS.QUERY)) {
             statement.setLong(1, userId);
             statement.setLong(2, testId);
             ResultSet resultSet = statement.executeQuery();
@@ -133,10 +133,10 @@ public class UserTestDAOImpl implements UserTestDAO {
     }
 
     @Override
-    public boolean updateTestStatus(long userId, long testId, TestStatus status) {
+    public boolean updateStatus(long userId, long testId, TestStatus status) {
         boolean result = false;
         try (Connection connection = datasource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UserTestQueries.UPDATE_TEST_STATUS.QUERY)) {
+             PreparedStatement statement = connection.prepareStatement(UserTestQueries.UPDATE_STATUS.QUERY)) {
             statement.setString(1, status.getValue());
             statement.setLong(2, userId);
             statement.setLong(3, testId);
@@ -149,7 +149,7 @@ public class UserTestDAOImpl implements UserTestDAO {
     }
 
     @Override
-    public Timestamp getTestStartingTime(long userId, long testId) {
+    public Timestamp getStartingTime(long userId, long testId) {
         Timestamp startingTime = null;
         try(Connection connection = datasource.getConnection();
             PreparedStatement statement = connection
@@ -169,14 +169,14 @@ public class UserTestDAOImpl implements UserTestDAO {
     enum UserTestQueries {
         GET_TESTS_BY_USER_ID("SELECT name, subject, difficulty, duration," +
                 "number_of_questions FROM user_test JOIN test ON user_test.test_id = test.id WHERE user_id = ?"),
-        ADD_USERS_TEST("INSERT INTO user_test(user_id, test_id, starting_time) VALUES(?, ?, ?)"),
-        GET_USERS_TEST_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
+        CREATE("INSERT INTO user_test(user_id, test_id, starting_time) VALUES(?, ?, ?)"),
+        GET_TEST_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
                 "WHERE user_id = ? ORDER BY starting_time DESC LIMIT ? OFFSET ?"),
         ADD_RESULT_AND_ENDING_TIME("UPDATE user_test SET result = ?, ending_time = ? " +
                 "WHERE user_id = ? AND test_id = ?"),
-        GET_AMOUNT_OF_USER_PASSED_TESTS("SELECT COUNT(user_id) FROM user_test WHERE user_id = ?"),
-        GET_TEST_STATUS("SELECT status FROM user_test WHERE user_id = ? AND test_id = ?"),
-        UPDATE_TEST_STATUS("UPDATE user_test SET status = ? WHERE user_id = ? AND test_id = ?"),
+        GET_AMOUNT_OF_RECORDS("SELECT COUNT(user_id) FROM user_test WHERE user_id = ?"),
+        GET_STATUS("SELECT status FROM user_test WHERE user_id = ? AND test_id = ?"),
+        UPDATE_STATUS("UPDATE user_test SET status = ? WHERE user_id = ? AND test_id = ?"),
         GET_STARTING_TIME("SELECT starting_time FROM user_test WHERE user_id = ? AND test_id = ?");
 
         final String QUERY;

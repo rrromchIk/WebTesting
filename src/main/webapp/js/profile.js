@@ -9,19 +9,13 @@ for(let i = 0; i < fields.length; ++i) {
     })
 }
 
-submitChangesBtn.addEventListener("click", () => {
-    if (fields[0].readOnly === false) {
-        for (let i = 0; i < fields.length; i++) {
-            fields[i].readOnly = true;
-        }
-    }
-})
-
 editProfileBtn.addEventListener("click", () => {
-    if (fields[0].readOnly === true) {
-        for (let i = 0; i < fields.length; i++) {
+    for (let i = 0; i < fields.length; i++) {
+        if (fields[i].readOnly === true) {
             fields[i].readOnly = false;
+            fields[i].setAttribute('required', 'true')
         }
+
     }
 })
 

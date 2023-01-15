@@ -7,7 +7,6 @@ import com.epam.testing.model.service.UserAnswerService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 public class SubmitAnswersCommand implements Command {
     private final UserAnswerService userAnswerService = new UserAnswerService();
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;

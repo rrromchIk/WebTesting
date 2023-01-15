@@ -21,11 +21,11 @@ public class UserService {
         return dao.getAll(limit, offset);
     }
 
-    public User getById(long id) {
+    public User getUserById(long id) {
         return dao.getById(id);
     }
 
-    public User getByLogin(String login) {
+    public User getUserByLogin(String login) {
         return dao.getByLogin(login);
     }
 
@@ -39,9 +39,5 @@ public class UserService {
 
     public boolean updateUser(User user) {
         return dao.update(user);
-    }
-
-    public boolean deleteUser(User user) {
-        return dao.delete(user);
     }
 }

@@ -19,25 +19,40 @@
             </div>
         </nav>
 
-        <h1 id="signInText"><fmt:message key="registration-form.signIn.label"/></h1>
+        <h1 id="signInText"><fmt:message key="registrationForm.signIn.label"/></h1>
 
         <div id="signInForm">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=logIn">
                 <div class="form-group">
-                    <label><fmt:message key="registration-form.login.label"/></label>
-                    <input type="text" name="login" class="form-control"
-                           placeholder="<fmt:message key="registration-form.login.placeholder"/>" required
-                           maxlength="25">
+                    <label><fmt:message key="registrationForm.login.label"/></label>
+                    <input class="form-control" type="text" name="login"  required
+                           placeholder="<fmt:message key="registrationForm.login.placeholder"/>"  maxlength="25"
+                           oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                           oninput="this.setCustomValidity('')">
                 </div>
 
                 <div class="form-group">
-                    <label><fmt:message key="registration-form.password.label"/></label>
-                    <input type="password" name="password" class="form-control"
-                           placeholder="<fmt:message key="registration-form.password.placeholder"/>" required
-                           maxlength="25">
+                    <label><fmt:message key="registrationForm.password.label"/></label>
+                    <input class="form-control" type="password" name="password" required
+                           placeholder="<fmt:message key="registrationForm.password.placeholder"/>" maxlength="25"
+                           oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                           oninput="this.setCustomValidity('')">
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registration-form.logIn.button"/></button>
+                <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.logIn.button"/></button>
+
+                <c:if test="${param.invalid eq true}">
+                    <input type="hidden" class="is-invalid">
+                    <div class="invalid-feedback">
+                        <h6><fmt:message key="validation.noSuchUser"/></h6>
+                    </div>
+                </c:if>
+                <c:if test="${param.signUpSuccess eq true}">
+                    <input type="hidden" class="is-valid">
+                    <div class="valid-feedback">
+                        <h6><fmt:message key="validation.signUpSuccess"/></h6>
+                    </div>
+                </c:if>
             </form>
         </div>
 

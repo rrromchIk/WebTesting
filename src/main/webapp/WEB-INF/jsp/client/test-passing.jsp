@@ -12,11 +12,10 @@
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
                     <a href="${pageContext.request.contextPath}/controller?action=userMain"
-                       class="float-right btn btn-outline-primary"><fmt:message key="test-passing.button.allTests"/></a>
+                       class="float-right btn btn-outline-primary"><fmt:message key="testPassing.button.allTests"/></a>
                 </div>
             </div>
         </nav>
-
 
         <div id="main-screen">
             <div class="card rounder-3 questionCard">
@@ -25,7 +24,7 @@
                         <li class="list-group-item question-number <c:if test="${loop.index eq requestScope.currentQuestion.number - 1}">active</c:if>">
                             <a href="${pageContext.request.contextPath}/controller?action=passTest&testId=${requestScope.test.id}&renderQuestion=${question.id}"
                                class="btn">
-                                <fmt:message key="test-passing.question.label"/> ${question.number}
+                                <fmt:message key="testPassing.question.label"/> ${question.number}
                             </a>
                         </li>
                     </c:forEach>
@@ -39,7 +38,7 @@
                     </h5>
                     <div class="card-body">
                         <h6 class="card-title">
-                            <fmt:message key="test-passing.question.label"/> ${requestScope.currentQuestion.number}
+                            <fmt:message key="testPassing.question.label"/> ${requestScope.currentQuestion.number}
                         </h6>
                         <h4 class="card-text">
                             ${requestScope.currentQuestion.text}?
@@ -78,7 +77,7 @@
 
         <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}"
            class="btn btn-danger">
-            <fmt:message key="test-passing.button.endAttempt"/>
+            <fmt:message key="testPassing.button.endAttempt"/>
         </a>
 
         <script src="${pageContext.request.contextPath}/js/test-passing.js"></script>

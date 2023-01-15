@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.admin;
+package com.epam.testing.controller.command.admin.tests;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddQuestionsCommand implements Command {
     private final TestsService testsService = new TestsService();
     private final TestQuestionService testQuestionService = new TestQuestionService();
+    private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -27,6 +28,7 @@ public class AddQuestionsCommand implements Command {
         if(amountOfAddedQuestions >= amountOfQuestionsInTheTest) {
             page = Path.COMMAND_ADMIN_MAIN;
         } else {
+            req.setAttribute("maxAmountOfAnswers", MAX_AMOUNT_OF_ANSWER_VARIANTS);
             req.setAttribute("questionNumber", amountOfAddedQuestions + 1);
             req.setAttribute("fullTest", test);
             req.setAttribute("testId", testId);

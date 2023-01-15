@@ -60,6 +60,10 @@ public class I18NCommand implements Command {
     if(userId != null && !userId.isEmpty()) {
       command += "&userId=" + userId;
     }
+    String testId = request.getParameter("testId");
+    if(testId != null && !testId.isEmpty()) {
+      command += "&testId=" + testId;
+    }
     String testName = request.getParameter("testName");
     if(testName != null && !testName.isEmpty()) {
       command += "&testName=" + testName;

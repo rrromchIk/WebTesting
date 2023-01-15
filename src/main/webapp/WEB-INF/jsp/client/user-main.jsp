@@ -40,14 +40,14 @@
 
             <c:if test="${requestScope.activeTab eq 'tests'}">
                 <div class="sort">
-                    <span><fmt:message key="user-main.sortBy.label"/>: </span>
+                    <span><fmt:message key="userMain.sortBy.label"/>: </span>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=name"
-                       class="sort" title="Sort by duration"><fmt:message key="user-main.sortBy.name"/> &#8693</a>
+                       class="sort" title="Sort by duration"><fmt:message key="userMain.sortBy.name"/> &#8693</a>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=difficulty"
-                       class="sort" title="Sort by name"><fmt:message key="user-main.sortBy.difficulty"/> &#8693</a>
+                       class="sort" title="Sort by name"><fmt:message key="userMain.sortBy.difficulty"/> &#8693</a>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=numOfQuest"
-                       class="sort" title="Sort by name" ><fmt:message key="user-main.sortBy.numOfQuestions"/> &#8693</a>
-                    <span><fmt:message key="user-main.onPartSubj.label"/>: </span>
+                       class="sort" title="Sort by name" ><fmt:message key="userMain.sortBy.numOfQuestions"/> &#8693</a>
+                    <span><fmt:message key="userMain.onPartSubj.label"/>: </span>
 
                     <select name="choice" onchange="window.location.href=this.options[this.selectedIndex].value">
                         <option>              </option>

@@ -19,7 +19,7 @@ import java.util.*;
                 @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
                         "submitAnswers endTest"),
                 @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +
-                        "changeUserStatus submitTestInfo addQuestions submitQuestionInfo")
+                        "changeUserStatus submitTestInfo addQuestions submitQuestionInfo testInfo editTest deleteQuestion")
         })
 public class SecurityFilter implements Filter {
     private static final UserService userService = new UserService();
@@ -43,18 +43,20 @@ public class SecurityFilter implements Filter {
         if (accessAllowed(request)) {
             chain.doFilter(request, response);
         } else {
-            String errorMessages = "You do not have permission to access the requested resource";
-            request.setAttribute("errorMessage", errorMessages);
             request.getRequestDispatcher(Path.PAGE_ERROR_PAGE).forward(request, response);
         }
     }
 
     private boolean accessAllowed(ServletRequest request) {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
-
         String command = request.getParameter("action");
 
         HttpSession session = httpRequest.getSession(false);
+        if(session == null) {
+            request.setAttribute("errorMessage", "Invalid session");
+            return false;
+        }
+
         UserRole userRole = (UserRole) session.getAttribute("userRole");
         String userLogin = (String) session.getAttribute("login");
         if(userRole == null) {
@@ -62,10 +64,11 @@ public class SecurityFilter implements Filter {
             userRole = UserRole.GUEST;
         }
 
+        request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
+
         if(userLogin != null && userService.userIsBlocked(userLogin)) {
             return false;
         }
-
         return accessMap.get(userRole).contains(command);
     }
 

@@ -12,11 +12,11 @@ import java.util.List;
  */
 
 public interface UserTestDAO {
-    int getAmountOfUserPassedTests(long userId);
-    Timestamp getTestStartingTime(long userId, long testId);
-    boolean addUsersTest(long userId, long testId, Timestamp startingTime);
+    int getAmountOfRecords(long userId);
+    Timestamp getStartingTime(long userId, long testId);
+    boolean create(long userId, long testId, Timestamp startingTime);
     boolean addResultAndEndingTime(long userId, long testId, Float testResult, Timestamp endingTime);
-    List<TestInfo> getUserTestsInfo(long userId, int limit, int offset);
-    TestStatus getTestStatus(long userId, long testId);
-    boolean updateTestStatus(long userId, long testId, TestStatus status);
+    List<TestInfo> getTestsInfo(long userId, int limit, int offset);
+    TestStatus getStatus(long userId, long testId);
+    boolean updateStatus(long userId, long testId, TestStatus status);
 }

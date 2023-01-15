@@ -15,5 +15,5 @@ public interface DAO<T extends Entity> {
     T getById(long id);
     long create(T model);
     boolean update(T model);
-    boolean delete(T model);
+    boolean delete(long id);
 }

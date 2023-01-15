@@ -12,10 +12,10 @@ public class UserAnswerService {
     }
 
     public boolean addUserAnswer(long userId, long questionId, String text) {
-        return dao.addUserAnswer(userId, questionId, text);
+        return dao.create(userId, questionId, text);
     }
 
     public boolean deleteUserAnswers(long userId, long questionId) {
-        return dao.deleteUserAnswer(userId, questionId);
+        return dao.delete(userId, questionId);
     }
 }

@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.admin;
+package com.epam.testing.controller.command.admin.tests;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
@@ -21,7 +21,7 @@ public class SubmitQuestionInfoCommand implements Command {
 
         long testId = Long.parseLong(req.getParameter("testId"));
         String questionText = req.getParameter("questionText");
-        int maxScore = 1;
+        int maxScore = Integer.parseInt(req.getParameter("maxScore"));
         List<String> answers = new ArrayList<>();
         List<String> correctAnswers = new ArrayList<>();
         QuestionType questionType = setQuestionInfo(req, answers, correctAnswers);

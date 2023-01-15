@@ -26,10 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
         $hours.textContent = hours < 10 ? '0' + hours : hours;
         $minutes.textContent = minutes < 10 ? '0' + minutes : minutes;
         $seconds.textContent = seconds < 10 ? '0' + seconds : seconds;
-
-        $hours.dataset.title = declensionNum(hours, ['година', 'години', 'годин']);
-        $minutes.dataset.title = declensionNum(minutes, ['хвилина', 'хвилини', 'хвилин']);
-        $seconds.dataset.title = declensionNum(seconds, ['секунда', 'секунди', 'секунд']);
     }
 
     const $hours = document.querySelector('.timer__hours');

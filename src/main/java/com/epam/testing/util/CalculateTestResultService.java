@@ -58,6 +58,9 @@ public class CalculateTestResultService {
                                                             List<String> questionCorrectAnswers,
                                                             List<String> userAnswers) {
         int score = 0;
+        if(questionCorrectAnswers.isEmpty() && userAnswers.isEmpty()) {
+            return maxScore;
+        }
         if(!userAnswers.isEmpty()) {
             score += questionCorrectAnswers.contains(userAnswers.get(0)) ? maxScore : 0;
         }
@@ -68,6 +71,9 @@ public class CalculateTestResultService {
                                                               List<String> questionCorrectAnswers,
                                                             List<String> userAnswers) {
         int score = 0;
+        if(questionCorrectAnswers.isEmpty() && userAnswers.isEmpty()) {
+            return maxScore;
+        }
         int amountOfCorrectAnswers = questionCorrectAnswers.size();
         int amountOfUserCorrectAnswers = 0;
         for(String userAnswer : userAnswers) {

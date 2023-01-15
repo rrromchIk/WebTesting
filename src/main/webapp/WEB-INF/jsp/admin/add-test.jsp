@@ -23,28 +23,33 @@
 
         <div id="addingTest">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=submitTestInfo">
-                <h3>Please enter test info</h3><br>
+                <h3><fmt:message key="addTest.enterTestInfo.label"/></h3><br>
                 <div class="form-row">
                     <div class="form-group col-md-3 mb-3">
-                        <label for="inputTestName"><fmt:message key="registration-form.name.label"/></label>
-                        <input type="text" name="name" class="form-control" id="inputTestName" required
-                               placeholder="<fmt:message key="registration-form.name.placeholder"/>">
+                        <label><fmt:message key="registrationForm.name.label"/></label>
+                        <input type="text" name="name" class="form-control" required
+                               placeholder="<fmt:message key="registrationForm.name.placeholder"/>"
+                               oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                               oninput="this.setCustomValidity('')">
                     </div>
 
                     <div class="form-group col-md-3 mb-3">
-                        <label for="inputSubject"><fmt:message key="test-card.subject.label"/></label>
-                        <input type="text" name="subject" class="form-control" id="inputSubject" required
-                               placeholder="<fmt:message key="test-card.subject.placeholder"/>">
+                        <label><fmt:message key="testCard.subject.label"/></label>
+                        <input type="text" name="subject" class="form-control" required
+                               placeholder="<fmt:message key="testCard.subject.placeholder"/>"
+                               oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                               oninput="this.setCustomValidity('')">
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label for="inputDuration"><fmt:message key="testCard.duration.label"/>(<fmt:message key="testCard.minutes"/>)</label>
-                        <input type="number" name="duration" class="form-control" id="inputDuration" value="1" placeholder="1" min="1">
+                        <label><fmt:message key="testCard.duration.label"/>(<fmt:message key="testCard.minutes"/>)</label>
+                        <input type="number" name="duration" class="form-control" value="1"
+                               placeholder="1" min="1">
                     </div>
 
                     <div class="form-group col-md-2">
-                        <label for="inputDifficulty"><fmt:message key="testCard.difficulty.label"/></label>
-                        <select id="inputDifficulty" name="difficulty" class="form-control">
+                        <label><fmt:message key="testCard.difficulty.label"/></label>
+                        <select name="difficulty" class="form-control">
                             <option value="0" selected><fmt:message key="testCard.difficulty.easy"/></option>
                             <option value="1"><fmt:message key="testCard.difficulty.medium"/></option>
                             <option value="2"><fmt:message key="testCard.difficulty.hard"/></option>
@@ -53,10 +58,9 @@
                 </div>
 
                 <div class="form-row">
-                    <label for="amountOfQuestions"
-                           class="col-sm-5 col-form-label"><fmt:message key="add-test.addAmountOfQuestions"/>:</label>
+                    <label class="col-sm-5 col-form-label"><fmt:message key="addTest.addAmountOfQuestions"/>:</label>
                     <div class="col-md-2">
-                        <input type="number" name="numOfQuestions" class="form-control" id="amountOfQuestions"
+                        <input type="number" name="numOfQuestions" class="form-control"
                                value="3" placeholder="3" min="3">
                     </div>
                 </div>

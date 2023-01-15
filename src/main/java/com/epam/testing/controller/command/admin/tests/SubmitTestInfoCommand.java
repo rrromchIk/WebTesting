@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.admin;
+package com.epam.testing.controller.command.admin.tests;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
@@ -24,14 +24,13 @@ public class SubmitTestInfoCommand implements Command {
                 .duration(Integer.parseInt(req.getParameter("duration")))
                 .numberOfQuestions(Integer.parseInt(req.getParameter("numOfQuestions")))
                 .build();
-        System.out.println(test);
-
 
         if(testsService.createTest(test)) {
             page += "&testId=" + test.getId();
         } else {
             page = Path.PAGE_ERROR_PAGE;
             String errorMessage = "Unable to create test";
+            req.setAttribute("commandToGoBack", Path.COMMAND_ADD_TEST);
             req.setAttribute("errorMessage", errorMessage);
             redirect = false;
         }

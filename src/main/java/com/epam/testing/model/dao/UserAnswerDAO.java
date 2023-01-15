@@ -8,6 +8,6 @@ import java.util.List;
  */
 public interface UserAnswerDAO {
     List<String> getUserAnswers(long userId, long questionId);
-    boolean addUserAnswer(long userId, long questionId, String text);
-    boolean deleteUserAnswer(long userId, long questionId);
+    boolean create(long userId, long questionId, String text);
+    boolean delete(long userId, long questionId);
 }

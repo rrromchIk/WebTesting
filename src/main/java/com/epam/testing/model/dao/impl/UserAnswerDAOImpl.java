@@ -26,7 +26,7 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
         List<String> userAnswers = new ArrayList<>();
         try(Connection connection = datasource.getConnection();
             PreparedStatement statement = connection
-                    .prepareStatement(UserAnswerQueries.GET_USER_ANSWERS.QUERY)) {
+                    .prepareStatement(UserAnswerQueries.GET.QUERY)) {
             statement.setLong(1, userId);
             statement.setLong(2, questionId);
             ResultSet resultSet = statement.executeQuery();
@@ -40,10 +40,10 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
     }
 
     @Override
-    public boolean addUserAnswer(long userId, long questionId, String text) {
+    public boolean create(long userId, long questionId, String text) {
         boolean result = false;
         try (Connection connection = datasource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UserAnswerQueries.ADD_USER_ANSWER.QUERY)) {
+             PreparedStatement statement = connection.prepareStatement(UserAnswerQueries.CREATE.QUERY)) {
             statement.setLong(1, userId);
             statement.setLong(2, questionId);
             statement.setString(3, text);
@@ -55,10 +55,10 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
     }
 
     @Override
-    public boolean deleteUserAnswer(long userId, long questionId) {
+    public boolean delete(long userId, long questionId) {
         boolean result = false;
         try (Connection connection = datasource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UserAnswerQueries.DELETE_USER_ANSWER.QUERY)) {
+             PreparedStatement statement = connection.prepareStatement(UserAnswerQueries.DELETE.QUERY)) {
             statement.setLong(1, userId);
             statement.setLong(2, questionId);
             result = statement.executeUpdate() > 0;
@@ -69,9 +69,9 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
     }
 
     enum UserAnswerQueries {
-        GET_USER_ANSWERS("SELECT * FROM user_answer WHERE user_id = ? AND question_id = ?"),
-        ADD_USER_ANSWER("INSERT INTO user_answer(user_id, question_id, text) VALUES(?, ?, ?)"),
-        DELETE_USER_ANSWER("DELETE FROM user_answer WHERE user_id = ? AND question_id = ?");
+        GET("SELECT * FROM user_answer WHERE user_id = ? AND question_id = ?"),
+        CREATE("INSERT INTO user_answer(user_id, question_id, text) VALUES(?, ?, ?)"),
+        DELETE("DELETE FROM user_answer WHERE user_id = ? AND question_id = ?");
 
         final String QUERY;
         UserAnswerQueries(String query) {

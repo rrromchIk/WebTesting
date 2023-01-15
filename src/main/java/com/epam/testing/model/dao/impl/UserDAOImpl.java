@@ -148,24 +148,10 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
-    /**
-     * Delete User by login AND password.
-     *
-     * @param user for delete.
-     * @return true if User was deleted. False if User not exist.
-     */
+
     @Override
-    public boolean delete(final User user) {
-        boolean result = false;
-        try (Connection connection = datasource.getConnection();
-             PreparedStatement statement = connection.prepareStatement(UserQueries.DELETE.QUERY)) {
-            statement.setString(1, user.getLogin());
-            statement.setString(2, user.getPassword());
-            result = statement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
+    public boolean delete(long id) {
+        throw new UnsupportedOperationException();
     }
 
     /**

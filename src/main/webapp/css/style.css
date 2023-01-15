@@ -70,7 +70,7 @@ body {
     border-width: thin;
     border-style: solid;
     width: 400px;
-    height: 515px;
+    height: 530px;
     border-color: rgb(175, 175, 175);
     border-radius: 2%;
 }
@@ -286,3 +286,28 @@ body {
 #addQuestionsMain {
     width: 50em;
 }
+
+#gradeInput{
+    border: 1px solid #D9DDE2;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.form-check{
+    margin-bottom: 20px;
+}
+
+.answerHeader{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.amountOfQuestionSpan{
+    position: absolute;
+    right: 0;
+}
+
+#questionText {
+    margin-bottom: 20px;
+}
+

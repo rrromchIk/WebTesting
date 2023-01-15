@@ -9,11 +9,11 @@ import java.util.List;
  */
 
 public interface TestDAO extends DAO<Test> {
-    Test getTestByName(String name);
-    List<Test> getTestsSortedByNumberOfQuestions(int limit, int offset);
-    List<Test> getTestsSortedByName(int limit, int offset);
-    List<Test> getTestsSortedByDifficulty(int limit, int offset);
-    List<Test> getTestsOnParticularSubject(String subject, int limit, int offset);
+    Test getByName(String name);
+    List<Test> getAllSortedByNumberOfQuestions(int limit, int offset);
+    List<Test> getAllSortedByName(int limit, int offset);
+    List<Test> getAllSortedByDifficulty(int limit, int offset);
+    List<Test> getAllOnParticularSubject(String subject, int limit, int offset);
     List<String> getAllTestsSubjects();
-    int getAmountOfTestsOnParticularSubject(String subject);
+    int getAmountOnParticularSubject(String subject);
 }

@@ -13,7 +13,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     private final DBManager datasource = DBManager.getInstance();
 
     @Override
-    public int getAmountOfQuestionsByTestId(long testId) {
+    public int getAmountOfRecordsByTestId(long testId) {
         int amount = 0;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
@@ -35,7 +35,7 @@ public class QuestionDAOImpl implements QuestionDAO {
      * @param testId for select.
      * @return valid list of questions if they exist. If not return empty list.
      */
-    public List<Question> getQuestionsByTestId(long testId) {
+    public List<Question> getAllByTestId(long testId) {
         List<Question> questionArr = new ArrayList<>();
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(QuestionDAOImpl.QuestionQueries.GET_BY_TEST_ID.QUERY)) {
@@ -119,14 +119,14 @@ public class QuestionDAOImpl implements QuestionDAO {
     /**
      * Delete Question by name
      *
-     * @param question for delete.
+     * @param id for delete.
      * @return true if Question was deleted. False if Question not exist.
      */
-    public boolean delete(Question question) {
+    public boolean delete(long id) {
         boolean result = false;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(QuestionDAOImpl.QuestionQueries.DELETE.QUERY)) {
-            statement.setLong(1, question.getId());
+            statement.setLong(1, id);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

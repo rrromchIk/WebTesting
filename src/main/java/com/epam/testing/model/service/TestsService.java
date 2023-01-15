@@ -4,7 +4,6 @@ import com.epam.testing.model.dao.TestDAO;
 import com.epam.testing.model.dao.impl.TestDAOImpl;
 import com.epam.testing.model.entity.Test;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 public class TestsService {
@@ -14,16 +13,12 @@ public class TestsService {
         return dao.getById(testId);
     }
 
-    public Test getTestByName(String name) {
-        return dao.getTestByName(name);
-    }
-
     public int getAmountOfTests() {
         return dao.getAmountOfRecords();
     }
 
     public int getAmountOfTestsOnParticularSubject(String subject) {
-        return dao.getAmountOfTestsOnParticularSubject(subject);
+        return dao.getAmountOnParticularSubject(subject);
     }
 
     public List<Test> getAllTests(int limit, int offset) {
@@ -31,19 +26,19 @@ public class TestsService {
     }
 
     public List<Test> getTestsSortedByNumberOfQuestions(int limit, int offset) {
-        return dao.getTestsSortedByNumberOfQuestions(limit, offset);
+        return dao.getAllSortedByNumberOfQuestions(limit, offset);
     }
 
     public List<Test> getTestsSortedByName(int limit, int offset) {
-        return dao.getTestsSortedByName(limit, offset);
+        return dao.getAllSortedByName(limit, offset);
     }
 
     public List<Test> getTestsSortedByDifficulty(int limit, int offset) {
-        return dao.getTestsSortedByDifficulty(limit, offset);
+        return dao.getAllSortedByDifficulty(limit, offset);
     }
 
     public List<Test> getTestsOnParticularSubject(String subject, int limit, int offset) {
-        return dao.getTestsOnParticularSubject(subject, limit, offset);
+        return dao.getAllOnParticularSubject(subject, limit, offset);
     }
 
     public List<String> getAllSubjects() {
@@ -51,13 +46,16 @@ public class TestsService {
     }
 
     public boolean deleteTest(long testId) {
-        Test test = dao.getById(testId);
-        return dao.delete(test);
+        return dao.delete(testId);
     }
 
     public boolean createTest(Test test) {
         long id = dao.create(test);
         test.setId(id);
         return id != -1;
+    }
+
+    public boolean updateTest(Test test) {
+        return dao.update(test);
     }
 }

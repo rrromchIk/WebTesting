@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ResourceBundleManager">
-    <file url="file://$PROJECT_DIR$/src/main/resources/locales.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/locales_en.properties" />
     <file url="file://$PROJECT_DIR$/src/main/resources/locales_ua.properties" />
     <custom-resource-bundle>
-      <file value="file://$PROJECT_DIR$/src/main/resources/locales.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/locales_en.properties" />
       <file value="file://$PROJECT_DIR$/src/main/resources/locales_ua.properties" />
       <base-name>locales</base-name>

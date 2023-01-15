@@ -16,15 +16,15 @@ public class UserTestService {
     private final TestsService testsService = new TestsService();
 
     public int getAmountOfUserPassedTests(long userId) {
-        return userTestDao.getAmountOfUserPassedTests(userId);
+        return userTestDao.getAmountOfRecords(userId);
     }
 
     public boolean addTestToUsersTests(long userId, long testId, Timestamp time) {
-        return userTestDao.addUsersTest(userId, testId, time);
+        return userTestDao.create(userId, testId, time);
     }
 
     public List<TestInfo> getUserTestsInfo(long userId, int limit, int offset) {
-        return userTestDao.getUserTestsInfo(userId, limit, offset);
+        return userTestDao.getTestsInfo(userId, limit, offset);
     }
 
     public boolean addResultAndEndingTime(long userId, long testId, float result, Timestamp endingTime) {
@@ -32,7 +32,7 @@ public class UserTestService {
     }
 
     public TestStatus getUserTestStatus(long userId, long testId) {
-        TestStatus status = userTestDao.getTestStatus(userId, testId);
+        TestStatus status = userTestDao.getStatus(userId, testId);
         if(status == null) {
             status = TestStatus.NOT_STARTED;
         }
@@ -40,7 +40,7 @@ public class UserTestService {
     }
 
     public boolean updateUserTestStatus(long userId, long testId, TestStatus status) {
-        return userTestDao.updateTestStatus(userId, testId, status);
+        return userTestDao.updateStatus(userId, testId, status);
     }
 
     public long getRemainingTime(long userId, long testId) {
@@ -48,7 +48,7 @@ public class UserTestService {
         int testDuration = test.getDuration();
 
         LocalDateTime currentTime = LocalDateTime.now();
-        LocalDateTime startingTime = userTestDao.getTestStartingTime(userId, testId).toLocalDateTime();
+        LocalDateTime startingTime = userTestDao.getStartingTime(userId, testId).toLocalDateTime();
         LocalDateTime limitTime = startingTime.plusMinutes(testDuration);
 
         return currentTime.until(limitTime, ChronoUnit.MILLIS);

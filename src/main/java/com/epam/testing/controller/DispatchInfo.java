@@ -7,8 +7,11 @@ package com.epam.testing.controller;
  */
 
 public class DispatchInfo {
-    private final  boolean redirect;
-    private final String page;
+    private boolean redirect;
+    private String page;
+
+    public DispatchInfo() {
+    }
 
     public DispatchInfo(boolean redirect, String page) {
         this.redirect = redirect;
@@ -21,5 +24,13 @@ public class DispatchInfo {
 
     public String getPage() {
         return page;
+    }
+
+    public void setRedirect(boolean redirect) {
+        this.redirect = redirect;
+    }
+
+    public void setPage(String page) {
+        this.page = page;
     }
 }

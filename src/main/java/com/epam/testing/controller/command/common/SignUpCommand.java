@@ -14,7 +14,6 @@ public class SignUpCommand implements Command {
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         String page;
-        boolean redirect;
 
         User user = new User.UserBuilder()
                 .login(req.getParameter("login"))
@@ -25,14 +24,11 @@ public class SignUpCommand implements Command {
                 .build();
 
         if(userService.addUser(user)) {
-            page = Path.PAGE_LOGIN;
-            redirect = true;
+            page = Path.PAGE_LOGIN + "?signUpSuccess=true";
         } else {
-            page = Path.PAGE_ERROR_PAGE;
-            String errorMessage = "Login already in use";
-            req.setAttribute("errorMessage", errorMessage);
-            redirect = false;
+            page = Path.PAGE_SIGNUP + "?invalid=true";
         }
-        return new DispatchInfo(redirect, page);
+
+        return new DispatchInfo(true, page);
     }
 }

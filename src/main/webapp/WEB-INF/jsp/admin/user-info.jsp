@@ -21,25 +21,31 @@
             </div>
         </nav>
 
-        <h1><fmt:message key="registration-form.login.label"/>: ${requestScope.fullUser.login}</h1>
+        <h1><fmt:message key="registrationForm.login.label"/>: ${requestScope.fullUser.login}</h1>
 
         <div id="profileForm">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=editUser&userId=${requestScope.fullUser.id}">
                 <input type="hidden" name="login" value="${requestScope.fullUser.login}">
                 <div class="form-group">
-                    <label><fmt:message key="registration-form.name.label"/></label>
-                    <input name="name" type="text" value="${requestScope.fullUser.name}" readonly="true" class="form-control"
-                           placeholder="<fmt:message key="registration-form.name.placeholder"/>" required maxlength="25">
+                    <label><fmt:message key="registrationForm.name.label"/></label>
+                    <input class="form-control" name="name" type="text" value="${requestScope.fullUser.name}" readonly
+                           placeholder="<fmt:message key="registrationForm.name.placeholder"/>" required maxlength="25"
+                           oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                           oninput="this.setCustomValidity('')">
                 </div>
                 <div class="form-group">
-                    <label><fmt:message key="registration-form.surname.label"/></label>
-                    <input name="surname" type="text" value="${requestScope.fullUser.surname}" readonly="true" class="form-control"
-                           placeholder="<fmt:message key="registration-form.surname.placeholder"/>" required maxlength="25">
+                    <label><fmt:message key="registrationForm.surname.label"/></label>
+                    <input class="form-control" name="surname" type="text" value="${requestScope.fullUser.surname}" readonly
+                           placeholder="<fmt:message key="registrationForm.surname.placeholder"/>" required maxlength="25"
+                           oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
+                           oninput="this.setCustomValidity('')">
                 </div>
                 <div class="form-group">
-                    <label><fmt:message key="registration-form.email.label"/></label>
-                    <input name="email" type="email" value="${requestScope.fullUser.email}" readonly="true" class="form-control"
-                           placeholder="<fmt:message key="registration-form.email.placeholder"/>" required maxlength="25">
+                    <label><fmt:message key="registrationForm.email.label"/></label>
+                    <input class="form-control" name="email" type="email" value="${requestScope.fullUser.email}" readonly
+                           placeholder="<fmt:message key="registrationForm.email.placeholder"/>" required maxlength="25"
+                           oninvalid="this.setCustomValidity('<fmt:message key="validation.badEmail"/>')"
+                           oninput="this.setCustomValidity('')">
                 </div>
                 <button id="edit-profile-btn" type="button" class="btn btn-primary"><fmt:message key="button.edit"/></button>
                 <button id="submit-changes-btn" disabled="true" type="submit" class="btn btn-primary"><fmt:message key="button.submitChanges"/></button>

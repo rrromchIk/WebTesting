@@ -28,7 +28,8 @@ public class StartTestCommand implements Command {
             userTestService.updateUserTestStatus(userId, testId, TestStatus.STARTED);
         } else {
             page = Path.PAGE_ERROR_PAGE;
-            String errorMessage = "Failed to add test to user collection";
+            String errorMessage = "Failed to start test. Try again later!";
+            req.setAttribute("commandToGoBack", Path.COMMAND_USER_MAIN);
             req.setAttribute("errorMessage", errorMessage);
         }
 

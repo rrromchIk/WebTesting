@@ -23,7 +23,7 @@
         </nav>
 
         <div id="main-content">
-            <h1><fmt:message key="main-page.content"/> </h1>
+            <h1><fmt:message key="mainPage.content"/> </h1>
         </div>
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>

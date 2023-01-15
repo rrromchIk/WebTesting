@@ -1,6 +1,10 @@
 package com.epam.testing.controller.command;
 
 import com.epam.testing.controller.command.admin.*;
+import com.epam.testing.controller.command.admin.tests.*;
+import com.epam.testing.controller.command.admin.users.ChangeUserStatusCommand;
+import com.epam.testing.controller.command.admin.users.EditUserCommand;
+import com.epam.testing.controller.command.admin.users.UserInfoCommand;
 import com.epam.testing.controller.command.client.*;
 import com.epam.testing.controller.command.common.*;
 
@@ -46,6 +50,9 @@ public class CommandFactory {
     commands.put("submittestinfo", new SubmitTestInfoCommand());
     commands.put("addquestions", new AddQuestionsCommand());
     commands.put("submitquestioninfo", new SubmitQuestionInfoCommand());
+    commands.put("testinfo", new TestInfoCommand());
+    commands.put("edittest", new EditTestCommand());
+    commands.put("deletequestion", new DeleteQuestionCommand());
 
     //client commands
     commands.put("editprofile", new EditProfileCommand());

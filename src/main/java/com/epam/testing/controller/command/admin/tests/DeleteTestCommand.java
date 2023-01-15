@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.admin;
+package com.epam.testing.controller.command.admin.tests;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
@@ -21,6 +21,7 @@ public class DeleteTestCommand implements Command {
         if(!testsService.deleteTest(testId)) {
             page = Path.PAGE_ERROR_PAGE;
             String errorMessage = "Unable to delete test";
+            req.setAttribute("commandToGoBack", page);
             req.setAttribute("errorMessage", errorMessage);
             redirect = false;
         }

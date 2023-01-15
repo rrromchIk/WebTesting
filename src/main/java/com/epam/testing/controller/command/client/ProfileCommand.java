@@ -14,13 +14,13 @@ public class ProfileCommand implements Command {
     private final UserService userService = new UserService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page;
-        HttpSession httpSession = req.getSession();
+        String page = Path.PAGE_USER_PROFILE;
 
+        HttpSession httpSession = req.getSession();
         String userLogin = (String)httpSession.getAttribute("login");
-        User user = userService.getByLogin(userLogin);
+
+        User user = userService.getUserByLogin(userLogin);
         req.setAttribute("fullUser", user);
-        page = Path.PAGE_USER_PROFILE;
 
         return new DispatchInfo(false, page);
     }

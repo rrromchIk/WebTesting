@@ -35,7 +35,7 @@ public class UserMainCommand implements Command {
         } else if(tab.equals("passedTests")) {
             processPassedTestsTab(req, userId);
         } else {
-            processPassedTestsTab(req, userId);
+            processTestsTab(req, userId);
         }
 
         return new DispatchInfo(false, page);
@@ -46,12 +46,12 @@ public class UserMainCommand implements Command {
         String subject = req.getParameter("groupBy");
         String sortingMethod = req.getParameter("sortMethod");
 
-        if(sortingMethod == null && subject == null) {
+        if((sortingMethod == null || sortingMethod.isEmpty()) && (subject == null || subject.isEmpty())) {
             sortingMethod = "default";
         }
 
         int totalNumOfTests;
-        if(subject != null) {
+        if(subject != null && !subject.isEmpty()) {
             totalNumOfTests = testsService.getAmountOfTestsOnParticularSubject(subject);
         } else {
             totalNumOfTests = testsService.getAmountOfTests();
@@ -63,10 +63,10 @@ public class UserMainCommand implements Command {
         int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, totalNumOfTests, pageNumber);
 
         List<Test> tests;
-        if(subject == null) {
-            tests = getTestsBySortedMethod(sortingMethod, offset);
-        } else {
+        if(subject != null && !subject.isEmpty()) {
             tests = testsService.getTestsOnParticularSubject(subject, RECORDS_ON_PAGE_LIMIT, offset);
+        } else {
+            tests = getTestsBySortedMethod(sortingMethod, offset);
         }
 
         setTestsStatuses(tests, userId);
@@ -109,6 +109,9 @@ public class UserMainCommand implements Command {
                 break;
             case "numOfQuest":
                 tests = testsService.getTestsSortedByNumberOfQuestions(RECORDS_ON_PAGE_LIMIT, offset);
+                break;
+            default:
+                tests = testsService.getAllTests(RECORDS_ON_PAGE_LIMIT, offset);
                 break;
         }
         return tests;

@@ -22,7 +22,7 @@ public class TestDAOImpl implements TestDAO {
      * @param name for select.
      * @return valid entity if it exists. If entity does not exist return null.
      */
-    public Test getTestByName(String name) {
+    public Test getByName(String name) {
         Test test = null;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TestDAOImpl.TestQueries.GET_BY_NAME.QUERY)) {
@@ -38,26 +38,26 @@ public class TestDAOImpl implements TestDAO {
     }
 
     @Override
-    public List<Test> getTestsSortedByNumberOfQuestions(int limit, int offset) {
-        return getMany(TestQueries.GET_TESTS_SORTED_BY_NUMBER_OF_QUESTIONS.QUERY, limit, offset);
+    public List<Test> getAllSortedByNumberOfQuestions(int limit, int offset) {
+        return getMany(TestQueries.GET_ALL_SORTED_BY_NUMBER_OF_QUESTIONS.QUERY, limit, offset);
     }
 
     @Override
-    public List<Test> getTestsSortedByName(int limit, int offset) {
-        return getMany(TestQueries.GET_TESTS_SORTED_BY_NAME.QUERY, limit, offset);
+    public List<Test> getAllSortedByName(int limit, int offset) {
+        return getMany(TestQueries.GET_ALL_SORTED_BY_NAME.QUERY, limit, offset);
     }
 
     @Override
-    public List<Test> getTestsSortedByDifficulty(int limit, int offset) {
-        return getMany(TestQueries.GET_TESTS_SORTED_BY_DIFFICULTY.QUERY, limit, offset);
+    public List<Test> getAllSortedByDifficulty(int limit, int offset) {
+        return getMany(TestQueries.GET_ALL_SORTED_BY_DIFFICULTY.QUERY, limit, offset);
     }
 
     @Override
-    public List<Test> getTestsOnParticularSubject(String subject, int limit, int offset) {
+    public List<Test> getAllOnParticularSubject(String subject, int limit, int offset) {
         List<Test> testArr = new ArrayList<>();
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
-                     TestQueries.GET_TESTS_ON_PARTICULAR_SUBJECT.QUERY)) {
+                     TestQueries.GET_ALL_ON_PARTICULAR_SUBJECT.QUERY)) {
             statement.setString(1, subject);
             statement.setInt(2, limit);
             statement.setInt(3, offset);
@@ -87,7 +87,7 @@ public class TestDAOImpl implements TestDAO {
     }
 
     @Override
-    public int getAmountOfTestsOnParticularSubject(String subject) {
+    public int getAmountOnParticularSubject(String subject) {
         int amount = 0;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(
@@ -243,14 +243,14 @@ public class TestDAOImpl implements TestDAO {
     /**
      * Delete Test by name
      *
-     * @param test for delete.
+     * @param id for delete.
      * @return true if Test was deleted. False if Test not exist.
      */
-    public boolean delete(final Test test) {
+    public boolean delete(long id) {
         boolean result = false;
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(TestDAOImpl.TestQueries.DELETE.QUERY)) {
-            statement.setString(1, test.getName());
+            statement.setLong(1, id);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -263,20 +263,19 @@ public class TestDAOImpl implements TestDAO {
         INSERT("INSERT INTO test(name, subject, difficulty, duration, number_of_questions) VALUES(?, ?, ?, ?, ?)"),
         UPDATE("UPDATE test SET name = ?, subject = ?, difficulty = ?, duration = ?, number_of_questions = ?" +
                 " WHERE name = ?"),
+        DELETE("DELETE FROM test WHERE id = ?"),
         GET_ALL("SELECT * FROM test LIMIT ? OFFSET ?"),
         GET_BY_ID("SELECT * FROM test WHERE id = ?"),
         GET_BY_NAME("SELECT * FROM test WHERE name = ?"),
-        DELETE("DELETE FROM test WHERE name = ?"),
 
-        GET_TESTS_SORTED_BY_NAME("SELECT * FROM test ORDER BY name LIMIT ? OFFSET ?"),
-        GET_TESTS_SORTED_BY_DIFFICULTY("SELECT * FROM test ORDER BY difficulty LIMIT ? OFFSET ?"),
-        GET_TESTS_SORTED_BY_NUMBER_OF_QUESTIONS("SELECT * FROM test ORDER BY number_of_questions LIMIT ? OFFSET ?"),
-        GET_TESTS_ON_PARTICULAR_SUBJECT("SELECT * FROM test where subject = ? LIMIT ? OFFSET ?"),
+        GET_ALL_SORTED_BY_NAME("SELECT * FROM test ORDER BY name LIMIT ? OFFSET ?"),
+        GET_ALL_SORTED_BY_DIFFICULTY("SELECT * FROM test ORDER BY difficulty LIMIT ? OFFSET ?"),
+        GET_ALL_SORTED_BY_NUMBER_OF_QUESTIONS("SELECT * FROM test ORDER BY number_of_questions LIMIT ? OFFSET ?"),
+        GET_ALL_ON_PARTICULAR_SUBJECT("SELECT * FROM test where subject = ? LIMIT ? OFFSET ?"),
 
         GET_ALL_SUBJECTS("SELECT subject FROM test"),
         GET_AMOUNT_OF_RECORDS("SELECT COUNT(name) FROM test"),
         GET_AMOUNT_OF_RECORDS_ON_PART_SUBJ("SELECT COUNT(name) FROM test WHERE subject = ?");
-
 
         final String QUERY;
         TestQueries(String QUERY) {

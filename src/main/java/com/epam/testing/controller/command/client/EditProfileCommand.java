@@ -21,13 +21,14 @@ public class EditProfileCommand implements Command {
         String newSurname= req.getParameter("surname");
         String newEmail = req.getParameter("email");
 
-        User user = userService.getByLogin(login);
+        User user = userService.getUserByLogin(login);
         user.setName(newName);
         user.setSurname(newSurname);
         user.setEmail(newEmail);
 
         if(!userService.updateUser(user)) {
             String errorMessage = "Can not update";
+            req.setAttribute("commandToGoBack", Path.COMMAND_USER_PROFILE);
             req.setAttribute("errorMessage", errorMessage);
             page = Path.PAGE_ERROR_PAGE;
             redirect = false;
