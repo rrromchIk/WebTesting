@@ -1,6 +1,6 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.connectionPool.DBManager;
+import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserTestDAO;
 import com.epam.testing.model.entity.TestDifficulty;
 import com.epam.testing.model.entity.TestInfo;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 public class UserTestDAOImpl implements UserTestDAO {
-    private final DBManager datasource = DBManager.getInstance();
+    private final DataSource datasource = DataSource.getInstance();
 
     public int getAmountOfRecords(long userId) {
         int amount = 0;

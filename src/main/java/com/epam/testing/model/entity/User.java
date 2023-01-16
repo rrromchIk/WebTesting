@@ -6,6 +6,7 @@ package com.epam.testing.model.entity;
  */
 
 public class User extends Entity {
+    private static final long serialVersionUID = 1L;
     private final String login;
     private String password;
     private String name;

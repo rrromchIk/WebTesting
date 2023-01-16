@@ -7,7 +7,8 @@ package com.epam.testing.model.entity;
  */
 
 public class Test extends Entity {
-    private String name;
+    private static final long serialVersionUID = 1L;
+    private final String name;
     private String subject;
     private TestDifficulty testDifficulty;
     private Integer numberOfQuestions;
@@ -32,10 +33,6 @@ public class Test extends Entity {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSubject() {

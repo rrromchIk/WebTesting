@@ -1,38 +1,37 @@
-package com.epam.testing.model.connectionPool;
+package com.epam.testing.model.connection;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Connection pool for Database
+ * DataSource configuration
  *
  * @author rom4ik
  */
 
-public class DBManager {
-    private static DataSource ds;
-    private static final DBManager instance;
+public class DataSource {
+    private static javax.sql.DataSource ds;
+    private static final DataSource instance;
 
     static {
         try {
             Context initContext = new InitialContext();
-            ds = (DataSource)initContext.lookup("java:/comp/env/jdbc/web_testing");
+            ds = (javax.sql.DataSource)initContext.lookup("java:/comp/env/jdbc/web_testing");
         } catch (NamingException e) {
             e.printStackTrace();
         }
-        instance = new DBManager();
+        instance = new DataSource();
     }
 
-    private DBManager() {}
+    private DataSource() {}
 
     /**
      * Singleton.
      */
-    public static synchronized DBManager getInstance() {
+    public static synchronized DataSource getInstance() {
         return instance;
     }
 

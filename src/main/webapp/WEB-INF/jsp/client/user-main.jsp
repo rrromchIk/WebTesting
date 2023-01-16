@@ -155,7 +155,9 @@
                       <c:forEach begin="1" end="${requestScope.amountOfPages}" varStatus="loop">
                           <li class="page-item page-number <c:if test="${requestScope.activePage eq loop.index}">active</c:if>">
                               <a class="page-link"
-                                 href="${pageContext.request.contextPath}/controller?action=userMain&tab=${requestScope.activeTab}<c:if test="${requestScope.sortMethod != null}">&sortMethod=${requestScope.sortMethod}</c:if>&page=${loop.index}">${loop.index}</a>
+                                 href="${pageContext.request.contextPath}/controller?action=userMain&tab=${requestScope
+                                 .activeTab}<c:if test="${requestScope.sortMethod != null}">&sortMethod=${requestScope
+                                 .sortMethod}</c:if>&page=${loop.index}">${loop.index}</a>
                           </li>
                       </c:forEach>
                   </c:if>

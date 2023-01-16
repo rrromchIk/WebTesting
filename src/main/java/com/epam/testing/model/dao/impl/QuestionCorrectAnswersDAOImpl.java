@@ -1,7 +1,7 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.connectionPool.DBManager;
-import com.epam.testing.model.dao.QuestionCorrectAnswerDAO;
+import com.epam.testing.model.connection.DataSource;
+import com.epam.testing.model.dao.QuestionAnswerDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionCorrectAnswersDAOImpl implements QuestionCorrectAnswerDAO {
-    private final DBManager datasource = DBManager.getInstance();
+public class QuestionCorrectAnswersDAOImpl implements QuestionAnswerDAO {
+    private final DataSource datasource = DataSource.getInstance();
 
     /**
      * Select all correct answers of question.

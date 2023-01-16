@@ -1,7 +1,7 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.connectionPool.DBManager;
-import com.epam.testing.model.dao.QuestionAnswerVariantsDAO;
+import com.epam.testing.model.connection.DataSource;
+import com.epam.testing.model.dao.QuestionAnswerDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionAnswerVariantsDAOImpl implements QuestionAnswerVariantsDAO {
-    private final DBManager datasource = DBManager.getInstance();
+public class QuestionAnswerVariantsDAOImpl implements QuestionAnswerDAO {
+    private final DataSource datasource = DataSource.getInstance();
 
     /**
      * Select all answers variants of question.

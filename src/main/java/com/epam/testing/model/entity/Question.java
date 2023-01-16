@@ -9,6 +9,7 @@ import java.util.Objects;
  */
 
 public class Question extends Entity {
+    private static final long serialVersionUID = 1L;
     private String text;
     private final QuestionType type;
     private final int maxScore;

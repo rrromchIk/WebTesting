@@ -1,6 +1,6 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.connectionPool.DBManager;
+import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.QuestionDAO;
 import com.epam.testing.model.entity.Question;
 import com.epam.testing.model.entity.QuestionType;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDAOImpl implements QuestionDAO {
-    private final DBManager datasource = DBManager.getInstance();
+    private final DataSource datasource = DataSource.getInstance();
 
     @Override
     public int getAmountOfRecordsByTestId(long testId) {

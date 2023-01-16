@@ -1,6 +1,6 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.connectionPool.DBManager;
+import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserAnswerDAO;
 
 import java.sql.*;
@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class UserAnswerDAOImpl implements UserAnswerDAO {
-    private final DBManager datasource = DBManager.getInstance();
+    private final DataSource datasource = DataSource.getInstance();
 
     /**Getting User's answers
      *
