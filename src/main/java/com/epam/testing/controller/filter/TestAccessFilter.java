@@ -35,7 +35,7 @@ public class TestAccessFilter implements Filter {
             chain.doFilter(request, response);
         } else {
             String errorMessages = "You do not have permission to access the test";
-            request.setAttribute("command", Path.COMMAND_USER_MAIN);
+            request.setAttribute("commandToGoBack", Path.COMMAND_USER_MAIN);
             request.setAttribute("errorMessage", errorMessages);
             request.getRequestDispatcher(Path.PAGE_ERROR_PAGE).forward(request, response);
         }

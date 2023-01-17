@@ -46,20 +46,14 @@
                     <div class="card-body">
                         <h3 class="card-title">${test.subject}</h3>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
-                            <c:choose>
-                                <c:when test="${test.difficulty.name eq 'easy'}">
-                                    <fmt:message key="testCard.difficulty.easy"/>
-                                </c:when>
-                                <c:when test="${test.difficulty.name eq 'medium'}">
-                                    <fmt:message key="testCard.difficulty.medium"/>
-                                </c:when>
-                                <c:when test="${test.difficulty.name eq 'hard'}">
-                                    <fmt:message key="testCard.difficulty.hard"/>
-                                </c:when>
-                            </c:choose>
+                            <df:difficulty diff="${test.difficulty}"/>
                         </p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>${test.duration} <fmt:message key="testCard.minutes"/></p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.numOfQuest.label"/>: </span>${test.numberOfQuestions}</p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>
+                                ${test.duration} <fmt:message key="testCard.minutes"/>
+                        </p>
+                        <p class="card-text"><span class="spanName"><fmt:message key="testCard.numOfQuest.label"/>: </span>
+                                ${test.numberOfQuestions}
+                        </p>
                         <a href="${pageContext.request.contextPath}/controller?action=testInfo&testId=${test.id}"
                            class="btn btn-primary"><fmt:message key="button.editTest"/></a>
                         <a href="${pageContext.request.contextPath}/controller?action=deleteTest&testId=${test.id}"
@@ -74,28 +68,35 @@
                 <div id="test-item" class="card">
                     <h5 class="card-header"><fmt:message key="registrationForm.login.label"/> : ${user.login}</h5>
                     <div class="card-body">
-                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.name.label"/>: </span>${user.name}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.surname.label"/>: </span>${user.surname}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="registrationForm.email.label"/>: </span>${user.email}</p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="userCard.role.label"/>: </span>
-                            <c:choose>
-                                <c:when test="${user.role.name eq 'client'}">
-                                    <fmt:message key="userCard.role.client"/>
-                                </c:when>
-                                <c:when test="${user.role.name eq 'admin'}">
-                                    <fmt:message key="userCard.role.admin"/>
-                                </c:when>
-                            </c:choose>
+                        <p class="card-text">
+                            <span class="spanName">
+                                <fmt:message key="registrationForm.name.label"/>:
+                            </span>
+                                ${user.name}
                         </p>
-                        <p class="card-text"><span class="spanName"><fmt:message key="userCard.status.label"/>: </span>
-                            <c:choose>
-                                <c:when test="${user.status.name eq 'active'}">
-                                    <fmt:message key="userCard.status.active"/>
-                                </c:when>
-                                <c:when test="${user.status.name eq 'blocked'}">
-                                    <fmt:message key="userCard.status.blocked"/>
-                                </c:when>
-                            </c:choose>
+                        <p class="card-text">
+                            <span class="spanName">
+                                <fmt:message key="registrationForm.surname.label"/>:
+                            </span>
+                                ${user.surname}
+                        </p>
+                        <p class="card-text">
+                            <span class="spanName">
+                                <fmt:message key="registrationForm.email.label"/>:
+                            </span>
+                                ${user.email}
+                        </p>
+                        <p class="card-text">
+                            <span class="spanName">
+                                <fmt:message key="userCard.role.label"/>:
+                            </span>
+                            <rl:role role="${user.role}"/>
+                        </p>
+                        <p class="card-text">
+                            <span class="spanName">
+                                <fmt:message key="userCard.status.label"/>:
+                            </span>
+                            <st:status status="${user.status}"/>
                         </p>
                         <a href="${pageContext.request.contextPath}/controller?action=userInfo&userId=${user.id}" class="btn btn-primary"><fmt:message key="userCard.editUser.button"/></a>
                         <a href="${pageContext.request.contextPath}/controller?action=changeUserStatus&userId=${user.id}" class="btn btn-danger">
@@ -107,21 +108,14 @@
             </c:forEach>
         </div>
 
-        <nav id="pagination-nav">
-            <ul id="paginationLine" class="pagination justify-content-center">
-                <ul id="paginationNumbers" class="pagination justify-content-center">
-                    <c:if test="${requestScope.amountOfPages > 1}">
-                        <c:forEach begin="1" end="${requestScope.amountOfPages}" varStatus="loop">
-                            <li class="page-item page-number <c:if test="${sessionScope.activePage eq loop.index}">active</c:if>">
-                                <a class="page-link"
-                                   href="${pageContext.request.contextPath}/controller?action=adminMain&tab=${requestScope.activeTab}&page=${loop.index}">${loop.index}</a>
-                            </li>
-                        </c:forEach>
-                    </c:if>
-                </ul>
-            </ul>
-        </nav>
+        <pg:pagination activePage="${sessionScope.activePage}"
+                       amountOfPages="${requestScope.amountOfPages}"
+                       activeTab="${requestScope.activeTab}"
+                       action="adminMain"
+                       sortMethod="${null}"
+                       groupBy="${null}"/>
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>

@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Main Controller Servlet.
+ * Main Controller servlet
  *
  * @author rom4ik
  */
+
 @WebServlet("/controller")
 public class Controller extends HttpServlet {
   @Override
@@ -31,6 +32,9 @@ public class Controller extends HttpServlet {
 
   private void processRequest(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
+    /**
+     * Command pattern implemented
+     */
     CommandFactory commandFactory = CommandFactory.commandFactory();
     Command command = commandFactory.getCommand(req);
     DispatchInfo dispatchInfo = command.execute(req, resp);

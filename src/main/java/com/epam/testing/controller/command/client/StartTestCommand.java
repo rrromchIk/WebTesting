@@ -22,8 +22,6 @@ public class StartTestCommand implements Command {
         long userId = (long)httpSession.getAttribute("userId");
         long testId = Long.parseLong(req.getParameter("testId"));
 
-        page += "&testId=" + testId;
-
         if(userTestService.addTestToUsersTests(userId, testId, Timestamp.valueOf(LocalDateTime.now()))) {
             userTestService.updateUserTestStatus(userId, testId, TestStatus.STARTED);
         } else {
@@ -33,6 +31,7 @@ public class StartTestCommand implements Command {
             req.setAttribute("errorMessage", errorMessage);
         }
 
+        page += "&testId=" + testId;
         return new DispatchInfo(true, page);
     }
 }

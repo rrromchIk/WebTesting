@@ -26,7 +26,6 @@
                            value="/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}"/>
             </jsp:include>
         </nav>
-
         <div id="choice">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -67,17 +66,7 @@
                     <div class="card-body">
                         <h4 class="card-title">${test.subject}</h4>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
-                            <c:choose>
-                                <c:when test="${test.difficulty.name eq 'easy'}">
-                                    <fmt:message key="testCard.difficulty.easy"/>
-                                </c:when>
-                                <c:when test="${test.difficulty.name eq 'medium'}">
-                                    <fmt:message key="testCard.difficulty.medium"/>
-                                </c:when>
-                                <c:when test="${test.difficulty.name eq 'hard'}">
-                                    <fmt:message key="testCard.difficulty.hard"/>
-                                </c:when>
-                            </c:choose>
+                            <df:difficulty diff="${test.difficulty}"/>
                         </p>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>${test.duration} <fmt:message key="testCard.minutes"/></p>
                         <p class="card-text"><span class="spanName"><fmt:message key="testCard.numOfQuest.label"/>: </span>${test.numberOfQuestions}</p>
@@ -110,17 +99,7 @@
                         <h3 class="card-title">${testInfo.testSubject}</h3>
                         <p class="card-text">
                             <span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
-                            <c:choose>
-                                <c:when test="${testInfo.testDifficulty.name eq 'easy'}">
-                                    <fmt:message key="testCard.difficulty.easy"/>
-                                </c:when>
-                                <c:when test="${testInfo.testDifficulty.name eq 'medium'}">
-                                    <fmt:message key="testCard.difficulty.medium"/>
-                                </c:when>
-                                <c:when test="${testInfo.testDifficulty.name eq 'hard'}">
-                                    <fmt:message key="testCard.difficulty.hard"/>
-                                </c:when>
-                            </c:choose>
+                            <df:difficulty diff="${testInfo.testDifficulty}"/>
                         </p>
                         <p class="card-text">
                             <span class="spanName"><fmt:message key="testCard.startingTime.label"/>: </span>
@@ -148,23 +127,15 @@
             </c:forEach>
         </div>
 
-        <nav id="pagination-nav">
-            <ul id="paginationLine" class="pagination justify-content-center">
-              <ul id="paginationNumbers" class="pagination justify-content-center">
-                  <c:if test="${requestScope.amountOfPages > 1}">
-                      <c:forEach begin="1" end="${requestScope.amountOfPages}" varStatus="loop">
-                          <li class="page-item page-number <c:if test="${requestScope.activePage eq loop.index}">active</c:if>">
-                              <a class="page-link"
-                                 href="${pageContext.request.contextPath}/controller?action=userMain&tab=${requestScope
-                                 .activeTab}<c:if test="${requestScope.sortMethod != null}">&sortMethod=${requestScope
-                                 .sortMethod}</c:if>&page=${loop.index}">${loop.index}</a>
-                          </li>
-                      </c:forEach>
-                  </c:if>
-              </ul>
-            </ul>
-        </nav>
+        <pg:pagination activePage="${requestScope.activePage}"
+                       amountOfPages="${requestScope.amountOfPages}"
+                       activeTab="${requestScope.activeTab}"
+                       action="userMain"
+                       sortMethod="${requestScope.sortMethod}"
+                       groupBy="${null}"/>
+
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>    

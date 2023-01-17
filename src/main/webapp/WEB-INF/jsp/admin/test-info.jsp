@@ -83,13 +83,12 @@
                 </div>
             </c:forEach>
             <c:if test="${requestScope.addQuestions eq true}">
-                <div>
                     <a href="${pageContext.request.contextPath}/controller?action=addQuestions&testId=${requestScope.fullTest.id}"
                        class="btn btn-success"><fmt:message key="testInfo.addQuestions.button"/></a>
-                </div>
             </c:if>
         </div>
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>

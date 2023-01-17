@@ -25,17 +25,7 @@
                     ${requestScope.fullTest.subject}
                 </p>
                 <p class="card-text"><span class="spanName"><fmt:message key="testCard.difficulty.label"/>: </span>
-                    <c:choose>
-                        <c:when test="${requestScope.fullTest.difficulty.name eq 'easy'}">
-                            <fmt:message key="testCard.difficulty.easy"/>
-                        </c:when>
-                        <c:when test="${requestScope.fullTest.difficulty.name eq 'medium'}">
-                            <fmt:message key="testCard.difficulty.medium"/>
-                        </c:when>
-                        <c:when test="${requestScope.fullTest.difficulty.name eq 'hard'}">
-                            <fmt:message key="testCard.difficulty.hard"/>
-                        </c:when>
-                    </c:choose>
+                    <df:difficulty diff="${requestScope.fullTest.difficulty}"/>
                 </p>
                 <p class="card-text"><span class="spanName"><fmt:message key="testCard.duration.label"/>: </span>
                     ${requestScope.fullTest.duration} <fmt:message key="testCard.minutes"/></p>
@@ -84,4 +74,5 @@
         <script src="${pageContext.request.contextPath}/js/add-questions.js"></script>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>

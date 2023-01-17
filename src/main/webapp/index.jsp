@@ -5,9 +5,10 @@
     <jsp:include page="/WEB-INF/templates/_head.jsp">
         <jsp:param name="title" value="Testing Patform"/>
     </jsp:include>
+
     <body>
         <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
-            <a id="navbar-logo" class="navbar-brand">TestsPortal</a>
+            <a id="navbar-logo" class="navbar-brand">TestPortal</a>
 
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
@@ -21,11 +22,11 @@
                 </jsp:include>
             </div>
         </nav>
-
         <div id="main-content">
             <h1><fmt:message key="mainPage.content"/> </h1>
         </div>
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>

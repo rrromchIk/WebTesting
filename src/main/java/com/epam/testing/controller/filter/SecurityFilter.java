@@ -1,7 +1,7 @@
 package com.epam.testing.controller.filter;
+
 import com.epam.testing.controller.Path;
 import com.epam.testing.model.entity.UserRole;
-import com.epam.testing.model.entity.UserStatus;
 import com.epam.testing.model.service.UserService;
 
 import javax.servlet.*;
@@ -58,18 +58,26 @@ public class SecurityFilter implements Filter {
         }
 
         UserRole userRole = (UserRole) session.getAttribute("userRole");
-        String userLogin = (String) session.getAttribute("login");
+        String userLogin = request.getParameter("login");
+        if(userLogin == null) {
+            userLogin = (String)session.getAttribute("login");
+        }
+
         if(userRole == null) {
             session.setAttribute("userRole", UserRole.GUEST);
             userRole = UserRole.GUEST;
         }
 
-        request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
-
         if(userLogin != null && userService.userIsBlocked(userLogin)) {
+            request.setAttribute("errorMessage", "Seems that you are blocked(");
             return false;
         }
-        return accessMap.get(userRole).contains(command);
+
+        boolean result = accessMap.get(userRole).contains(command);
+        if(!result) {
+            request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
+        }
+        return result;
     }
 
     @Override

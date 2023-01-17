@@ -10,7 +10,11 @@ public class UserService {
     private static final UserDAOImpl dao = new UserDAOImpl();
 
     public boolean userIsBlocked(String login) {
-        return dao.getByLogin(login).getStatus().equals(UserStatus.BLOCKED);
+        User user = dao.getByLogin(login);
+        if(user == null) {
+            return false;
+        }
+        return user.getStatus().equals(UserStatus.BLOCKED);
     }
 
     public int getAmountOfUsers() {

@@ -3,6 +3,7 @@ package com.epam.testing.controller.command.client;
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
+import com.epam.testing.model.dto.CheckedAnswer;
 import com.epam.testing.model.entity.*;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.TestsService;

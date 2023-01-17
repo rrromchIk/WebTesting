@@ -1,4 +1,4 @@
-package com.epam.testing.model.entity;
+package com.epam.testing.model.dto;
 
 public class CheckedAnswer {
     private final String text;

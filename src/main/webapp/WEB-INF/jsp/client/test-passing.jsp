@@ -83,4 +83,5 @@
         <script src="${pageContext.request.contextPath}/js/test-passing.js"></script>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
+    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>    

@@ -16,6 +16,7 @@ public class LogoutCommand implements Command {
 
         if(session != null) {
             session.setAttribute("userRole", UserRole.GUEST);
+            session.setAttribute("login", "");
         }
         return new DispatchInfo(false, Path.PAGE_INDEX);
     }
