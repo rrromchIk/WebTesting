@@ -3,6 +3,8 @@ package com.epam.testing.controller.filter;
 import com.epam.testing.controller.Path;
 import com.epam.testing.model.entity.UserRole;
 import com.epam.testing.model.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -22,11 +24,15 @@ import java.util.*;
                         "changeUserStatus submitTestInfo addQuestions submitQuestionInfo testInfo editTest deleteQuestion")
         })
 public class SecurityFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(SecurityFilter.class);
+
     private static final UserService userService = new UserService();
     private static final Map<UserRole, List<String>> accessMap = new HashMap<>();
 
     @Override
     public void init(FilterConfig config) {
+        LOGGER.debug("Security filter initialization");
+
         List<String> adminCommands = asList(config.getInitParameter("admin"));
         List<String> clientCommands = asList(config.getInitParameter("client"));
         List<String> guestCommands = asList(config.getInitParameter("guest"));
@@ -35,11 +41,16 @@ public class SecurityFilter implements Filter {
         accessMap.put(UserRole.CLIENT, clientCommands);
         accessMap.put(UserRole.ADMIN, adminCommands);
         accessMap.put(UserRole.GUEST, guestCommands);
+
+        LOGGER.info("Client commands -> {}", clientCommands);
+        LOGGER.info("Admin commands -> {}", clientCommands);
+        LOGGER.info("Guest commands -> {}", guestCommands);
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain chain) throws IOException, ServletException {
+        LOGGER.debug("Security filter");
         if (accessAllowed(request)) {
             chain.doFilter(request, response);
         } else {
@@ -53,7 +64,9 @@ public class SecurityFilter implements Filter {
 
         HttpSession session = httpRequest.getSession(false);
         if(session == null) {
-            request.setAttribute("errorMessage", "Invalid session");
+            String errorMessage = "Invalid session";
+            LOGGER.trace("Access invalid -> {}", errorMessage);
+            request.setAttribute("errorMessage", errorMessage);
             return false;
         }
 
@@ -69,12 +82,14 @@ public class SecurityFilter implements Filter {
         }
 
         if(userLogin != null && userService.userIsBlocked(userLogin)) {
-            request.setAttribute("errorMessage", "Seems that you are blocked(");
+            LOGGER.trace("Access invalid -> User is blocked");
+            request.setAttribute("errorMessage","Seems that you are blocked(" );
             return false;
         }
 
         boolean result = accessMap.get(userRole).contains(command);
         if(!result) {
+            LOGGER.trace("Access invalid -> Permission fails");
             request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
         }
         return result;
@@ -82,7 +97,7 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        LOGGER.debug("Security filter destroyed");
     }
 
     private List<String> asList(String param) {

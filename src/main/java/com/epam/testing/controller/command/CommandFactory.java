@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CommandFactory {
   private static CommandFactory factory = new CommandFactory();
-  private static Map<String, Command> commands = new HashMap<>();
+  private static final Map<String, Command> commands = new HashMap<>();
 
   private CommandFactory() {}
 
@@ -34,13 +34,11 @@ public class CommandFactory {
   }
 
   static {
-    // common commands
     commands.put("login", new LoginCommand());
     commands.put("logout", new LogoutCommand());
     commands.put("signup", new SignUpCommand());
     commands.put("i18n", new I18NCommand());
 
-    //admin commands
     commands.put("adminmain", new AdminMainCommand());
     commands.put("userinfo", new UserInfoCommand());
     commands.put("edituser", new EditUserCommand());
@@ -54,7 +52,6 @@ public class CommandFactory {
     commands.put("edittest", new EditTestCommand());
     commands.put("deletequestion", new DeleteQuestionCommand());
 
-    //client commands
     commands.put("editprofile", new EditProfileCommand());
     commands.put("profile", new ProfileCommand());
     commands.put("usermain", new UserMainCommand());

@@ -5,6 +5,8 @@ import com.epam.testing.model.dao.UserTestDAO;
 import com.epam.testing.model.entity.TestDifficulty;
 import com.epam.testing.model.entity.TestInfo;
 import com.epam.testing.model.entity.TestStatus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class UserTestDAOImpl implements UserTestDAO {
     private final DataSource datasource = DataSource.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(UserTestDAOImpl.class);
 
     public int getAmountOfRecords(long userId) {
         int amount = 0;
@@ -29,6 +32,7 @@ public class UserTestDAOImpl implements UserTestDAO {
                 amount = resultSet.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return amount;
@@ -50,6 +54,7 @@ public class UserTestDAOImpl implements UserTestDAO {
             statement.setTimestamp(3, startingTime);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -76,6 +81,7 @@ public class UserTestDAOImpl implements UserTestDAO {
             statement.setLong(4, testId);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -109,6 +115,7 @@ public class UserTestDAOImpl implements UserTestDAO {
                         .build());
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return userTestsInfo;
@@ -127,6 +134,7 @@ public class UserTestDAOImpl implements UserTestDAO {
                 testStatus = TestStatus.getEnum(resultSet.getString(UserTestFields.STATUS.FIELD));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return testStatus;
@@ -142,6 +150,7 @@ public class UserTestDAOImpl implements UserTestDAO {
             statement.setLong(3, testId);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -161,6 +170,7 @@ public class UserTestDAOImpl implements UserTestDAO {
                 startingTime = resultSet.getTimestamp(UserTestFields.STARTING_TIME.FIELD);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return startingTime;

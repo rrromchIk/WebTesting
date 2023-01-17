@@ -3,6 +3,9 @@ package com.epam.testing.model.dao.impl;
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserDAO;
 import com.epam.testing.model.entity.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
  */
 
 public class UserDAOImpl implements UserDAO {
+    private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
     private final DataSource datasource = DataSource.getInstance();
     /**
      * Select all Users.
@@ -27,10 +31,11 @@ public class UserDAOImpl implements UserDAO {
             statement.setInt(1, limit);
             statement.setInt(2, offset);
             ResultSet rs = statement.executeQuery();
-            while(rs.next()){
+            while(rs.next()) {
                 users.add(mapUser(rs));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return users;
@@ -47,6 +52,7 @@ public class UserDAOImpl implements UserDAO {
                 amount = resultSet.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return amount;
@@ -69,6 +75,7 @@ public class UserDAOImpl implements UserDAO {
                 user = mapUser(resultSet);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return user;
@@ -99,6 +106,7 @@ public class UserDAOImpl implements UserDAO {
                 result = generatedKeys.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -143,6 +151,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(5, user.getLogin());
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -173,6 +182,7 @@ public class UserDAOImpl implements UserDAO {
                 user = mapUser(resultSet);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return user;
@@ -195,6 +205,7 @@ public class UserDAOImpl implements UserDAO {
                 user = mapUser(resultSet);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return user;

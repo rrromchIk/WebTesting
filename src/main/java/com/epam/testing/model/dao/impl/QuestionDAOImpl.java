@@ -4,12 +4,15 @@ import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.QuestionDAO;
 import com.epam.testing.model.entity.Question;
 import com.epam.testing.model.entity.QuestionType;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDAOImpl implements QuestionDAO {
+    private static final Logger LOGGER = LogManager.getLogger(QuestionDAO.class);
     private final DataSource datasource = DataSource.getInstance();
 
     @Override
@@ -24,6 +27,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                 amount = resultSet.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return amount;
@@ -45,6 +49,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                 questionArr.add(mapQuestion(resultSet));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return questionArr;
@@ -92,6 +97,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                 result = generatedKeys.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -111,6 +117,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             statement.setLong(2, question.getId());
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -129,6 +136,7 @@ public class QuestionDAOImpl implements QuestionDAO {
             statement.setLong(1, id);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;

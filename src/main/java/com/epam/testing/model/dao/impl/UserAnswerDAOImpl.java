@@ -2,6 +2,8 @@ package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserAnswerDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 
 public class UserAnswerDAOImpl implements UserAnswerDAO {
+    private static final Logger LOGGER = LogManager.getLogger(UserAnswerDAOImpl.class);
     private final DataSource datasource = DataSource.getInstance();
 
     /**Getting User's answers
@@ -34,6 +37,7 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
                 userAnswers.add(resultSet.getString(UserAnswerFields.TEXT.FIELD));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return userAnswers;
@@ -49,6 +53,7 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
             statement.setString(3, text);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -63,6 +68,7 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
             statement.setLong(2, questionId);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;

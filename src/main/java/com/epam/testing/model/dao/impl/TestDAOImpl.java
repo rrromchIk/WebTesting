@@ -4,6 +4,9 @@ import com.epam.testing.model.entity.TestDifficulty;
 import com.epam.testing.model.entity.Test;
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.TestDAO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +17,7 @@ import java.util.List;
  */
 
 public class TestDAOImpl implements TestDAO {
+    private static final Logger LOGGER = LogManager.getLogger(TestDAOImpl.class);
     private final DataSource datasource = DataSource.getInstance();
 
     /**
@@ -32,6 +36,7 @@ public class TestDAOImpl implements TestDAO {
                 test = mapTest(resultSet);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return test;
@@ -66,6 +71,7 @@ public class TestDAOImpl implements TestDAO {
                 testArr.add(mapTest(resultSet));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return testArr;
@@ -81,6 +87,7 @@ public class TestDAOImpl implements TestDAO {
                 subjects.add(resultSet.getString(TestFields.SUBJECT.FIELD));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return subjects;
@@ -98,6 +105,7 @@ public class TestDAOImpl implements TestDAO {
                 amount = resultSet.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return amount;
@@ -114,6 +122,7 @@ public class TestDAOImpl implements TestDAO {
                 amount = resultSet.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return amount;
@@ -140,6 +149,7 @@ public class TestDAOImpl implements TestDAO {
                 testArr.add(mapTest(resultSet));
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return testArr;
@@ -162,6 +172,7 @@ public class TestDAOImpl implements TestDAO {
                 test = mapTest(resultSet);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return test;
@@ -211,6 +222,7 @@ public class TestDAOImpl implements TestDAO {
                 result = generatedKeys.getInt(1);
             }
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -235,6 +247,7 @@ public class TestDAOImpl implements TestDAO {
             statement.setString(6, test.getName());
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;
@@ -253,6 +266,7 @@ public class TestDAOImpl implements TestDAO {
             statement.setLong(1, id);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
             e.printStackTrace();
         }
         return result;

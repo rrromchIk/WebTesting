@@ -4,6 +4,8 @@ import com.epam.testing.controller.Path;
 import com.epam.testing.model.entity.TestStatus;
 import com.epam.testing.model.service.UserTestService;
 import com.epam.testing.util.CalculateTestResultService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
@@ -16,13 +18,12 @@ import java.time.LocalDateTime;
 @WebFilter(filterName = "TestAccessFilter",
         urlPatterns = "/controller")
 public class TestAccessFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(TestAccessFilter.class);
     private final UserTestService userTestService = new UserTestService();
 
+    @Override
     public void init(FilterConfig config) throws ServletException {
-
-    }
-
-    public void destroy() {
+        LOGGER.debug("TestAccess filter initialization");
     }
 
     @Override
@@ -42,10 +43,12 @@ public class TestAccessFilter implements Filter {
     }
 
     private boolean accessAllowed(ServletRequest request) {
+        LOGGER.debug("Test access filter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
         HttpSession session = httpRequest.getSession();
         if(session == null) {
+            LOGGER.trace("Invalid session");
             return false;
         }
 
@@ -55,6 +58,7 @@ public class TestAccessFilter implements Filter {
         TestStatus testStatus = userTestService.getUserTestStatus(userId, testId);
         boolean result;
         if(testStatus.equals(TestStatus.NOT_STARTED)) {
+            LOGGER.trace("Access invalid. Reason: test status - NOT_STARTED");
             result = false;
         } else if(testStatus.equals(TestStatus.STARTED)) {
             long remainingTime = userTestService.getRemainingTime(userId, testId);
@@ -63,10 +67,18 @@ public class TestAccessFilter implements Filter {
                 float testResult = CalculateTestResultService.getTestResult(testId, userId);
                 userTestService.addResultAndEndingTime(userId, testId, testResult, Timestamp.valueOf(LocalDateTime.now()));
                 userTestService.updateUserTestStatus(userId, testId, TestStatus.PASSED);
+            } else {
+                LOGGER.trace("Access success. Remaining time for test -> {}", remainingTime);
             }
         } else {
+            LOGGER.trace("Access invalid. Reason: test status - PASSED");
             result = false;
         }
         return result;
+    }
+
+    @Override
+    public void destroy() {
+        LOGGER.debug("Test access filter destroyed");
     }
 }
