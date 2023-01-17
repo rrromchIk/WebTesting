@@ -17,7 +17,7 @@ public class SubmitQuestionInfoCommand implements Command {
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String command = Path.COMMAND_ADD_QUESTIONS;
+        String command = req.getContextPath() + Path.COMMAND_ADD_QUESTIONS;
 
         long testId = Long.parseLong(req.getParameter("testId"));
         String questionText = req.getParameter("questionText");

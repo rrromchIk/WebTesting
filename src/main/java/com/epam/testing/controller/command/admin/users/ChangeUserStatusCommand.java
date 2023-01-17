@@ -20,7 +20,7 @@ public class ChangeUserStatusCommand implements Command {
         int activePage = (int)req.getSession().getAttribute("activePage");
         long userId = Long.parseLong(req.getParameter("userId"));
 
-        String page = Path.COMMAND_ADMIN_MAIN + "&tab=users&page=" + activePage;
+        String page = req.getContextPath()+ Path.COMMAND_ADMIN_MAIN + "&tab=users&page=" + activePage;
         boolean redirect = true;
 
         User user = userService.getUserById(userId);

@@ -14,7 +14,7 @@ public class EditTestCommand implements Command {
     private final TestsService testsService = new TestsService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.COMMAND_TEST_INFO;
+        String page = req.getContextPath() + Path.COMMAND_TEST_INFO;
         boolean redirect = true;
 
         long testId = Long.parseLong(req.getParameter("testId"));

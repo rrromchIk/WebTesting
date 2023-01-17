@@ -14,13 +14,13 @@
                 <div class="item-wrapper">
                     <c:choose>
                         <c:when test="${requestScope.commandToGoBack eq null}">
-                            <c:set var="commandToGoBack" value="index.jsp"/>
+                            <c:set var="commandToGoBack" value="/index.jsp"/>
                         </c:when>
                         <c:when test="${requestScope.commandToGoBack != null}">
                             <c:set var="commandToGoBack" value="${requestScope.commandToGoBack}"/>
                         </c:when>
                     </c:choose>
-                    <a href="${pageScope.commandToGoBack}" class="float-right btn btn-outline-primary">
+                    <a href="${pageContext.request.contextPath}${pageScope.commandToGoBack}" class="float-right btn btn-outline-primary">
                         &#8592 <fmt:message key="button.back"/>
                     </a>
                 </div>

@@ -13,7 +13,7 @@ public class SignUpCommand implements Command {
     private final UserService userService = new UserService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page;
+        String page = req.getContextPath();
 
         User user = new User.UserBuilder()
                 .login(req.getParameter("login"))
@@ -24,9 +24,9 @@ public class SignUpCommand implements Command {
                 .build();
 
         if(userService.addUser(user)) {
-            page = Path.PAGE_LOGIN + "?signUpSuccess=true";
+            page += Path.PAGE_LOGIN + "?signUpSuccess=true";
         } else {
-            page = Path.PAGE_SIGNUP + "?invalid=true";
+            page += Path.PAGE_SIGNUP + "?invalid=true";
         }
 
         return new DispatchInfo(true, page);

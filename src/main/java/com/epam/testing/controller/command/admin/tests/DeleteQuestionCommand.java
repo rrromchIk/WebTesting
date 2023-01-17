@@ -15,7 +15,7 @@ public class DeleteQuestionCommand implements Command {
         long questionId = Long.parseLong(req.getParameter("questionId"));
         long testId = Long.parseLong(req.getParameter("testId"));
 
-        String command = Path.COMMAND_TEST_INFO;
+        String command = req.getContextPath() + Path.COMMAND_TEST_INFO;
         command += "&testId=" + testId;
 
         testQuestionService.deleteQuestion(questionId);

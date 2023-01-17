@@ -16,7 +16,7 @@ public class DeleteTestCommand implements Command {
         long testId = Long.parseLong(req.getParameter("testId"));
 
         boolean redirect = true;
-        String page = Path.COMMAND_ADMIN_MAIN + "&page=" + activePage;
+        String page = req.getContextPath() + Path.COMMAND_ADMIN_MAIN + "&page=" + activePage;
 
         if(!testsService.deleteTest(testId)) {
             page = Path.PAGE_ERROR_PAGE;

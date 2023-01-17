@@ -16,7 +16,9 @@ public class StartTestCommand implements Command {
     private final UserTestService userTestService = new UserTestService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.COMMAND_USER_PASS_TEST;
+        String page = req.getContextPath() + Path.COMMAND_USER_PASS_TEST;
+        boolean redirect = true;
+
         HttpSession httpSession = req.getSession();
 
         long userId = (long)httpSession.getAttribute("userId");
@@ -29,9 +31,10 @@ public class StartTestCommand implements Command {
             String errorMessage = "Failed to start test. Try again later!";
             req.setAttribute("commandToGoBack", Path.COMMAND_USER_MAIN);
             req.setAttribute("errorMessage", errorMessage);
+            redirect = false;
         }
 
         page += "&testId=" + testId;
-        return new DispatchInfo(true, page);
+        return new DispatchInfo(redirect, page);
     }
 }

@@ -12,7 +12,7 @@ public class SubmitAnswersCommand implements Command {
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.COMMAND_USER_PASS_TEST;
+        String page = req.getContextPath() + Path.COMMAND_USER_PASS_TEST;
 
         long questionId = Long.parseLong(req.getParameter("questionId"));
         long userId = (long) req.getSession().getAttribute("userId");

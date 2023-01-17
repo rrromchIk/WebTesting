@@ -13,7 +13,7 @@ public class LoginCommand implements Command {
     private final UserService userService = new UserService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page;
+        String page = req.getContextPath();
 
         String login = req.getParameter("login");
         String password = req.getParameter("password");
@@ -21,9 +21,9 @@ public class LoginCommand implements Command {
         if(userService.userExists(login, password)) {
             User user = userService.getUserByLogin(login);
             if(login.equals("admin") && password.equals("admin")) {
-                page = Path.COMMAND_ADMIN_MAIN;
+                page += Path.COMMAND_ADMIN_MAIN;
             } else {
-                page = Path.COMMAND_USER_MAIN;
+                page += Path.COMMAND_USER_MAIN;
             }
 
             HttpSession httpSession = req.getSession();
@@ -31,7 +31,7 @@ public class LoginCommand implements Command {
             httpSession.setAttribute("login", user.getLogin());
             httpSession.setAttribute("userRole", user.getRole());
         } else {
-            page = Path.PAGE_LOGIN + "?invalid=true";
+            page += Path.PAGE_LOGIN + "?invalid=true";
         }
 
         return new DispatchInfo(true, page);

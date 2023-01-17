@@ -13,7 +13,7 @@ public class EditProfileCommand implements Command {
     private final UserService userService = new UserService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.COMMAND_USER_PROFILE;
+        String page = req.getContextPath() + Path.COMMAND_USER_PROFILE;
         boolean redirect = true;
 
         String login = req.getParameter("login");

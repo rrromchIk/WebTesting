@@ -14,7 +14,7 @@
                     <a href="signUp.jsp" class="float-right btn btn-outline-primary"><fmt:message key="button.signUp"/></a>
                 </div>
                 <jsp:include page="/WEB-INF/templates/_lang-drop-down.jsp">
-                    <jsp:param name="command" value="logIn.jsp"/>
+                    <jsp:param name="command" value="/logIn.jsp"/>
                 </jsp:include>
             </div>
         </nav>

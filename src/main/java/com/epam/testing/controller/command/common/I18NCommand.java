@@ -29,7 +29,7 @@ public class I18NCommand implements Command {
       session.setAttribute(defaultLocale, Path.LOCALE_NAME_EN);
     }
 
-    String command = request.getParameter("command");
+    String command = request.getContextPath() + request.getParameter("command");
     command = checkOtherParameters(request, command);
 
     return new DispatchInfo(true, command);

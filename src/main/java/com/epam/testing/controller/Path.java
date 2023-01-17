@@ -22,23 +22,23 @@ public final class Path {
   public static final String PAGE_TEST_INFO = "/WEB-INF/jsp/admin/test-info.jsp";
 
   // common commands
-  public static final String COMMAND_LOGIN = "controller?action=logIn";
-  public static final String COMMAND_SIGNUP = "controller?action=signUp";
-  public static final String COMMAND_LOGOUT = "controller?action=logOut";
+  public static final String COMMAND_LOGIN = "/controller?action=logIn";
+  public static final String COMMAND_SIGNUP = "/controller?action=signUp";
+  public static final String COMMAND_LOGOUT = "/controller?action=logOut";
 
   // admin commands
-  public static final String COMMAND_ADMIN_MAIN = "controller?action=adminMain";
-  public static final String COMMAND_USER_INFO = "controller?action=userInfo";
-  public static final String COMMAND_SUBMIT_TEST_INFO = "controller?action=submitTestInfo";
-  public static final String COMMAND_ADD_QUESTIONS = "controller?action=addQuestions";
-  public static final String COMMAND_TEST_INFO = "controller?action=testInfo";
-  public static final String COMMAND_ADD_TEST = "controller?action=addTest";
+  public static final String COMMAND_ADMIN_MAIN = "/controller?action=adminMain";
+  public static final String COMMAND_USER_INFO = "/controller?action=userInfo";
+  public static final String COMMAND_SUBMIT_TEST_INFO = "/controller?action=submitTestInfo";
+  public static final String COMMAND_ADD_QUESTIONS = "/controller?action=addQuestions";
+  public static final String COMMAND_TEST_INFO = "/controller?action=testInfo";
+  public static final String COMMAND_ADD_TEST = "/controller?action=addTest";
 
   // client commands
-  public static final String COMMAND_USER_MAIN = "controller?action=userMain";
-  public static final String COMMAND_USER_PROFILE = "controller?action=profile";
-  public static final String COMMAND_USER_EDIT_PROFILE = "controller?action=editProfile";
-  public static final String COMMAND_USER_PASS_TEST = "controller?action=passTest";
+  public static final String COMMAND_USER_MAIN = "/controller?action=userMain";
+  public static final String COMMAND_USER_PROFILE = "/controller?action=profile";
+  public static final String COMMAND_USER_EDIT_PROFILE = "/controller?action=editProfile";
+  public static final String COMMAND_USER_PASS_TEST = "/controller?action=passTest";
 
 
   // i18n

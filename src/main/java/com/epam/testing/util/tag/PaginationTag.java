@@ -11,6 +11,7 @@ public class PaginationTag extends TagSupport {
     private String action;
     private String sortMethod;
     private String groupBy;
+    private String contextPath;
 
     @Override
     public int doStartTag() throws JspException {
@@ -45,7 +46,8 @@ public class PaginationTag extends TagSupport {
     }
 
     private String formHref(int loopIndex) {
-        return String.format("href=\"/controller?action=%s&tab=%s%s%s&page=%d\">%d",
+        return String.format("href=\"%s/controller?action=%s&tab=%s%s%s&page=%d\">%d",
+                contextPath,
                 action,
                 activeTab,
                 !sortMethod.isEmpty() ? "&sortMethod=" + sortMethod : "",
@@ -89,5 +91,7 @@ public class PaginationTag extends TagSupport {
         this.groupBy = groupBy;
     }
 
-
+    public void setContextPath(String contextPath) {
+        this.contextPath = contextPath;
+    }
 }

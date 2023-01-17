@@ -108,7 +108,8 @@
             </c:forEach>
         </div>
 
-        <pg:pagination activePage="${sessionScope.activePage}"
+        <pg:pagination contextPath="${pageContext.request.contextPath}"
+                       activePage="${sessionScope.activePage}"
                        amountOfPages="${requestScope.amountOfPages}"
                        activeTab="${requestScope.activeTab}"
                        action="adminMain"

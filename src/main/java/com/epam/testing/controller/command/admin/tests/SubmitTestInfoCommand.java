@@ -14,7 +14,7 @@ public class SubmitTestInfoCommand implements Command {
     private final TestsService testsService = new TestsService();
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = Path.COMMAND_ADD_QUESTIONS;
+        String page = req.getContextPath() + Path.COMMAND_ADD_QUESTIONS;
         boolean redirect = true;
 
         Test test = new Test.TestBuilder()

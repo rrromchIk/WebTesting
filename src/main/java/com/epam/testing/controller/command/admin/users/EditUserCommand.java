@@ -14,7 +14,7 @@ public class EditUserCommand implements Command {
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         long userId = Long.parseLong(req.getParameter("userId"));
-        String page = Path.COMMAND_USER_INFO + "&userId=" + userId;
+        String page = req.getContextPath() + Path.COMMAND_USER_INFO + "&userId=" + userId;
         boolean redirect = true;
 
         String login = req.getParameter("login");

@@ -51,7 +51,7 @@
                     <select name="choice" onchange="window.location.href=this.options[this.selectedIndex].value">
                         <option>              </option>
                         <c:forEach var="subject" items="${requestScope.subjects}">
-                            <option VALUE="/controller?action=userMain&tab=tests&groupBy=${subject}"
+                            <option VALUE="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&groupBy=${subject}"
                             <c:if test="${requestScope.selectedSubject eq subject}">selected</c:if>>${subject}</option>
                         </c:forEach>
                     </select>
@@ -127,12 +127,13 @@
             </c:forEach>
         </div>
 
-        <pg:pagination activePage="${requestScope.activePage}"
+        <pg:pagination contextPath="${pageContext.request.contextPath}"
+                       activePage="${requestScope.activePage}"
                        amountOfPages="${requestScope.amountOfPages}"
                        activeTab="${requestScope.activeTab}"
                        action="userMain"
                        sortMethod="${requestScope.sortMethod}"
-                       groupBy="${null}"/>
+                       groupBy="${requestScope.groupBy}"/>
 
 
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
