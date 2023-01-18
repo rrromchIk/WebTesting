@@ -7,7 +7,7 @@
     </jsp:include>
 
     <body>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <a id="navbar-logo" class="navbar-brand">TestsPortal</a>
 
             <div id="navbar-table" class="collapse navbar-collapse">
@@ -21,7 +21,7 @@
             </div>
         </nav>
 
-        <div id="addingTest">
+        <div id="addingTest" class="card">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=editTest&testId=${requestScope.fullTest.id}">
                 <h3><fmt:message key="testInfo.label"/></h3><br>
                 <div class="form-row">
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-row">
-                    <label class="col-sm-5 col-form-label"><fmt:message key="testInfo.amountOfQuestionsInTheTest"/>:</label>
+                    <label id="amountOfQuestionsLabel" ><fmt:message key="testInfo.amountOfQuestionsInTheTest"/>:</label>
                     <div class="form-group col-md-2">
                         <input class="form-control" name="numOfQuestions"  type="number"
                                value="${requestScope.fullTest.numberOfQuestions}" placeholder="3" min="1">
@@ -88,7 +88,7 @@
             </c:if>
         </div>
 
+        <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
-    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>

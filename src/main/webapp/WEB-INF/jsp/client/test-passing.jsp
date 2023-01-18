@@ -7,7 +7,7 @@
     </jsp:include>
 
     <body>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <a id="navbar-logo" class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">TestPortal</a>
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
@@ -58,7 +58,12 @@
                                     <label for="${loop.index}">${answer.text}</label><br>
                                 </c:forEach>
                             </div>
+
                             <button type="submit" class="btn btn-primary"><fmt:message key="button.submit"/></button>
+                            <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}"
+                               class="btn btn-danger float-right">
+                                <fmt:message key="testPassing.button.endAttempt"/>
+                            </a>
                         </form>
                     </div>
                 </div>
@@ -75,13 +80,18 @@
             </div>
         </div>
 
-        <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}"
-           class="btn btn-danger">
-            <fmt:message key="testPassing.button.endAttempt"/>
-        </a>
+        <!--<div id="endAttemptButtonDIV">
+            <a id="endAttemptButton" href="${pageContext.request.contextPath}/controller?action=endTest&testId=${requestScope.test.id}"
+               class="btn btn-danger float-right">
+                <fmt:message key="testPassing.button.endAttempt"/>
+            </a>
+        </div>-->
 
+
+
+
+        <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <script src="${pageContext.request.contextPath}/js/test-passing.js"></script>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
-    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>    

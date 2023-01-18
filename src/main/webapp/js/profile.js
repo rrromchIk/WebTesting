@@ -11,11 +11,11 @@ for(let i = 0; i < fields.length; ++i) {
 
 editProfileBtn.addEventListener("click", () => {
     for (let i = 0; i < fields.length; i++) {
-        if (fields[i].readOnly === true) {
+
+        if (fields[i].readOnly === true && fields[i].name !== "") {
             fields[i].readOnly = false;
             fields[i].setAttribute('required', 'true')
         }
-
     }
 })
 

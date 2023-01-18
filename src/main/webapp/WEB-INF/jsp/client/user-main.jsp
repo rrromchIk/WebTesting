@@ -7,17 +7,17 @@
     </jsp:include>
 
     <body>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <a id="navbar-logo" class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">TestPortal</a>
 
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
-                    <a href="${pageContext.request.contextPath}/controller?action=logOut"
-                       class="float-right btn btn-outline-primary"><fmt:message key="button.logOut"/></a>
-                </div>
-                <div class="item-wrapper">
                     <a href="${pageContext.request.contextPath}/controller?action=profile"
                        class="float-right btn btn-outline-primary"><fmt:message key="profile.label"/></a>
+                </div>
+                <div class="item-wrapper">
+                    <a href="${pageContext.request.contextPath}/controller?action=logOut"
+                       class="float-right btn btn-outline-danger"><fmt:message key="button.logOut"/></a>
                 </div>
             </div>
 
@@ -37,15 +37,17 @@
                        href="${pageContext.request.contextPath}/controller?action=userMain&tab=passedTests"><fmt:message key="tab.passedTests"/></a>
             </ul>
 
+
+
             <c:if test="${requestScope.activeTab eq 'tests'}">
                 <div class="sort">
                     <span><fmt:message key="userMain.sortBy.label"/>: </span>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=name"
-                       class="sort" title="Sort by duration"><fmt:message key="userMain.sortBy.name"/> &#8693</a>
+                       class="sort"><fmt:message key="userMain.sortBy.name"/> &#8693</a>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=difficulty"
-                       class="sort" title="Sort by name"><fmt:message key="userMain.sortBy.difficulty"/> &#8693</a>
+                       class="sort"><fmt:message key="userMain.sortBy.difficulty"/> &#8693</a>
                     <a href="${pageContext.request.contextPath}/controller?action=userMain&tab=tests&sortMethod=numOfQuest"
-                       class="sort" title="Sort by name" ><fmt:message key="userMain.sortBy.numOfQuestions"/> &#8693</a>
+                       class="sort"><fmt:message key="userMain.sortBy.numOfQuestions"/> &#8693</a>
                     <span><fmt:message key="userMain.onPartSubj.label"/>: </span>
 
                     <select name="choice" onchange="window.location.href=this.options[this.selectedIndex].value">
@@ -83,7 +85,7 @@
                             </c:when>
 
                             <c:when test="${test.status.value eq 'passed'}">
-                                <a class="btn btn-primary disabled"><fmt:message key="testCard.button.passed"/></a>
+                                <button type="button" class="btn btn-secondary" disabled><fmt:message key="testCard.button.passed"/></button>
                             </c:when>
                         </c:choose>
                     </div>
@@ -136,7 +138,7 @@
                        groupBy="${requestScope.groupBy}"/>
 
 
+        <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
-    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>    

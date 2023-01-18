@@ -7,7 +7,7 @@
     </jsp:include>
 
     <body>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <a id="navbar-logo" class="navbar-brand">TestsPortal</a>
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
@@ -36,13 +36,12 @@
             <div class="card-body" id="questionsDiv">
                 <form method="post" id="addQuestionsForm"
                       action="${pageContext.request.contextPath}/controller?action=submitQuestionInfo&testId=${requestScope.testId}">
-                    <br><hr><br>
+                    <hr>
                     <h3 class="testHeader"><fmt:message key="testPassing.question.label"/> ${requestScope.questionNumber}/${requestScope.fullTest.numberOfQuestions}</h3>
                     <textarea id="questionText" class="form-control" name="questionText" required
                               placeholder="<fmt:message key="addQuestions.question.placeholder"/>"
                               oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                               oninput="this.setCustomValidity('')"></textarea>
-
                     <div class="form-check">
                         <span><fmt:message key="addQuestions.grade.label"/>: </span>
                         <input type="number" id="gradeInput" name="maxScore" value="1" placeholder="1" min="1"/>
@@ -71,8 +70,9 @@
             </div>
         </div>
 
+        <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <script src="${pageContext.request.contextPath}/js/add-questions.js"></script>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
-    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
+
 </html>

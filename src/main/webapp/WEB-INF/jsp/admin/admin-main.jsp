@@ -7,7 +7,7 @@
     </jsp:include>
 
     <body>
-        <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav id="navbar" class="navbar navbar-expand-lg navbar-light">
             <a id="navbar-logo" class="navbar-brand" href="${pageContext.request.contextPath}/index.jsp">TestPortal</a>
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="item-wrapper">
                     <a href="${pageContext.request.contextPath}/controller?action=logOut"
-                       class="float-right btn btn-outline-primary"><fmt:message key="button.logOut"/></a>
+                       class="float-right btn btn-outline-danger"><fmt:message key="button.logOut"/></a>
                 </div>
                 <jsp:include page="/WEB-INF/templates/_lang-drop-down.jsp">
                     <jsp:param name="command"
@@ -116,7 +116,7 @@
                        sortMethod="${null}"
                        groupBy="${null}"/>
 
+        <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
-    <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
 </html>
