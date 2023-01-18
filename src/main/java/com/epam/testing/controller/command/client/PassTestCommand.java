@@ -60,7 +60,7 @@ public class PassTestCommand implements Command {
             req.setAttribute("currentQuestion", currentQuestion);
         } else {
             page = Path.PAGE_ERROR_PAGE;
-            String errorMessage = "No questions";
+            String errorMessage = "No questions in the test added. Try later.";
             req.setAttribute("commandToGoBack", Path.COMMAND_USER_MAIN);
             req.setAttribute("errorMessage", errorMessage);
         }
