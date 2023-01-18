@@ -23,3 +23,7 @@ A question can have one or more correct answers. The result of the test is the p
 of questions that the student answered correctly in relation to the total number of questions
 (it is considered that the student answered the question correctly if his answer coincides 
 exactly with the correct answers).
+
+
+
+![web_testing(db)](https://user-images.githubusercontent.com/90086332/213000245-04eae285-eece-4308-b7e7-41fb5d4e3168.png)
