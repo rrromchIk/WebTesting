@@ -12,6 +12,5 @@ public interface QuestionDAO {
     int getAmountOfRecordsByTestId(long testId);
     List<Question> getAllByTestId(long id);
     long create(long testId, Question question);
-    boolean update(Question question);
     boolean delete(long id);
 }

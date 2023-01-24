@@ -52,22 +52,19 @@ public class Question extends Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Question question = (Question) o;
-        return Objects.equals(getId(), question.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
+        return maxScore == question.maxScore &&
+                Objects.equals(text, question.text) &&
+                Objects.equals(type.getValue(), question.type.getValue());
     }
 
 
     public static class QuestionBuilder {
-        private int id;
+        private long id;
         private String text;
         private QuestionType type;
         private int maxScore;
 
-        public QuestionBuilder id(int id){
+        public QuestionBuilder id(long id){
             this.id = id;
             return this;
         }

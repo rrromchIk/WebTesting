@@ -1,5 +1,7 @@
 package com.epam.testing.model.entity;
 
+import java.util.Objects;
+
 /**
  * Test entity class
  *
@@ -76,6 +78,18 @@ public class Test extends Entity {
                 ", difficulty = " + testDifficulty +
                 ", numberOfQuestions = " + numberOfQuestions +
                 ", duration = " + duration + "}";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Test test = (Test) o;
+        return Objects.equals(name, test.name) &&
+                Objects.equals(subject, test.subject) &&
+                Objects.equals(testDifficulty.getValue(), test.testDifficulty.getValue()) &&
+                Objects.equals(numberOfQuestions, test.numberOfQuestions) &&
+                Objects.equals(duration, test.duration);
     }
 
     /**

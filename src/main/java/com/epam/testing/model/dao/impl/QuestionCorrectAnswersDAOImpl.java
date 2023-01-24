@@ -14,7 +14,15 @@ import java.util.List;
 
 public class QuestionCorrectAnswersDAOImpl implements QuestionAnswerDAO {
     private static final Logger LOGGER = LogManager.getLogger(QuestionCorrectAnswersDAOImpl.class);
-    private final DataSource datasource = DataSource.getInstance();
+    private final DataSource datasource;
+
+    public QuestionCorrectAnswersDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public QuestionCorrectAnswersDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     /**
      * Select all correct answers of question.

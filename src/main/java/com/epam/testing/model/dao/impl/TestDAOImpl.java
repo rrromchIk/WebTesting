@@ -18,7 +18,15 @@ import java.util.List;
 
 public class TestDAOImpl implements TestDAO {
     private static final Logger LOGGER = LogManager.getLogger(TestDAOImpl.class);
-    private final DataSource datasource = DataSource.getInstance();
+    private final DataSource datasource;
+
+    public TestDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public TestDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     /**
      * Select Test by name.
@@ -219,7 +227,7 @@ public class TestDAOImpl implements TestDAO {
             }
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()) {
-                result = generatedKeys.getInt(1);
+                result = generatedKeys.getLong(1);
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());

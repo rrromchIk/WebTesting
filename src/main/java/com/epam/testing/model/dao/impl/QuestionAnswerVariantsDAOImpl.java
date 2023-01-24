@@ -14,7 +14,15 @@ import java.util.List;
 
 public class QuestionAnswerVariantsDAOImpl implements QuestionAnswerDAO {
     private static final Logger LOGGER = LogManager.getLogger(QuestionAnswerVariantsDAOImpl.class);
-    private final DataSource datasource = DataSource.getInstance();
+    private final DataSource datasource;
+
+    public QuestionAnswerVariantsDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public QuestionAnswerVariantsDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     /**
      * Select all answers variants of question.

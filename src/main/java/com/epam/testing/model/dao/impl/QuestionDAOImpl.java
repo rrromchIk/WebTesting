@@ -12,8 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDAOImpl implements QuestionDAO {
-    private static final Logger LOGGER = LogManager.getLogger(QuestionDAO.class);
-    private final DataSource datasource = DataSource.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(QuestionDAOImpl.class);
+    private final DataSource datasource;
+
+    public QuestionDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public QuestionDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     @Override
     public int getAmountOfRecordsByTestId(long testId) {
@@ -67,7 +75,7 @@ public class QuestionDAOImpl implements QuestionDAO {
                 .type(QuestionType.getEnum(resultSet.getString(QuestionFields.TYPE.FIELD)))
                 .maxScore(resultSet.getInt(QuestionFields.MAX_SCORE.FIELD))
                 .build();
-        question.setId(resultSet.getInt(QuestionFields.ID.FIELD));
+        question.setId(resultSet.getLong(QuestionFields.ID.FIELD));
 
         return question;
     }
@@ -94,28 +102,8 @@ public class QuestionDAOImpl implements QuestionDAO {
             }
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()) {
-                result = generatedKeys.getInt(1);
+                result = generatedKeys.getLong(1);
             }
-        } catch (SQLException e) {
-            LOGGER.error(e.getMessage());
-            e.printStackTrace();
-        }
-        return result;
-    }
-
-    /**
-     * Update Question's info by id.
-     *
-     * @param question new question's state.
-     * @return True if success. False if fails.
-     */
-    public boolean update(Question question) {
-        boolean result = false;
-        try(Connection connection  = datasource.getConnection();
-            PreparedStatement statement = connection.prepareStatement(QuestionQueries.INSERT.QUERY)) {
-            statement.setString( 1, question.getText());
-            statement.setLong(2, question.getId());
-            result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
             e.printStackTrace();
