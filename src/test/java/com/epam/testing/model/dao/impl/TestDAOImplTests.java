@@ -1,6 +1,5 @@
 package com.epam.testing.model.dao.impl;
 
-
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.entity.TestDifficulty;
 import org.junit.jupiter.api.BeforeAll;

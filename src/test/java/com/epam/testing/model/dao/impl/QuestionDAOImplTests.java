@@ -106,13 +106,12 @@ class QuestionDAOImplTests {
 
         when(mockPreparedStatement.executeUpdate()).thenReturn(1);
         when(mockResultSet.next()).thenReturn(Boolean.TRUE, Boolean.FALSE);
-        when(mockResultSet.getLong(anyInt())).thenReturn(TEST_ID);
-        assertEquals(TEST_ID, questionDAO.create(TEST_ID, questionExample));
+        when(mockResultSet.getLong(anyInt())).thenReturn(QUESTION_ID);
+        assertEquals(QUESTION_ID, questionDAO.create(TEST_ID, questionExample));
 
         when(mockPreparedStatement.executeUpdate()).thenThrow(SQLException.class);
         assertEquals(INVALID_ID, questionDAO.create(TEST_ID, questionExample));
     }
-
 
     @Test
     void deleteMethodTest() throws SQLException {

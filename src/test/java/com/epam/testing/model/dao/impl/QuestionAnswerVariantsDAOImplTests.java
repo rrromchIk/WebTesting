@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class QuestionCorrectAnswersDAOImplTests {
+class QuestionAnswerVariantsDAOImplTests {
     @Mock
     DataSource mockDataSource;
     @Mock
@@ -48,34 +48,34 @@ class QuestionCorrectAnswersDAOImplTests {
 
     @Test
     void getAllByQuestionIdMethodTest() throws SQLException {
-        QuestionCorrectAnswersDAOImpl questionCorrectAnswersDAO =
-                new QuestionCorrectAnswersDAOImpl(mockDataSource);
+        QuestionAnswerVariantsDAOImpl questionAnswerVariantsDAO =
+                new QuestionAnswerVariantsDAOImpl(mockDataSource);
 
         when(mockResultSet.next()).thenReturn(Boolean.FALSE);
-        assertTrue(questionCorrectAnswersDAO.getAllByQuestionId(QUESTION_ID).isEmpty());
+        assertTrue(questionAnswerVariantsDAO.getAllByQuestionId(QUESTION_ID).isEmpty());
 
         when(mockResultSet.next()).thenReturn(Boolean.TRUE, Boolean.FALSE);
         when(mockResultSet.getString(1)).thenReturn(ANSWER_TEXT);
-        List<String> questions = questionCorrectAnswersDAO.getAllByQuestionId(QUESTION_ID);
+        List<String> questions = questionAnswerVariantsDAO.getAllByQuestionId(QUESTION_ID);
         assertTrue(questions.size() >= 1);
         assertEquals(ANSWER_TEXT, questions.get(0));
 
         when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
-        assertTrue(questionCorrectAnswersDAO.getAllByQuestionId(QUESTION_ID).isEmpty());
+        assertTrue(questionAnswerVariantsDAO.getAllByQuestionId(QUESTION_ID).isEmpty());
     }
 
     @Test
     void createMethodTest() throws SQLException {
-        QuestionCorrectAnswersDAOImpl questionCorrectAnswersDAO =
-                new QuestionCorrectAnswersDAOImpl(mockDataSource);
+        QuestionAnswerVariantsDAOImpl questionAnswerVariantsDAO=
+                new QuestionAnswerVariantsDAOImpl(mockDataSource);
 
         when(mockPreparedStatement.executeUpdate()).thenReturn(-1);
-        assertFalse(questionCorrectAnswersDAO.create(QUESTION_ID, ANSWER_TEXT));
+        assertFalse(questionAnswerVariantsDAO.create(QUESTION_ID, ANSWER_TEXT));
 
         when(mockPreparedStatement.executeUpdate()).thenReturn(1);
-        assertTrue(questionCorrectAnswersDAO.create(QUESTION_ID, ANSWER_TEXT));
+        assertTrue(questionAnswerVariantsDAO.create(QUESTION_ID, ANSWER_TEXT));
 
         when(mockPreparedStatement.executeUpdate()).thenThrow(SQLException.class);
-        assertFalse(questionCorrectAnswersDAO.create(QUESTION_ID, ANSWER_TEXT));
+        assertFalse(questionAnswerVariantsDAO.create(QUESTION_ID, ANSWER_TEXT));
     }
 }
