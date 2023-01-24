@@ -24,8 +24,8 @@ public class CommandFactory {
   private CommandFactory() {}
 
   /**
-     * Singleton.
-     */
+   *  Singleton.
+   */
   public static synchronized CommandFactory commandFactory() {
     if (factory == null) {
       factory = new CommandFactory();
@@ -63,12 +63,6 @@ public class CommandFactory {
 
   public Command getCommand(HttpServletRequest request) {
     String action = request.getParameter("action");
-    Command command;
-    if(!commands.containsKey(action.toLowerCase())) {
-      command = new NoCommand();
-    } else {
-      command = commands.get(action.toLowerCase());
-    }
-    return command;
+    return commands.get(action.toLowerCase());
   }
 }

@@ -8,6 +8,8 @@ import com.epam.testing.model.entity.User;
 import com.epam.testing.model.service.TestsService;
 import com.epam.testing.model.service.UserService;
 import com.epam.testing.util.PaginationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,12 +17,14 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class AdminMainCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(AdminMainCommand.class);
     private final UserService userService = new UserService();
     private final TestsService testsService = new TestsService();
     private static final Integer RECORDS_ON_PAGE_LIMIT = 3;
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("AdminMainCommand execution started");
         String page = Path.PAGE_ADMIN_MAIN;
         String tab = req.getParameter("tab");
 
@@ -36,6 +40,7 @@ public class AdminMainCommand implements Command {
             processTestsTab(req);
         }
 
+        LOGGER.debug("AdminMainCommand execution finished");
         return new DispatchInfo(false, page);
     }
 
@@ -44,7 +49,7 @@ public class AdminMainCommand implements Command {
         int amountOfPages = PaginationService.getNumberOfPages(RECORDS_ON_PAGE_LIMIT, totalNumOfTests);
         String page = req.getParameter("page");
         int pageNumber = PaginationService.getValidPageNumber(page, totalNumOfTests, RECORDS_ON_PAGE_LIMIT);
-        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, totalNumOfTests, pageNumber);
+        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, pageNumber);
 
         List<Test> tests = testsService.getAllTests(RECORDS_ON_PAGE_LIMIT, offset);
         req.setAttribute("tests", tests);
@@ -60,7 +65,7 @@ public class AdminMainCommand implements Command {
         int amountOfPages = PaginationService.getNumberOfPages(RECORDS_ON_PAGE_LIMIT, totalNumOfUsers);
         String page = req.getParameter("page");
         int pageNumber = PaginationService.getValidPageNumber(page, totalNumOfUsers, RECORDS_ON_PAGE_LIMIT);
-        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, totalNumOfUsers, pageNumber);
+        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, pageNumber);
 
         List<User> users = userService.getAllUsers(RECORDS_ON_PAGE_LIMIT, offset);
         req.setAttribute("users", users);

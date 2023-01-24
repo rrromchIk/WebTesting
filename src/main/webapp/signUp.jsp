@@ -31,11 +31,12 @@
                                placeholder="<fmt:message key="registrationForm.login.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
-                        <c:if test="${param.invalid eq true}">
+                        <c:if test="${sessionScope.invalid eq true}">
                             <input type="hidden" class="is-invalid">
                             <div class="invalid-feedback">
                                 <h6><fmt:message key="validation.loginAlreadyInUser"/></h6>
                             </div>
+                            <c:remove var="invalid" scope="session"/>
                         </c:if>
                     </div>
 

@@ -4,14 +4,20 @@ import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.service.UserAnswerService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SubmitAnswersCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(SubmitAnswersCommand.class);
     private final UserAnswerService userAnswerService = new UserAnswerService();
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("SubmitAnswersCommand execution started");
         String page = req.getContextPath() + Path.COMMAND_USER_PASS_TEST;
 
         long questionId = Long.parseLong(req.getParameter("questionId"));
@@ -31,6 +37,8 @@ public class SubmitAnswersCommand implements Command {
 
         page += "&testId=" + testId;
         page += "&renderQuestion=" + questionId;
+
+        LOGGER.debug("SubmitAnswersCommand execution finished");
         return new DispatchInfo(true, page);
     }
 }

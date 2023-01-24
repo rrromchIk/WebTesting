@@ -6,14 +6,19 @@ import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.Test;
 import com.epam.testing.model.entity.TestDifficulty;
 import com.epam.testing.model.service.TestsService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditTestCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(EditTestCommand.class);
     private final TestsService testsService = new TestsService();
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("EditTestCommand execution started");
         String page = req.getContextPath() + Path.COMMAND_TEST_INFO;
         boolean redirect = true;
 
@@ -39,8 +44,11 @@ public class EditTestCommand implements Command {
             req.setAttribute("commandToGoBack", command);
             req.setAttribute("errorMessage", errorMessage);
             redirect = false;
+
+            LOGGER.warn(errorMessage);
         }
 
+        LOGGER.debug("EditTestCommand execution finished");
         return new DispatchInfo(redirect, page);
     }
 }

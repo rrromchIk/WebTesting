@@ -1,5 +1,10 @@
 package com.epam.testing.model.entity;
 
+/**
+ * Question type enum
+ *
+ * @author rom4ik
+ */
 public enum QuestionType {
     MULTIPLE_CORRECT_ANSWERS("multiple_answers"),
     SINGLE_CORRECT_ANSWER("single_answer");

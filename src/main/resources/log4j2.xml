@@ -5,7 +5,7 @@
         <PatternLayout pattern="[%-5p] %d{yyyy-MM-dd HH:mm:ss.SSS} %c{1}:%L - %m%n"/>
     </Console>
     <RollingFile name="ToRollingFile" fileName="D:/проекти Java/WebTesting/logs/logs.log"
-                 filePattern="D:/проекти Java/WebTesting/logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log">
+                 filePattern="D:/проекти Java/WebTesting/logs/$${date:yyyy-MM}/WebTesting-%d{dd-MM-yyyy}-%i.log">
         <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5p] %c{1}:%L - %m%n"/>
         <Policies>
             <TimeBasedTriggeringPolicy/>

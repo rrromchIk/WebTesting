@@ -6,6 +6,8 @@ import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.Question;
 import com.epam.testing.model.entity.QuestionType;
 import com.epam.testing.model.service.TestQuestionService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SubmitQuestionInfoCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(SubmitQuestionInfoCommand.class);
     private final TestQuestionService testQuestionService = new TestQuestionService();
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("SubmitQuestionInfoCommand execution started");
         String command = req.getContextPath() + Path.COMMAND_ADD_QUESTIONS;
 
         long testId = Long.parseLong(req.getParameter("testId"));
@@ -36,6 +41,7 @@ public class SubmitQuestionInfoCommand implements Command {
         answers.forEach(answer -> testQuestionService.addQuestionAnswer(question.getId(), answer));
         correctAnswers.forEach(correctAnswer -> testQuestionService.addCorrectAnswer(question.getId(), correctAnswer));
 
+        LOGGER.debug("SubmitQuestionInfoCommand execution finished");
         command += "&testId=" + testId;
         return new DispatchInfo(true, command);
     }

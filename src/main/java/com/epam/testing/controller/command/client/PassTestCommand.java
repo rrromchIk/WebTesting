@@ -8,6 +8,8 @@ import com.epam.testing.model.entity.*;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.TestsService;
 import com.epam.testing.model.service.UserTestService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +18,14 @@ import java.util.List;
 import java.util.Optional;
 
 public class PassTestCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(PassTestCommand.class);
     private final TestsService testsService = new TestsService();
     private final TestQuestionService testQuestionService = new TestQuestionService();
     private final UserTestService userTestService = new UserTestService();
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("PassTestCommand execution started");
         String page = Path.PAGE_USER_TEST_PASSING;
         HttpSession httpSession = req.getSession();
 
@@ -36,14 +40,7 @@ public class PassTestCommand implements Command {
         }
 
         if(!questions.isEmpty()) {
-            Question currentQuestion = questions.get(0);
-            if(isQuestionToRenderValid(questionToRender)) {
-                Optional<Question> opt = questions.stream()
-                        .filter(question -> question.getId() == Integer.parseInt(questionToRender))
-                        .findFirst();
-                if(opt.isPresent())
-                    currentQuestion = opt.get();
-            }
+            Question currentQuestion = getCurrentQuestion(questions, questionToRender);
 
             List<CheckedAnswer> answerVariants = testQuestionService
                     .getAnswerVariantsByQuestionIdWithCheckedStatus(userId, currentQuestion.getId());
@@ -63,9 +60,11 @@ public class PassTestCommand implements Command {
             String errorMessage = "No questions in the test added. Try later.";
             req.setAttribute("commandToGoBack", Path.COMMAND_USER_MAIN);
             req.setAttribute("errorMessage", errorMessage);
+
+            LOGGER.warn(errorMessage);
         }
 
-
+        LOGGER.debug("PassTestCommand execution finished");
         return new DispatchInfo(false, page);
     }
 
@@ -86,5 +85,17 @@ public class PassTestCommand implements Command {
             result = "radio";
         }
         return result;
+    }
+
+    private Question getCurrentQuestion(List<Question> questions, String questionToRender) {
+        Question currentQuestion = questions.get(0);
+        if(isQuestionToRenderValid(questionToRender)) {
+            Optional<Question> opt = questions.stream()
+                    .filter(question -> question.getId() == Integer.parseInt(questionToRender))
+                    .findFirst();
+            if(opt.isPresent())
+                currentQuestion = opt.get();
+        }
+        return currentQuestion;
     }
 }

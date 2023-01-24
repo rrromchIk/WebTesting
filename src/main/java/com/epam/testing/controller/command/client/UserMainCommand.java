@@ -9,18 +9,22 @@ import com.epam.testing.model.entity.TestStatus;
 import com.epam.testing.model.service.TestsService;
 import com.epam.testing.model.service.UserTestService;
 import com.epam.testing.util.PaginationService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public class UserMainCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserMainCommand.class);
     private final TestsService testsService = new TestsService();
     private final UserTestService userTestService = new UserTestService();
     private static final Integer RECORDS_ON_PAGE_LIMIT = 3;
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("UserMainCommand execution started");
         String page = Path.PAGE_USER_MAIN;
 
         String tab = req.getParameter("tab");
@@ -38,6 +42,7 @@ public class UserMainCommand implements Command {
             processTestsTab(req, userId);
         }
 
+        LOGGER.debug("UserMainCommand execution finished");
         return new DispatchInfo(false, page);
     }
 
@@ -60,7 +65,7 @@ public class UserMainCommand implements Command {
         int amountOfPages = PaginationService.getNumberOfPages(RECORDS_ON_PAGE_LIMIT, totalNumOfTests);
         String page = req.getParameter("page");
         int pageNumber = PaginationService.getValidPageNumber(page, totalNumOfTests, RECORDS_ON_PAGE_LIMIT);
-        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, totalNumOfTests, pageNumber);
+        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, pageNumber);
 
         List<Test> tests;
         if(subject != null && !subject.isEmpty()) {
@@ -85,7 +90,7 @@ public class UserMainCommand implements Command {
         int amountOfPages = PaginationService.getNumberOfPages(RECORDS_ON_PAGE_LIMIT, totalNumOfPassedTests);
         String page = req.getParameter("page");
         int pageNumber = PaginationService.getValidPageNumber(page, totalNumOfPassedTests, RECORDS_ON_PAGE_LIMIT);
-        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, totalNumOfPassedTests, pageNumber);
+        int offset = PaginationService.getOffsetOnCertainPage(RECORDS_ON_PAGE_LIMIT, pageNumber);
 
         List<TestInfo> userTests = userTestService.getUserTestsInfo(userId, RECORDS_ON_PAGE_LIMIT, offset);
         req.setAttribute("passedTests", userTests);
@@ -95,7 +100,7 @@ public class UserMainCommand implements Command {
     }
 
     private List<Test> getTestsBySortedMethod(String sortingMethod, int offset) {
-        List<Test> tests = null;
+        List<Test> tests;
 
         switch (sortingMethod) {
             case "default":

@@ -1,5 +1,11 @@
 package com.epam.testing.model.entity;
 
+/**
+ * Test status enum
+ *
+ * @author rom4ik
+ */
+
 public enum TestStatus {
     NOT_STARTED("not_started"),
     STARTED("started"),

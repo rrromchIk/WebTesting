@@ -17,7 +17,15 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
-    private final DataSource datasource = DataSource.getInstance();
+    private final DataSource datasource;
+
+    public UserDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public UserDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
     /**
      * Select all Users.
      *
@@ -103,7 +111,7 @@ public class UserDAOImpl implements UserDAO {
             }
             ResultSet generatedKeys = statement.getGeneratedKeys();
             if(generatedKeys.next()) {
-                result = generatedKeys.getInt(1);
+                result = generatedKeys.getLong(1);
             }
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -129,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
                 .role(UserRole.getRole(resultSet.getString(UserFields.ROLE.FIELD)))
                 .status(UserStatus.getStatus(resultSet.getString(UserFields.STATUS.FIELD)))
                         .build();
-        user.setId(resultSet.getInt(UserFields.ID.FIELD));
+        user.setId(resultSet.getLong(UserFields.ID.FIELD));
         return user;
     }
 
@@ -156,7 +164,6 @@ public class UserDAOImpl implements UserDAO {
         }
         return result;
     }
-
 
     @Override
     public boolean delete(long id) {

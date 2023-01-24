@@ -5,14 +5,19 @@ import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.User;
 import com.epam.testing.model.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class EditProfileCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(EditProfileCommand.class);
     private final UserService userService = new UserService();
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("EditProfileCommand execution started");
         String page = req.getContextPath() + Path.COMMAND_USER_PROFILE;
         boolean redirect = true;
 
@@ -32,8 +37,11 @@ public class EditProfileCommand implements Command {
             req.setAttribute("errorMessage", errorMessage);
             page = Path.PAGE_ERROR_PAGE;
             redirect = false;
+
+            LOGGER.warn(errorMessage);
         }
 
+        LOGGER.debug("EditProfileCommand execution finished");
         return new DispatchInfo(redirect, page);
     }
 }

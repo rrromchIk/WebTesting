@@ -1,5 +1,7 @@
 package com.epam.testing.model.entity;
 
+import java.util.Objects;
+
 /** User entity class
  *
  * @author rom4ik
@@ -83,6 +85,22 @@ public class User extends Entity {
                 ", surname = " + surname +
                 ", email = " + email + "}";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(getId(), user.getId()) &&
+                Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(surname, user.surname) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(userRole.getName(), user.userRole.getName()) &&
+                Objects.equals(userStatus.getName(), user.userStatus.getName());
+    }
+
 
     /**
      * Builder.

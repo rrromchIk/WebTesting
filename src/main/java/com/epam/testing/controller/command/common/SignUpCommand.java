@@ -5,16 +5,23 @@ import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.User;
 import com.epam.testing.model.service.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class SignUpCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(SignUpCommand.class);
     private final UserService userService = new UserService();
+
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
-        String page = req.getContextPath();
+        LOGGER.debug("SignUpCommand execution started");
 
+        String page = req.getContextPath();
+        HttpSession session = req.getSession();
         User user = new User.UserBuilder()
                 .login(req.getParameter("login"))
                 .password(req.getParameter("password"))
@@ -24,11 +31,16 @@ public class SignUpCommand implements Command {
                 .build();
 
         if(userService.addUser(user)) {
-            page += Path.PAGE_LOGIN + "?signUpSuccess=true";
+            LOGGER.info("Sign up success");
+            session.setAttribute("signUpSuccess", true);
+            page += Path.PAGE_LOGIN;
         } else {
-            page += Path.PAGE_SIGNUP + "?invalid=true";
+            LOGGER.info("Sign up fault: login already in use");
+            session.setAttribute("invalid", true);
+            page += Path.PAGE_SIGNUP;
         }
 
+        LOGGER.debug("SignUpCommand execution finished");
         return new DispatchInfo(true, page);
     }
 }

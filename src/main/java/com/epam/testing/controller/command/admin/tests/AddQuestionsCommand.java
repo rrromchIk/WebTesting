@@ -6,17 +6,21 @@ import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.Test;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.TestsService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class AddQuestionsCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(AddQuestionsCommand.class);
     private final TestsService testsService = new TestsService();
     private final TestQuestionService testQuestionService = new TestQuestionService();
     private static final int MAX_AMOUNT_OF_ANSWER_VARIANTS = 10;
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
+        LOGGER.debug("AddQuestionsCommand execution started");
         String page = Path.PAGE_ADD_QUESTIONS;
 
         long testId = Long.parseLong(req.getParameter("testId"));
@@ -34,6 +38,7 @@ public class AddQuestionsCommand implements Command {
             req.setAttribute("testId", testId);
         }
 
+        LOGGER.debug("AddQuestionsCommand execution finished");
         return new DispatchInfo(false, page);
     }
 }

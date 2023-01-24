@@ -14,7 +14,7 @@ public class PaginationService {
         return (int)Math.ceil((double)totalNumber / limit);
     }
 
-    public static Integer getOffsetOnCertainPage(Integer limit, Integer totalNumber, Integer page) {
+    public static Integer getOffsetOnCertainPage(Integer limit, Integer page) {
         return limit * (page - 1);
     }
 
