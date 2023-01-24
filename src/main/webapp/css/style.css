@@ -378,13 +378,12 @@ footer {
 }
 
 #main-content {
-    /*display: flex;
+    display: flex;
     height: 65vh;
     justify-content: center;
     align-items: center;
-    text-transform: uppercase;*/
     text-transform: uppercase;
-    margin-top: 225px;
+    /*margin-top: 225px;*/
     font-family: 'Poppins', sans-serif;
 }
 
