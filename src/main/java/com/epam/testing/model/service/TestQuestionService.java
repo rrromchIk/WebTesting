@@ -21,7 +21,11 @@ public class TestQuestionService {
     }
 
     public List<Question> getQuestionsByTestId(long testId) {
-        return questionDAO.getAllByTestId(testId);
+        List<Question> questions = questionDAO.getAllByTestId(testId);
+        for(int i = 0; i < questions.size(); i++) {
+            questions.get(i).setNumber(i + 1);
+        }
+        return questions;
     }
 
     public List<String> getCorrectAnswers(long questionId) {
@@ -44,6 +48,10 @@ public class TestQuestionService {
             boolean checked = userAnswers.contains(answerStr);
             return new CheckedAnswer(answerStr, checked);
         }).collect(Collectors.toList());
+    }
+
+    public List<String> getAnswerVariantsByQuestionId(long questionId) {
+        return answerVariantDAO.getAllByQuestionId(questionId);
     }
 
     public boolean addQuestionToTheTest(long testId, Question question) {

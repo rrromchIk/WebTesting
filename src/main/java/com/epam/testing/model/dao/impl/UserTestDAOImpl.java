@@ -97,7 +97,7 @@ public class UserTestDAOImpl implements UserTestDAO {
         List<TestInfo> userTestsInfo = new ArrayList<>();
         try(Connection connection = datasource.getConnection();
             PreparedStatement statement = connection
-                    .prepareStatement(UserTestQueries.GET_TEST_INFO.QUERY)) {
+                    .prepareStatement(UserTestQueries.GET_TESTS_INFO.QUERY)) {
             statement.setLong(1, userId);
             statement.setInt(2, limit);
             statement.setInt(3, offset);
@@ -119,6 +119,34 @@ public class UserTestDAOImpl implements UserTestDAO {
             e.printStackTrace();
         }
         return userTestsInfo;
+    }
+
+    @Override
+    public TestInfo getTestInfo(long userId, long testId) {
+        TestInfo userTestInfo = null;
+        try(Connection connection = datasource.getConnection();
+            PreparedStatement statement = connection
+                    .prepareStatement(UserTestQueries.GET_TEST_INFO.QUERY)) {
+            statement.setLong(1, userId);
+            statement.setLong(2, testId);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                userTestInfo = new TestInfo.TestInfoBuilder()
+                        .userId(resultSet.getLong(UserTestFields.USER_ID.FIELD))
+                        .testId(resultSet.getLong(UserTestFields.TEST_ID.FIELD))
+                        .testName(resultSet.getString(TestDAOImpl.TestFields.NAME.FIELD))
+                        .testSubject(resultSet.getString(TestDAOImpl.TestFields.SUBJECT.FIELD))
+                        .testDifficulty(TestDifficulty.getEnum(resultSet.getInt(TestDAOImpl.TestFields.DIFFICULTY.FIELD)))
+                        .startingTime(resultSet.getTimestamp(UserTestFields.STARTING_TIME.FIELD))
+                        .endingTime(resultSet.getTimestamp(UserTestFields.ENDING_TIME.FIELD))
+                        .result(resultSet.getFloat(UserTestFields.RESULT.FIELD))
+                        .build();
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return userTestInfo;
     }
 
     @Override
@@ -180,8 +208,10 @@ public class UserTestDAOImpl implements UserTestDAO {
         GET_TESTS_BY_USER_ID("SELECT name, subject, difficulty, duration," +
                 "number_of_questions FROM user_test JOIN test ON user_test.test_id = test.id WHERE user_id = ?"),
         CREATE("INSERT INTO user_test(user_id, test_id, starting_time) VALUES(?, ?, ?)"),
-        GET_TEST_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
+        GET_TESTS_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
                 "WHERE user_id = ? ORDER BY starting_time DESC LIMIT ? OFFSET ?"),
+        GET_TEST_INFO("SELECT * FROM user_test JOIN test ON test_id = test.id " +
+                "WHERE user_id = ? AND test_id = ?"),
         ADD_RESULT_AND_ENDING_TIME("UPDATE user_test SET result = ?, ending_time = ? " +
                 "WHERE user_id = ? AND test_id = ?"),
         GET_AMOUNT_OF_RECORDS("SELECT COUNT(user_id) FROM user_test WHERE user_id = ?"),

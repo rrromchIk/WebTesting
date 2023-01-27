@@ -51,6 +51,7 @@ public class CommandFactory {
     commands.put("testinfo", new TestInfoCommand());
     commands.put("edittest", new EditTestCommand());
     commands.put("deletequestion", new DeleteQuestionCommand());
+    commands.put("testresult", new TestResultCommand());
 
     commands.put("editprofile", new EditProfileCommand());
     commands.put("profile", new ProfileCommand());

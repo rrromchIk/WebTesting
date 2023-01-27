@@ -17,6 +17,7 @@ public interface UserTestDAO {
     boolean create(long userId, long testId, Timestamp startingTime);
     boolean addResultAndEndingTime(long userId, long testId, Float testResult, Timestamp endingTime);
     List<TestInfo> getTestsInfo(long userId, int limit, int offset);
+    TestInfo getTestInfo(long userId, long testId);
     TestStatus getStatus(long userId, long testId);
     boolean updateStatus(long userId, long testId, TestStatus status);
 }

@@ -19,7 +19,7 @@ import java.util.*;
         initParams = {
                 @WebInitParam(name = "guest", value = "logIn signUp logOut i18n"),
                 @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
-                        "submitAnswers endTest"),
+                        "submitAnswers endTest testResult"),
                 @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +
                         "changeUserStatus submitTestInfo addQuestions submitQuestionInfo testInfo editTest deleteQuestion")
         })
