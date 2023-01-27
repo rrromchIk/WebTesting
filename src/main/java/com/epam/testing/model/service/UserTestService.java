@@ -53,4 +53,8 @@ public class UserTestService {
 
         return currentTime.until(limitTime, ChronoUnit.MILLIS);
     }
+
+    public TestInfo getTestInfo(long userId, long testId) {
+        return userTestDao.getTestInfo(userId, testId);
+    }
 }

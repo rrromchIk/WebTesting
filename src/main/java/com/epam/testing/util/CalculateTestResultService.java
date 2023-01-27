@@ -5,7 +5,9 @@ import com.epam.testing.model.entity.QuestionType;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.UserAnswerService;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CalculateTestResultService {
     private static final TestQuestionService testQuestionService = new TestQuestionService();
@@ -19,6 +21,18 @@ public class CalculateTestResultService {
         int totalMaxScore = getTotalMaxScore(questions);
         int actualScore = getActualScore(questions, userId);
         return (actualScore * 100) / (float)(totalMaxScore);
+    }
+
+    public static int getQuestionScore(Question question, long userId) {
+        List<Question> questions = new ArrayList<>();
+        questions.add(question);
+        return getActualScore(questions, userId);
+    }
+
+    public static boolean isAnswerCorrect(long questionId, String answer) {
+        List<String> questionCorrectAnswers = testQuestionService
+                .getCorrectAnswers(questionId);
+        return questionCorrectAnswers.contains(answer);
     }
 
     private static int getTotalMaxScore(List<Question> questions) {

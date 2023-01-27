@@ -122,9 +122,12 @@
                             <span class="spanName"><fmt:message key="testCard.result.label"/>: </span>
                                 ${testInfo.result} %
                         </p>
+                        <a href="${pageContext.request.contextPath}/controller?action=testResult&testId=${testInfo.testId}"
+                           class="btn btn-primary" target="_blank" >
+                            Check out answers
+                        </a>
+
                     </div>
-
-
                 </div>
             </c:forEach>
         </div>
