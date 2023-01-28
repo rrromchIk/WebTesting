@@ -19,5 +19,4 @@
             </c:if>
              class="${styleClass}" alt="avatar1">
     </c:otherwise>
-
 </c:choose>

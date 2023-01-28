@@ -22,7 +22,6 @@
                            value="/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}"/>
             </jsp:include>
 
-
             <av:avatarImage img="${requestScope.userAvatar}"
                             styleClass="avatar"
                             onClickViewProfile="${true}"/>

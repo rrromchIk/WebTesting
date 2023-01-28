@@ -23,18 +23,25 @@
         </nav>
 
         <h1 class="color"><fmt:message key="profile.label"/></h1>
+
         <div class="personal-image">
-            <div class="personal-figure">
-                <av:avatarImage img="${requestScope.userAvatar}"
-                                styleClass="personal-avatar"
-                                onClickViewProfile="${false}"/>
-            </div>
+            <label class="label">
+                <form method="post" action="${pageContext.request.contextPath}/controller?action=uploadAvatar" enctype="multipart/form-data">
+                    <input class="fileInput" type="file" value="Change avatar" name="file" onchange="this.form.submit()" accept="image/*">
+                </form>
+                <figure class="personal-figure">
+                    <av:avatarImage img="${requestScope.userAvatar}"
+                                    styleClass="personal-avatar"
+                                    onClickViewProfile="${false}"/>
+                    <figcaption class="personal-figcaption">
+                        <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
+                    </figcaption>
+                </figure>
+            </label>
         </div>
 
         <div id="profileForm">
-            <form method="post" action="${pageContext.request.contextPath}/controller?action=uploadAvatar" enctype="multipart/form-data">
-                <input class="fileInput" type="file" value="Change avatar" name="file" onchange="this.form.submit()" accept="image/*">
-            </form>
+
 
             <form method="post" action="${pageContext.request.contextPath}/controller?action=editProfile">
                 <input type="hidden" name="login" value="${requestScope.fullUser.login}">
@@ -64,8 +71,12 @@
                            oninvalid="this.setCustomValidity('<fmt:message key="validation.badEmail"/>')"
                            oninput="this.setCustomValidity('')">
                 </div>
+                <a href="${pageContext.request.contextPath}/controller?action=resetAvatar"
+                   class="btn btn-outline-danger">Reset avatar</a>
                 <button class="btn btn-primary" id="edit-profile-btn" type="button" ><fmt:message key="button.edit"/></button>
                 <button class="btn btn-primary" id="submit-changes-btn" disabled type="submit" ><fmt:message key="button.submitChanges"/></button>
+
+
             </form>
         </div>
 
