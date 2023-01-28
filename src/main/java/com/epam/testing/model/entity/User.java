@@ -1,5 +1,6 @@
 package com.epam.testing.model.entity;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 /** User entity class
@@ -16,7 +17,7 @@ public class User extends Entity {
     private String email;
     private final UserRole userRole;
     private UserStatus userStatus;
-
+    private Blob avatar;
 
     private User(UserBuilder builder) {
         this.login = builder.login;
@@ -26,6 +27,7 @@ public class User extends Entity {
         this.email = builder.email;
         this.userRole = builder.userRole;
         this.userStatus = builder.userStatus;
+        this.avatar = builder.avatar;
     }
 
     public String getLogin() {
@@ -76,6 +78,10 @@ public class User extends Entity {
         this.userStatus = status;
     }
 
+    public Blob getAvatar() {
+        return avatar;
+    }
+
     @Override
     public String toString() {
         return "User {" +
@@ -113,6 +119,7 @@ public class User extends Entity {
         private String email;
         private UserRole userRole;
         private UserStatus userStatus;
+        private Blob avatar;
 
         public UserBuilder login(String login) {
             this.login = login;
@@ -146,6 +153,11 @@ public class User extends Entity {
 
         public UserBuilder status(UserStatus status) {
             this.userStatus = status;
+            return this;
+        }
+
+        public UserBuilder avatar(Blob avatar) {
+            this.avatar = avatar;
             return this;
         }
 

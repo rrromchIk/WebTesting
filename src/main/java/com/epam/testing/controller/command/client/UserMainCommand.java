@@ -6,20 +6,25 @@ import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.Test;
 import com.epam.testing.model.entity.TestInfo;
 import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.User;
 import com.epam.testing.model.service.TestsService;
+import com.epam.testing.model.service.UserService;
 import com.epam.testing.model.service.UserTestService;
+import com.epam.testing.util.ImageConverterUtil;
 import com.epam.testing.util.PaginationService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Blob;
 import java.util.List;
 
 public class UserMainCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(UserMainCommand.class);
     private final TestsService testsService = new TestsService();
     private final UserTestService userTestService = new UserTestService();
+    private final UserService userService = new UserService();
     private static final Integer RECORDS_ON_PAGE_LIMIT = 3;
 
     @Override
@@ -42,6 +47,7 @@ public class UserMainCommand implements Command {
             processTestsTab(req, userId);
         }
 
+        setUserAvatar(req, userId);
         LOGGER.debug("UserMainCommand execution finished");
         return new DispatchInfo(false, page);
     }
@@ -127,5 +133,12 @@ public class UserMainCommand implements Command {
             TestStatus status = userTestService.getUserTestStatus(userId, test.getId());
             test.setStatus(status);
         });
+    }
+
+    private void setUserAvatar(HttpServletRequest req, long userId) {
+        User user = userService.getUserById(userId);
+        Blob blob = user.getAvatar();
+        String img = ImageConverterUtil.getBase64String(blob);
+        req.setAttribute("userAvatar", img);
     }
 }

@@ -70,7 +70,7 @@ public class PdfBuilder {
   }
 
   private static void addHeader(Document document) throws DocumentException {
-    Paragraph header = new Paragraph("Test overview", new Font(baseFont, 20));
+    Paragraph header = new Paragraph("Test overview", new Font(baseFont, 20, Font.BOLD));
     header.setAlignment(Element.ALIGN_CENTER);
     document.add(header);
     addLines(document, 2);

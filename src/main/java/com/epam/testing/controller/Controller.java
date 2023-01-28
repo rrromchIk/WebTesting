@@ -5,6 +5,7 @@ import com.epam.testing.controller.command.CommandFactory;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @WebServlet("/controller")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, //1MB
+        maxFileSize = 1024 * 1024 * 10,       //10MB
+        maxRequestSize = 1024 * 1024 * 100)   //100MB
 public class Controller extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest req, HttpServletResponse resp)

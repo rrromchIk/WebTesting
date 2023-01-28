@@ -6,6 +6,7 @@ import com.epam.testing.model.entity.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -136,6 +137,7 @@ public class UserDAOImpl implements UserDAO {
                 .email(resultSet.getString(UserFields.EMAIL.FIELD))
                 .role(UserRole.getRole(resultSet.getString(UserFields.ROLE.FIELD)))
                 .status(UserStatus.getStatus(resultSet.getString(UserFields.STATUS.FIELD)))
+                .avatar(resultSet.getBlob(UserFields.AVATAR.FIELD))
                         .build();
         user.setId(resultSet.getLong(UserFields.ID.FIELD));
         return user;
@@ -218,6 +220,21 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    @Override
+    public boolean updateAvatar(InputStream img, long userId) {
+        boolean result = false;
+        try (Connection connection = datasource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UserQueries.UPDATE_AVATAR.QUERY)) {
+            statement.setBlob(1, img);
+            statement.setLong(2, userId);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     enum UserQueries {
         GET_ALL("SELECT * FROM user LIMIT ? OFFSET ?"),
         GET_BY_ID("SELECT * FROM user WHERE id = ?"),
@@ -226,6 +243,7 @@ public class UserDAOImpl implements UserDAO {
         INSERT("INSERT INTO user(login, password, name, surname, email) " +
                 "VALUES(?, sha1(?), ?, ?, ?)"),
         UPDATE("UPDATE user SET name = ?, surname = ?, email = ?, status = ? WHERE login = ?"),
+        UPDATE_AVATAR("UPDATE user SET avatar = ? WHERE id = ?"),
         DELETE("DELETE FROM user WHERE login = ? AND password = ?"),
 
         GET_AMOUNT_OF_RECORDS("SELECT COUNT(login) FROM user");
@@ -244,7 +262,8 @@ public class UserDAOImpl implements UserDAO {
         SURNAME("surname"),
         EMAIL ("email"),
         ROLE("role"),
-        STATUS("status");
+        STATUS("status"),
+        AVATAR("avatar");
 
         final String FIELD;
         UserFields(String field) {

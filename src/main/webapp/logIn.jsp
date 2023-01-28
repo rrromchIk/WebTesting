@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label class="color"><fmt:message key="registrationForm.login.label"/></label>
-                        <input class="form-control" type="text" name="login"  required
+                        <input class="form-control" type="text" name="login"  required title=""
                                placeholder="<fmt:message key="registrationForm.login.placeholder"/>"  maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
@@ -57,9 +57,13 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.logIn.button"/></button>
-
                 </form>
             </div>
+            <div id="registrTip">
+                <span id="registrTipText"><fmt:message key="registrationForm.dontHaveAnAccount.label"/></span>
+                <a href="signUp.jsp"><fmt:message key="button.signUp"/></a>
+            </div>
+
         </div>
         <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>

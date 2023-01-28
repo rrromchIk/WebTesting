@@ -25,6 +25,18 @@
                 <jsp:param name="command"
                            value="/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}"/>
             </jsp:include>
+
+            <c:choose>
+                <c:when test="${requestScope.userAvatar eq null}">
+                    <img src="${pageContext.request.contextPath}/img/defaultAvatar.png"
+                         class="avatar" alt="avatar">
+                </c:when>
+                <c:otherwise>
+                    <img src="data:image/jpg;base64,${requestScope.userAvatar}"
+                                 class="avatar" alt="avatar">
+                </c:otherwise>
+            </c:choose>
+
         </nav>
         <div id="choice">
             <ul class="nav nav-tabs">
@@ -122,11 +134,12 @@
                             <span class="spanName"><fmt:message key="testCard.result.label"/>: </span>
                                 ${testInfo.result} %
                         </p>
-                        <a href="${pageContext.request.contextPath}/controller?action=testResult&testId=${testInfo.testId}"
-                           class="btn btn-primary" target="_blank" >
-                            Check out answers
-                        </a>
-
+                        <c:if test="${testInfo.endingTime != 'not ended'}">
+                            <a href="${pageContext.request.contextPath}/controller?action=testResult&testId=${testInfo.testId}"
+                               class="btn btn-primary" target="_blank" >
+                                <fmt:message key="testCard.checkOutAnswers.label"/>
+                            </a>
+                        </c:if>
                     </div>
                 </div>
             </c:forEach>

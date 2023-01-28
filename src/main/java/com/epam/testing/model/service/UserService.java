@@ -4,6 +4,8 @@ import com.epam.testing.model.dao.impl.UserDAOImpl;
 import com.epam.testing.model.entity.User;
 import com.epam.testing.model.entity.UserStatus;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 public class UserService {
@@ -43,5 +45,9 @@ public class UserService {
 
     public boolean updateUser(User user) {
         return dao.update(user);
+    }
+
+    public boolean setAvatar(InputStream img, long userId) {
+        return dao.updateAvatar(img, userId);
     }
 }

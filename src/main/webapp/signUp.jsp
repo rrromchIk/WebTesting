@@ -42,7 +42,7 @@
 
                     <div class="form-group">
                         <label class="color"><fmt:message key="registrationForm.password.label"/></label>
-                        <input class="form-control" type="password" name="password"  required
+                        <input class="form-control" type="password" name="password"  required title=""
                                placeholder="<fmt:message key="registrationForm.password.placeholder"/>" maxlength="100"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
@@ -50,7 +50,7 @@
 
                     <div class="form-group">
                         <label class="color"><fmt:message key="registrationForm.name.label"/></label>
-                        <input class="form-control" type="text" name="name"  required
+                        <input class="form-control" type="text" name="name"  required title=""
                                placeholder="<fmt:message key="registrationForm.name.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
@@ -58,7 +58,7 @@
 
                     <div class="form-group">
                         <label class="color"><fmt:message key="registrationForm.surname.label"/></label>
-                        <input class="form-control" type="text" name="surname"  required
+                        <input class="form-control" type="text" name="surname"  required title=""
                                placeholder="<fmt:message key="registrationForm.surname.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
@@ -66,13 +66,18 @@
 
                     <div class="form-group">
                         <label class="color"><fmt:message key="registrationForm.email.label"/></label>
-                        <input class="form-control" type="email" name="email"  required
+                        <input class="form-control" type="email" name="email"  required title=""
                                placeholder="<fmt:message key="registrationForm.email.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.badEmail"/>')"
                                oninput="this.setCustomValidity('')">
                     </div>
                     <button class="btn btn-primary" id="signUpButton" type="submit" ><fmt:message key="registrationForm.signUp.button"/></button>
                 </form>
+
+            </div>
+            <div id="registrTip">
+                <span id="registrTipText"><fmt:message key="registrationForm.haveAlreadyAnAccount.label"/></span>
+                <a href="logIn.jsp"><fmt:message key="button.signIn"/></a>
             </div>
         </div>
 
