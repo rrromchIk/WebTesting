@@ -30,7 +30,6 @@ public class QuestionAnswerVariantsDAOImpl implements QuestionAnswerDAO {
      * @param id for identification
      * @return valid list of answers if they exist. If not return empty list.
      */
-
     public List<String> getAllByQuestionId(long id) {
         List<String> answers = new ArrayList<>();
         try (Connection connection = datasource.getConnection();

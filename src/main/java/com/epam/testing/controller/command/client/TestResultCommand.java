@@ -3,7 +3,7 @@ package com.epam.testing.controller.command.client;
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
-import com.epam.testing.util.PdfBuilder;
+import com.epam.testing.util.PdfBuilderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,7 +18,7 @@ public class TestResultCommand implements Command {
         long testId = Long.parseLong(req.getParameter("testId"));
         long userId = (long)req.getSession().getAttribute("userId");
 
-        PdfBuilder.createResultPdf(resp, userId, testId);
+        PdfBuilderUtil.createResultPdf(resp, userId, testId);
 
         LOGGER.debug("TestResultCommand execution started");
         return new DispatchInfo(false, Path.COMMAND_USER_MAIN + "?tab=passedTests");

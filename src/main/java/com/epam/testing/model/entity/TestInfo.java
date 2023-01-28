@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * TestInfo entity for test information
+ * Test info entity for user_test table
  *
  * @author rom4ik
  */

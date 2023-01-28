@@ -4,6 +4,11 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
+/**
+ * PaginationTag custom Tag class
+ *
+ * @author rom4ik
+ */
 public class PaginationTag extends TagSupport {
     private int amountOfPages;
     private int activePage;

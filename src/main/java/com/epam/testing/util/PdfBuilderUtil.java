@@ -21,23 +21,27 @@ import java.util.StringJoiner;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * PDF builder util. Generates pdf-files for test result.
+ * PDF builder util. Generates pdf-files for test result
  *
- * @author rom4ik.
+ * @author rom4ik
  */
-public class PdfBuilder {
+public class PdfBuilderUtil {
   private static BaseFont baseFont;
-  private static final Logger LOGGER = LogManager.getLogger(PdfBuilder.class);
+  private static final Logger LOGGER = LogManager.getLogger(PdfBuilderUtil.class);
   private static final TestQuestionService testQuestionService = new TestQuestionService();
   private static final UserTestService userTestService = new UserTestService();
   private static final UserService userService = new UserService();
 
   /**
-   * Util class not need in instance
+   * Don't let anyone instantiate this class.
    */
-  private PdfBuilder() {
-  }
+  private PdfBuilderUtil() {}
 
+  /**
+   * @param response to display pdf file
+   * @param userId for User identification
+   * @param testId for Test identification
+   */
   public static void createResultPdf(HttpServletResponse response, long userId, long testId) {
     Document document = new Document(PageSize.A4, 50, 50, 20, 50);
     ByteArrayOutputStream baos = new ByteArrayOutputStream();

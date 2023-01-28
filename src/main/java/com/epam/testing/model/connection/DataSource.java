@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 /**
  * DataSource configuration
+ * Uses webapp/META-INF/context.xml for configuration
  *
  * @author rom4ik
  */

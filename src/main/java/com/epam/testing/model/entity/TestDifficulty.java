@@ -1,7 +1,7 @@
 package com.epam.testing.model.entity;
 
 /**
- * Difficulty enum
+ * Test difficulty enum
  *
  * @author rom4ik
  */

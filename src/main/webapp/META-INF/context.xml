@@ -3,9 +3,7 @@ Configuration file for Tomcat 6
 Data source and connection pool configuration
 (The default Tomcat's DBCP is used)
 =============================================================-->
-
 <Context>
-
     <!--=============================================================
     maxActive: the maximum number of active connections that can be
     allocated from this pool at the same time, negative for no limit.

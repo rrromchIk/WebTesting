@@ -17,18 +17,21 @@
     </properties>
 
     <dependencies>
+        <!-- Dependency for working with servlets-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Dependency for working with jsp-->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.2</version>
             <scope>provided</scope>
         </dependency>
+        <!-- Dependencies for working with jstl-->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
@@ -39,6 +42,7 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
         </dependency>
+        <!-- Dependencies for testing-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -63,6 +67,7 @@
             <version>5.0.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- Dependencies for logging-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
@@ -73,17 +78,29 @@
             <artifactId>log4j-core</artifactId>
             <version>2.13.0</version>
         </dependency>
+        <!-- Dependency for db connection-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.31</version>
         </dependency>
+        <!-- Dependency for creating pdf-->
         <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itextpdf</artifactId>
             <version>5.5.13</version>
         </dependency>
-
+        <!-- Dependencies for sending mails-->
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.2</version>
+        </dependency>
     </dependencies>
 
     <build>

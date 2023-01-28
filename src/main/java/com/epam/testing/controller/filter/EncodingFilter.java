@@ -7,6 +7,11 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
+/**
+ * Encoding filter. Encode request in specified encoding
+ *
+ * @author rom4ik
+ */
 @WebFilter(filterName = "EncodingFilter",
         urlPatterns = "/*",
         initParams = @WebInitParam(name = "encoding", value = "UTF-8"))

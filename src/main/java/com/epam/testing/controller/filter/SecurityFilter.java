@@ -14,6 +14,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Security filter. Checks for permissions for different roles in webapp.
+ *
+ * @author rom4ik
+ */
 @WebFilter(filterName = "SecurityFilter",
         urlPatterns = "/controller",
         initParams = {

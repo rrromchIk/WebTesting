@@ -3,7 +3,7 @@ package com.epam.testing.model.entity;
 import java.util.Objects;
 
 /**
- * Test entity class
+ * Test entity for test table
  *
  * @author rom4ik
  */

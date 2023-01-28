@@ -7,10 +7,20 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Base64;
 
+/**
+ * ImageConverter util. Converts image from blob format
+ * to base64 encoded string
+ *
+ * @author rom4ik
+ */
 public class ImageConverterUtil {
     /**
-     *
-     * @param blob user avatar
+     * Don't let anyone instantiate this class.
+     */
+    private ImageConverterUtil() {}
+
+    /**
+     * @param blob represents user avatar from database
      * @return string that represents encoded image or null if user has no avatar.
      */
     public static String getBase64String(Blob blob) {

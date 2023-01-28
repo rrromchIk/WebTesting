@@ -1,5 +1,6 @@
 package com.epam.testing.controller.listener;
 
+import com.epam.testing.util.EmailSenderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -26,7 +27,7 @@ public class ContextListener implements ServletContextListener {
     LOGGER.debug("Servlet context initialization starts");
     ServletContext servletContext = sce.getServletContext();
     initI18N(servletContext);
-
+    EmailSenderUtil.sendEmail("roman.nikitin.pz.2021@lpnu.ua", "Hello from Java");
     LOGGER.debug("Servlet context initialization finished");
   }
 

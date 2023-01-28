@@ -15,6 +15,11 @@ import java.io.IOException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+/**
+ * TestAccess filter. Checks for user permission for test.
+ *
+ * @author rom4ik
+ */
 @WebFilter(filterName = "TestAccessFilter",
         urlPatterns = "/controller")
 public class TestAccessFilter implements Filter {

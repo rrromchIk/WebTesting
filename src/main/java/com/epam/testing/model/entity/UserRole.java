@@ -1,7 +1,7 @@
 package com.epam.testing.model.entity;
 
 /**
- * Role enum
+ * User role enum
  *
  * @author rom4ik
  */

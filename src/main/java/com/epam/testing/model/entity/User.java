@@ -3,7 +3,7 @@ package com.epam.testing.model.entity;
 import java.sql.Blob;
 import java.util.Objects;
 
-/** User entity class
+/** User entity class for user table
  *
  * @author rom4ik
  */
