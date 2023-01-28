@@ -23,9 +23,26 @@
         </nav>
 
         <h1 class="color"><fmt:message key="profile.label"/></h1>
-
+        <div class="personal-image">
+            <div class="personal-figure">
+                <c:choose>
+                    <c:when test="${requestScope.userAvatar eq null}">
+                        <img src="${pageContext.request.contextPath}/img/defaultAvatar.png"
+                             class="personal-avatar" alt="avatar">
+                    </c:when>
+                    <c:otherwise>
+                        <img src="data:image/jpg;base64,${requestScope.userAvatar}"
+                             class="personal-avatar" alt="avatar">
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
 
         <div id="profileForm">
+            <form method="post" action="${pageContext.request.contextPath}/controller?action=uploadAvatar" enctype="multipart/form-data">
+                <input class="fileInput" type="file" value="Change avatar" name="file" onchange="this.form.submit()" accept="image/*">
+            </form>
+
             <form method="post" action="${pageContext.request.contextPath}/controller?action=editProfile">
                 <input type="hidden" name="login" value="${requestScope.fullUser.login}">
                 <div class="form-group">

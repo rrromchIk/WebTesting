@@ -398,6 +398,18 @@ footer {
     border-radius: 2%;
 }
 
+#registrTip {
+    display: flex;
+    justify-content: center;
+    flex-flow: row;
+    flex-wrap: nowrap;
+}
+
+#registrTipText {
+    color: rgb(211,211,211);
+    padding-right: 10px;
+}
+
 #addingTest {
     margin: 10px;
     border-width: thin;
@@ -431,7 +443,6 @@ footer {
     border-width: 2px;
     border-style: solid;
     width: 400px;
-    height: 450px;
     border-color: rgb(175, 175, 175);
     border-radius: 2%;
 }
@@ -695,7 +706,7 @@ input.form-check-input{
 }
 
 #signInFormDIV {
-    min-height: calc(100vh - 200px);
+    min-height: calc(100vh - 140px);
 }
 
 #profileFormDIV {
@@ -708,7 +719,7 @@ input.form-check-input{
 }
 
 #signUpFormDIV {
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 120px);
 }
 
 #endAttemptButtonDIV {
@@ -734,6 +745,53 @@ input.form-check-input{
     padding: 6px;
 }
 
+
+.personal-image {
+    text-align: center;
+}
+
+.personal-figure {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+.personal-avatar {
+    cursor: pointer;
+    width: 120px;
+    height: 120px;
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 2px solid transparent;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+    transition: all ease-in-out .3s;
+}
+.personal-avatar:hover {
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+.fileInput::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.fileInput::before {
+    content: 'Select new avatar';
+    display: inline-block;
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    -webkit-user-select: none;
+    cursor: pointer;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
 
 
 

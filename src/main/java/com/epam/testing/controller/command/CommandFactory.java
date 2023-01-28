@@ -51,7 +51,7 @@ public class CommandFactory {
     commands.put("testinfo", new TestInfoCommand());
     commands.put("edittest", new EditTestCommand());
     commands.put("deletequestion", new DeleteQuestionCommand());
-    commands.put("testresult", new TestResultCommand());
+
 
     commands.put("editprofile", new EditProfileCommand());
     commands.put("profile", new ProfileCommand());
@@ -60,6 +60,8 @@ public class CommandFactory {
     commands.put("passtest", new PassTestCommand());
     commands.put("endtest", new EndTestCommand());
     commands.put("submitanswers", new SubmitAnswersCommand());
+    commands.put("testresult", new TestResultCommand());
+    commands.put("uploadavatar", new AvatarUploadCommand());
   }
 
   public Command getCommand(HttpServletRequest request) {
