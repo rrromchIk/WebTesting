@@ -23,7 +23,6 @@
             </jsp:include>
 
 
-
             <av:avatarImage img="${requestScope.userAvatar}"
                             styleClass="avatar"
                             onClickViewProfile="${true}"/>

@@ -62,6 +62,7 @@ public class CommandFactory {
     commands.put("submitanswers", new SubmitAnswersCommand());
     commands.put("testresult", new TestResultCommand());
     commands.put("uploadavatar", new AvatarUploadCommand());
+    commands.put("resetavatar", new ResetAvatarCommand());
   }
 
   public Command getCommand(HttpServletRequest request) {
