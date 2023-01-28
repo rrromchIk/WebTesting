@@ -12,10 +12,6 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.Base64;
 
 public class ProfileCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(ProfileCommand.class);

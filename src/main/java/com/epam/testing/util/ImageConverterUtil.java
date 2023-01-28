@@ -8,8 +8,16 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 public class ImageConverterUtil {
+    /**
+     *
+     * @param blob user avatar
+     * @return string that represents encoded image or null if user has no avatar.
+     */
     public static String getBase64String(Blob blob) {
         String base64Image = null;
+        if(blob == null) {
+            return base64Image;
+        }
 
         try(InputStream inputStream = blob.getBinaryStream();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {

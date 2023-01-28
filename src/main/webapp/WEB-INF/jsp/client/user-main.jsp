@@ -12,10 +12,6 @@
 
             <div id="navbar-table" class="collapse navbar-collapse">
                 <div class="item-wrapper">
-                    <a href="${pageContext.request.contextPath}/controller?action=profile"
-                       class="float-right btn btn-outline-primary"><fmt:message key="profile.label"/></a>
-                </div>
-                <div class="item-wrapper">
                     <a href="${pageContext.request.contextPath}/controller?action=logOut"
                        class="float-right btn btn-outline-danger"><fmt:message key="button.logOut"/></a>
                 </div>
@@ -26,16 +22,11 @@
                            value="/controller?action=userMain&tab=${requestScope.activeTab}&sortMethod=${requestScope.sortMethod}&page=${requestScope.activePage}&groupBy=${requestScope.selectedSubject}"/>
             </jsp:include>
 
-            <c:choose>
-                <c:when test="${requestScope.userAvatar eq null}">
-                    <img src="${pageContext.request.contextPath}/img/defaultAvatar.png"
-                         class="avatar" alt="avatar">
-                </c:when>
-                <c:otherwise>
-                    <img src="data:image/jpg;base64,${requestScope.userAvatar}"
-                                 class="avatar" alt="avatar">
-                </c:otherwise>
-            </c:choose>
+
+
+            <av:avatarImage img="${requestScope.userAvatar}"
+                            styleClass="avatar"
+                            onClickViewProfile="${true}"/>
 
         </nav>
         <div id="choice">

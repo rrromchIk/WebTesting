@@ -25,16 +25,9 @@
         <h1 class="color"><fmt:message key="profile.label"/></h1>
         <div class="personal-image">
             <div class="personal-figure">
-                <c:choose>
-                    <c:when test="${requestScope.userAvatar eq null}">
-                        <img src="${pageContext.request.contextPath}/img/defaultAvatar.png"
-                             class="personal-avatar" alt="avatar">
-                    </c:when>
-                    <c:otherwise>
-                        <img src="data:image/jpg;base64,${requestScope.userAvatar}"
-                             class="personal-avatar" alt="avatar">
-                    </c:otherwise>
-                </c:choose>
+                <av:avatarImage img="${requestScope.userAvatar}"
+                                styleClass="personal-avatar"
+                                onClickViewProfile="${false}"/>
             </div>
         </div>
 
