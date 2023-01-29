@@ -1,4 +1,4 @@
-package com.epam.testing.controller.command.client;
+package com.epam.testing.controller.command.client.profile;
 
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;

@@ -3,7 +3,6 @@ package com.epam.testing.controller.command.admin.users;
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
-import com.epam.testing.controller.command.client.EditProfileCommand;
 import com.epam.testing.model.entity.User;
 import com.epam.testing.model.service.UserService;
 import org.apache.logging.log4j.LogManager;

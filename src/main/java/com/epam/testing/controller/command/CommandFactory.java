@@ -6,6 +6,11 @@ import com.epam.testing.controller.command.admin.users.ChangeUserStatusCommand;
 import com.epam.testing.controller.command.admin.users.EditUserCommand;
 import com.epam.testing.controller.command.admin.users.UserInfoCommand;
 import com.epam.testing.controller.command.client.*;
+import com.epam.testing.controller.command.client.profile.AvatarUploadCommand;
+import com.epam.testing.controller.command.client.profile.EditProfileCommand;
+import com.epam.testing.controller.command.client.profile.ProfileCommand;
+import com.epam.testing.controller.command.client.profile.ResetAvatarCommand;
+import com.epam.testing.controller.command.client.testpassing.*;
 import com.epam.testing.controller.command.common.*;
 
 import java.util.HashMap;
