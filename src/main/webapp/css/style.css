@@ -75,14 +75,14 @@ footer {
     border-radius: 2%;
 }
 
-#registrTip {
+.registrTip {
     display: flex;
     justify-content: center;
     flex-flow: row;
     flex-wrap: nowrap;
 }
 
-#registrTipText {
+.registrTipText {
     color: rgb(211,211,211);
     padding-right: 10px;
 }
