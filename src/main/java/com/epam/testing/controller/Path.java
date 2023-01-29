@@ -19,6 +19,7 @@ public final class Path {
   public static final String PAGE_ADD_TEST = "/WEB-INF/jsp/admin/add-test.jsp";
   public static final String PAGE_ADD_QUESTIONS = "/WEB-INF/jsp/admin/add-questions.jsp";
   public static final String PAGE_TEST_INFO = "/WEB-INF/jsp/admin/test-info.jsp";
+  public static final String PAGE_FORGOT_PASSWORD = "forgotPassword.jsp";
 
   public static final String COMMAND_LOGIN = "/controller?action=logIn";
   public static final String COMMAND_SIGNUP = "/controller?action=signUp";

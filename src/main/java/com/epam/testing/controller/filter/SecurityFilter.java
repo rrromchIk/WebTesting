@@ -22,7 +22,7 @@ import java.util.*;
 @WebFilter(filterName = "SecurityFilter",
         urlPatterns = "/controller",
         initParams = {
-                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n"),
+                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n resetPassword"),
                 @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
                         "submitAnswers endTest testResult uploadAvatar resetAvatar"),
                 @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +

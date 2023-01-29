@@ -28,7 +28,7 @@ public class EmailSenderUtil {
      * @param emailToSend represents email address to which message has to be sent
      * @param text message to send
      */
-    public static void sendEmail(String emailToSend, String text){
+    public static boolean sendEmail(String emailToSend, String text){
         LOGGER.info("Sending email starts");
         Properties properties = new Properties();
         try {
@@ -36,8 +36,9 @@ public class EmailSenderUtil {
         } catch (IOException e) {
             LOGGER.warn(e.getMessage());
             e.printStackTrace();
+            return false;
         }
-
+        boolean success = true;
         String senderEmail = properties.getProperty("sender.name");
         String senderPassword = properties.getProperty("sender.password");
 
@@ -65,8 +66,10 @@ public class EmailSenderUtil {
         } catch (MessagingException e) {
             LOGGER.warn(e.getMessage());
             e.printStackTrace();
+            success = false;
         }
 
         LOGGER.info("Email message sent successfully");
+        return success;
     }
 }

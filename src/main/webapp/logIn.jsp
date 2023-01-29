@@ -59,9 +59,13 @@
                     <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.logIn.button"/></button>
                 </form>
             </div>
-            <div id="registrTip">
-                <span id="registrTipText"><fmt:message key="registrationForm.dontHaveAnAccount.label"/></span>
+            <div class="registrTip">
+                <span class="registrTipText"><fmt:message key="registrationForm.dontHaveAnAccount.label"/></span>
                 <a href="signUp.jsp"><fmt:message key="button.signUp"/></a>
+            </div>
+            <div class="registrTip">
+                <span class="registrTipText">Forgot your password?</span>
+                <a href="forgotPassword.jsp">Reset</a>
             </div>
 
         </div>
