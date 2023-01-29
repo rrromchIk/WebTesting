@@ -2,9 +2,9 @@ package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserTestDAO;
-import com.epam.testing.model.entity.TestDifficulty;
-import com.epam.testing.model.entity.TestInfo;
-import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.test.TestDifficulty;
+import com.epam.testing.model.entity.test.TestInfo;
+import com.epam.testing.model.entity.test.TestStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

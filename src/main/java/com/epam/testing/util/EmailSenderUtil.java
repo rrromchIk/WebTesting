@@ -28,18 +28,30 @@ public class EmailSenderUtil {
      * @param emailToSend represents email address to which message has to be sent
      * @param text message to send
      */
-    public static void sendEmail(String emailToSend, String text){
+    public static boolean sendEmail(String emailToSend, String subject, String text){
         LOGGER.info("Sending email starts");
-        Properties properties = new Properties();
-        try {
-            properties.load(EmailSenderUtil.class.getClassLoader().getResourceAsStream("email.properties"));
-        } catch (IOException e) {
-            LOGGER.warn(e.getMessage());
-            e.printStackTrace();
+        boolean success = true;
+
+        Properties properties = readProperties("email.properties");
+        if(properties == null) {
+            success = false;
+            LOGGER.warn("Failed to read email.properties");
+        } else {
+            if(sendMessage(properties, emailToSend, subject, text)) {
+                LOGGER.info("Email message sent successfully");
+            } else {
+                LOGGER.warn("Failed to send email");
+                success = false;
+            }
         }
 
+        return success;
+    }
+
+    private static boolean sendMessage(Properties properties, String emailToSend, String subject, String text) {
         String senderEmail = properties.getProperty("sender.name");
         String senderPassword = properties.getProperty("sender.password");
+        boolean result = true;
 
         LOGGER.info("Sender email: {}", senderEmail);
         LOGGER.info("Recipient email: {}", emailToSend);
@@ -53,11 +65,11 @@ public class EmailSenderUtil {
 
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("WebTesting"));
+            message.setFrom(new InternetAddress(subject));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(emailToSend));
-            message.setSubject("Test");
-            //set the content of the email message
+            message.setSubject("WebTesting");
+
             message.setText(text);
 
             Transport.send(message);
@@ -65,8 +77,20 @@ public class EmailSenderUtil {
         } catch (MessagingException e) {
             LOGGER.warn(e.getMessage());
             e.printStackTrace();
+            result = false;
         }
+        return result;
+    }
 
-        LOGGER.info("Email message sent successfully");
+    private static Properties readProperties(String fileName) {
+        Properties properties = new Properties();
+        try {
+            properties.load(EmailSenderUtil.class.getClassLoader().getResourceAsStream(fileName));
+        } catch (IOException e) {
+            LOGGER.warn(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return properties;
     }
 }

@@ -1,7 +1,7 @@
 package com.epam.testing.controller.filter;
 
 import com.epam.testing.controller.Path;
-import com.epam.testing.model.entity.UserRole;
+import com.epam.testing.model.entity.user.UserRole;
 import com.epam.testing.model.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,7 +22,7 @@ import java.util.*;
 @WebFilter(filterName = "SecurityFilter",
         urlPatterns = "/controller",
         initParams = {
-                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n"),
+                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n resetPassword"),
                 @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
                         "submitAnswers endTest testResult uploadAvatar resetAvatar"),
                 @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +
@@ -70,7 +70,7 @@ public class SecurityFilter implements Filter {
         HttpSession session = httpRequest.getSession(false);
         if(session == null) {
             String errorMessage = "Invalid session";
-            LOGGER.trace("Access invalid -> {}", errorMessage);
+            LOGGER.warn("Access invalid -> {}", errorMessage);
             request.setAttribute("errorMessage", errorMessage);
             return false;
         }
@@ -87,14 +87,14 @@ public class SecurityFilter implements Filter {
         }
 
         if(userLogin != null && userService.userIsBlocked(userLogin)) {
-            LOGGER.trace("Access invalid -> User is blocked");
+            LOGGER.warn("Access invalid -> User is blocked");
             request.setAttribute("errorMessage","Seems that you are blocked(" );
             return false;
         }
 
         boolean result = accessMap.get(userRole).contains(command);
         if(!result) {
-            LOGGER.trace("Access invalid -> Permission fails");
+            LOGGER.warn("Access invalid -> Permission fails");
             request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
         }
         return result;

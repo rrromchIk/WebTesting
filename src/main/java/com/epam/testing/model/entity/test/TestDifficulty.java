@@ -1,4 +1,4 @@
-package com.epam.testing.model.entity;
+package com.epam.testing.model.entity.test;
 
 /**
  * Test difficulty enum

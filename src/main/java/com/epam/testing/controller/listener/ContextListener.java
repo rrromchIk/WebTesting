@@ -27,7 +27,6 @@ public class ContextListener implements ServletContextListener {
     LOGGER.debug("Servlet context initialization starts");
     ServletContext servletContext = sce.getServletContext();
     initI18N(servletContext);
-    EmailSenderUtil.sendEmail("roman.nikitin.pz.2021@lpnu.ua", "Hello from Java");
     LOGGER.debug("Servlet context initialization finished");
   }
 

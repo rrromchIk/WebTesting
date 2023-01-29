@@ -1,7 +1,7 @@
 package com.epam.testing.model.dao.impl;
 
-import com.epam.testing.model.entity.TestDifficulty;
-import com.epam.testing.model.entity.Test;
+import com.epam.testing.model.entity.test.TestDifficulty;
+import com.epam.testing.model.entity.test.Test;
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.TestDAO;
 import org.apache.logging.log4j.LogManager;

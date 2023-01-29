@@ -1,4 +1,4 @@
-package com.epam.testing.model.entity;
+package com.epam.testing.model.entity.test;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

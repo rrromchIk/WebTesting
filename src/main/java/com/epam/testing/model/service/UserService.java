@@ -1,10 +1,9 @@
 package com.epam.testing.model.service;
 
 import com.epam.testing.model.dao.impl.UserDAOImpl;
-import com.epam.testing.model.entity.User;
-import com.epam.testing.model.entity.UserStatus;
+import com.epam.testing.model.entity.user.User;
+import com.epam.testing.model.entity.user.UserStatus;
 
-import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -33,6 +32,10 @@ public class UserService {
 
     public User getUserByLogin(String login) {
         return dao.getByLogin(login);
+    }
+
+    public User getUserByEmail(String email) {
+        return dao.getByEmail(email);
     }
 
     public boolean userExists(String login, String password) {

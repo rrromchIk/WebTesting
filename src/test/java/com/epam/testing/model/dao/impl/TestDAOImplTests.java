@@ -1,7 +1,7 @@
 package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
-import com.epam.testing.model.entity.TestDifficulty;
+import com.epam.testing.model.entity.test.TestDifficulty;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,11 +36,11 @@ class TestDAOImplTests {
     private final static Integer OFFSET = 3;
     private final static Long INVALID_ID = -1L;
     private static final Long TEST_ID = 14L;
-    private static com.epam.testing.model.entity.Test testExample;
+    private static com.epam.testing.model.entity.test.Test testExample;
 
     @BeforeAll
     static void setUp() {
-        testExample = new com.epam.testing.model.entity.Test.TestBuilder()
+        testExample = new com.epam.testing.model.entity.test.Test.TestBuilder()
                 .name("testName")
                 .difficulty(TestDifficulty.HARD)
                 .duration(15)
@@ -175,7 +175,7 @@ class TestDAOImplTests {
         assertTrue(testDAO.getAll(LIMIT, OFFSET).isEmpty());
 
         makeResultSetReturnValidTest();
-        List<com.epam.testing.model.entity.Test> tests = testDAO.getAll(LIMIT, OFFSET);
+        List<com.epam.testing.model.entity.test.Test> tests = testDAO.getAll(LIMIT, OFFSET);
         assertTrue(tests.size() >= 1);
         assertEquals(testExample, tests.get(0));
 

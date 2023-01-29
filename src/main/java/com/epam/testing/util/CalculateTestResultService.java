@@ -1,13 +1,12 @@
 package com.epam.testing.util;
 
-import com.epam.testing.model.entity.Question;
-import com.epam.testing.model.entity.QuestionType;
+import com.epam.testing.model.entity.question.Question;
+import com.epam.testing.model.entity.question.QuestionType;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.UserAnswerService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 /**
  * CalculateTestResultService util. Calculates total result

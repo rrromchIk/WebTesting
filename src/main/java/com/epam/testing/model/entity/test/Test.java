@@ -1,4 +1,6 @@
-package com.epam.testing.model.entity;
+package com.epam.testing.model.entity.test;
+
+import com.epam.testing.model.entity.Entity;
 
 import java.util.Objects;
 

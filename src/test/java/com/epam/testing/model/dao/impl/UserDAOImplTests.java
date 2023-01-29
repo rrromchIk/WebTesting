@@ -1,9 +1,9 @@
 package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
-import com.epam.testing.model.entity.User;
-import com.epam.testing.model.entity.UserRole;
-import com.epam.testing.model.entity.UserStatus;
+import com.epam.testing.model.entity.user.User;
+import com.epam.testing.model.entity.user.UserRole;
+import com.epam.testing.model.entity.user.UserStatus;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

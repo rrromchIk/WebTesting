@@ -1,4 +1,4 @@
-<%@ attribute name="diff" type="com.epam.testing.model.entity.TestDifficulty" required="true" %>
+<%@ attribute name="diff" type="com.epam.testing.model.entity.test.TestDifficulty" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 
