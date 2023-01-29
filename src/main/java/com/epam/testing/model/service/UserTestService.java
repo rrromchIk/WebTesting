@@ -2,9 +2,9 @@ package com.epam.testing.model.service;
 
 import com.epam.testing.model.dao.UserTestDAO;
 import com.epam.testing.model.dao.impl.UserTestDAOImpl;
-import com.epam.testing.model.entity.Test;
-import com.epam.testing.model.entity.TestInfo;
-import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.test.Test;
+import com.epam.testing.model.entity.test.TestInfo;
+import com.epam.testing.model.entity.test.TestStatus;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;

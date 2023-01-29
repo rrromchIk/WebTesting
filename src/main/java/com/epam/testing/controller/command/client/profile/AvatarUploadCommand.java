@@ -27,7 +27,7 @@ public class AvatarUploadCommand implements Command {
             InputStream inputStream = filePart.getInputStream();
 
             if(inputStream != null) {
-                userService.setAvatar(filePart.getInputStream(), userId);
+                userService.setAvatar(inputStream, userId);
                 LOGGER.info("Image upload success. Image name: {}", filePart.getSubmittedFileName());
             } else {
                 LOGGER.warn("Image upload failed");

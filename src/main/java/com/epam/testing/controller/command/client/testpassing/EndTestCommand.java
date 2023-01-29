@@ -3,7 +3,7 @@ package com.epam.testing.controller.command.client.testpassing;
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
-import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.test.TestStatus;
 import com.epam.testing.model.service.UserTestService;
 import com.epam.testing.util.CalculateTestResultService;
 import org.apache.logging.log4j.LogManager;

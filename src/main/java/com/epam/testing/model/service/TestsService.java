@@ -2,7 +2,7 @@ package com.epam.testing.model.service;
 
 import com.epam.testing.model.dao.TestDAO;
 import com.epam.testing.model.dao.impl.TestDAOImpl;
-import com.epam.testing.model.entity.Test;
+import com.epam.testing.model.entity.test.Test;
 
 import java.util.List;
 

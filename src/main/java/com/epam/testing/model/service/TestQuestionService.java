@@ -5,7 +5,7 @@ import com.epam.testing.model.dao.impl.QuestionCorrectAnswersDAOImpl;
 import com.epam.testing.model.dao.impl.QuestionDAOImpl;
 import com.epam.testing.model.dao.impl.QuestionAnswerVariantsDAOImpl;
 import com.epam.testing.model.dto.CheckedAnswer;
-import com.epam.testing.model.entity.Question;
+import com.epam.testing.model.entity.question.Question;
 
 import java.util.List;
 import java.util.stream.Collectors;

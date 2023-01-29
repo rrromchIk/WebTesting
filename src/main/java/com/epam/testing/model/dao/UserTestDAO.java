@@ -1,7 +1,7 @@
 package com.epam.testing.model.dao;
 
-import com.epam.testing.model.entity.TestInfo;
-import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.test.TestInfo;
+import com.epam.testing.model.entity.test.TestStatus;
 
 import java.sql.Timestamp;
 import java.util.List;

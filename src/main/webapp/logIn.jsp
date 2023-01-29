@@ -19,9 +19,10 @@
             </div>
         </nav>
 
-        <h1 id="signInText"><fmt:message key="registrationForm.signIn.label"/></h1>
+
 
         <div id="signInFormDIV">
+            <h1 id="signInText"><fmt:message key="registrationForm.signIn.label"/></h1>
             <div id="signInForm">
                 <form method="post" action="${pageContext.request.contextPath}/controller?action=logIn">
 

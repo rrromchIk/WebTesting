@@ -1,6 +1,6 @@
 package com.epam.testing.model.dao;
 
-import com.epam.testing.model.entity.Test;
+import com.epam.testing.model.entity.test.Test;
 import java.util.List;
 
 /** Test DAO interface

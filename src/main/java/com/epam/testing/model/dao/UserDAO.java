@@ -1,6 +1,6 @@
 package com.epam.testing.model.dao;
 
-import com.epam.testing.model.entity.User;
+import com.epam.testing.model.entity.user.User;
 
 import java.io.InputStream;
 
@@ -12,5 +12,6 @@ import java.io.InputStream;
 public interface UserDAO extends DAO<User> {
     User getByLoginAndPassword(String login, String password);
     User getByLogin(String login);
+    User getByEmail(String email);
     boolean updateAvatar(InputStream img, long userId);
 }

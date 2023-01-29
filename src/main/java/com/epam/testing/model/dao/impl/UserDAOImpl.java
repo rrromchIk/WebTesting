@@ -2,7 +2,9 @@ package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.UserDAO;
-import com.epam.testing.model.entity.*;
+import com.epam.testing.model.entity.user.User;
+import com.epam.testing.model.entity.user.UserRole;
+import com.epam.testing.model.entity.user.UserStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -200,7 +202,7 @@ public class UserDAOImpl implements UserDAO {
     /**
      * Select User by login.
      *
-     * @param login and for select.
+     * @param login for select.
      * @return valid entity if it exists. If entity does not exist return null.
      */
     @Override
@@ -209,6 +211,30 @@ public class UserDAOImpl implements UserDAO {
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UserQueries.GET_BY_LOGIN.QUERY)) {
             statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = mapUser(resultSet);
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
+    /**
+     * Select User by email.
+     *
+     * @param email for select.
+     * @return valid entity if it exists. If entity does not exist return null.
+     */
+    @Override
+    public User getByEmail(String email) {
+        User user = null;
+        try (Connection connection = datasource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UserQueries.GET_BY_EMAIL.QUERY)) {
+            statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 user = mapUser(resultSet);
@@ -240,6 +266,7 @@ public class UserDAOImpl implements UserDAO {
         GET_BY_ID("SELECT * FROM user WHERE id = ?"),
         GET_BY_LOGIN_AND_PASSWORD("SELECT * FROM user WHERE login = ? AND password = sha1(?)"),
         GET_BY_LOGIN("SELECT * FROM user WHERE login = ?"),
+        GET_BY_EMAIL("SELECT * FROM user WHERE email = ?"),
         INSERT("INSERT INTO user(login, password, name, surname, email) " +
                 "VALUES(?, sha1(?), ?, ?, ?)"),
         UPDATE("UPDATE user SET name = ?, surname = ?, email = ?, status = ? WHERE login = ?"),

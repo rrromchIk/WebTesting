@@ -1,7 +1,7 @@
 package com.epam.testing.controller.filter;
 
 import com.epam.testing.controller.Path;
-import com.epam.testing.model.entity.TestStatus;
+import com.epam.testing.model.entity.test.TestStatus;
 import com.epam.testing.model.service.UserTestService;
 import com.epam.testing.util.CalculateTestResultService;
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +53,7 @@ public class TestAccessFilter implements Filter {
 
         HttpSession session = httpRequest.getSession();
         if(session == null) {
-            LOGGER.trace("Invalid session");
+            LOGGER.warn("Invalid session");
             return false;
         }
 
@@ -63,7 +63,7 @@ public class TestAccessFilter implements Filter {
         TestStatus testStatus = userTestService.getUserTestStatus(userId, testId);
         boolean result;
         if(testStatus.equals(TestStatus.NOT_STARTED)) {
-            LOGGER.trace("Access invalid. Reason: test status - NOT_STARTED");
+            LOGGER.warn("Access invalid. Reason: test status - NOT_STARTED");
             result = false;
         } else if(testStatus.equals(TestStatus.STARTED)) {
             long remainingTime = userTestService.getRemainingTime(userId, testId);
@@ -73,10 +73,10 @@ public class TestAccessFilter implements Filter {
                 userTestService.addResultAndEndingTime(userId, testId, testResult, Timestamp.valueOf(LocalDateTime.now()));
                 userTestService.updateUserTestStatus(userId, testId, TestStatus.PASSED);
             } else {
-                LOGGER.trace("Access success. Remaining time for test -> {}", remainingTime);
+                LOGGER.warn("Access success. Remaining time for test -> {}", remainingTime);
             }
         } else {
-            LOGGER.trace("Access invalid. Reason: test status - PASSED");
+            LOGGER.warn("Access invalid. Reason: test status - PASSED");
             result = false;
         }
         return result;

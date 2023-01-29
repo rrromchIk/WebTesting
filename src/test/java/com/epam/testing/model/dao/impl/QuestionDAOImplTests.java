@@ -1,8 +1,8 @@
 package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
-import com.epam.testing.model.entity.Question;
-import com.epam.testing.model.entity.QuestionType;
+import com.epam.testing.model.entity.question.Question;
+import com.epam.testing.model.entity.question.QuestionType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

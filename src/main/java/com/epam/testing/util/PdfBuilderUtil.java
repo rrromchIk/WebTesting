@@ -1,9 +1,9 @@
 package com.epam.testing.util;
 
 import com.epam.testing.model.dto.CheckedAnswer;
-import com.epam.testing.model.entity.Question;
-import com.epam.testing.model.entity.TestInfo;
-import com.epam.testing.model.entity.User;
+import com.epam.testing.model.entity.question.Question;
+import com.epam.testing.model.entity.test.TestInfo;
+import com.epam.testing.model.entity.user.User;
 import com.epam.testing.model.service.TestQuestionService;
 import com.epam.testing.model.service.UserService;
 import com.epam.testing.model.service.UserTestService;

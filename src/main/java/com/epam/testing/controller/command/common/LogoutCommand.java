@@ -3,7 +3,7 @@ package com.epam.testing.controller.command.common;
 import com.epam.testing.controller.DispatchInfo;
 import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
-import com.epam.testing.model.entity.UserRole;
+import com.epam.testing.model.entity.user.UserRole;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

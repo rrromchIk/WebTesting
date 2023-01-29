@@ -19,15 +19,16 @@
         </div>
     </nav>
 
-    <h1 id="signInText">Forgot password?</h1>
+    <h1 id="forgotPasswordText">Forgot password?</h1>
 
-    <div id="signInFormDIV">
+    <div id="forgotPasswordDIV">
         <div id="signInForm">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=resetPassword">
                 <div class="form-group">
                     <label class="color">We'll send you an email with a link to reset your password.</label>
                     <input class="form-control" type="text" name="email"  required title=""
-                           placeholder="<fmt:message key="registrationForm.email.placeholder"/>"  maxlength="25"
+                           pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
+                           placeholder="<fmt:message key="registrationForm.email.placeholder"/>"  maxlength="45"
                            oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                            oninput="this.setCustomValidity('')">
                 </div>
@@ -44,7 +45,7 @@
                     <div class="valid-feedback">
                         <h6>Email sent successfully</h6>
                     </div>
-                    <c:remove var="signUpSuccess" scope="session"/>
+                    <c:remove var="success" scope="session"/>
                 </c:if>
             </form>
         </div>

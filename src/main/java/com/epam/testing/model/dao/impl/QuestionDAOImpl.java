@@ -2,8 +2,8 @@ package com.epam.testing.model.dao.impl;
 
 import com.epam.testing.model.connection.DataSource;
 import com.epam.testing.model.dao.QuestionDAO;
-import com.epam.testing.model.entity.Question;
-import com.epam.testing.model.entity.QuestionType;
+import com.epam.testing.model.entity.question.Question;
+import com.epam.testing.model.entity.question.QuestionType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

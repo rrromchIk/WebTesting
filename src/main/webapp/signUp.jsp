@@ -75,8 +75,8 @@
                 </form>
 
             </div>
-            <div id="registrTip">
-                <span id="registrTipText"><fmt:message key="registrationForm.haveAlreadyAnAccount.label"/></span>
+            <div class="registrTip">
+                <span class="registrTipText"><fmt:message key="registrationForm.haveAlreadyAnAccount.label"/></span>
                 <a href="logIn.jsp"><fmt:message key="button.signIn"/></a>
             </div>
         </div>
