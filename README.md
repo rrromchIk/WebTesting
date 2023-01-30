@@ -64,3 +64,11 @@ exactly with the correct answers).
 ```
 - You can see logs in logs/logs.log
 - In order to configure logging, check src/main/resurces/log4j2.xml
+```
+---
+## Running
+1. Clone this project
+2. Create and configure database
+3. Configure Logging
+4. Download a Tomcat v9 
+5. Add a tomcat configuration and Run
