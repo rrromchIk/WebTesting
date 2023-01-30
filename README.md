@@ -1,6 +1,7 @@
 # WebTesting
-
+```
 Task:
+```
 The student registers in the system and after registration can pass one or more Tests.
 There is a list of tests in the system. For the list it is necessary to implement:
   - choice of tests on a particular subject;
