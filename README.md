@@ -28,7 +28,7 @@ of questions that the student answered correctly in relation to the total number
 exactly with the correct answers).
 ```
 ---
-# Database
+# Database MySql
 
 ```
 - You can create on your local machine by running sql/db_create.sql script
