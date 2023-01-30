@@ -55,7 +55,3 @@ exactly with the correct answers).
 ```
 - You can see logs in logs/logs.log
 - In order to configure logging, check src/main/resurces/log4j2.xml
-
-
-
-
