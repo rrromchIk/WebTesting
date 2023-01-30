@@ -27,16 +27,15 @@ of questions that the student answered correctly in relation to the total number
 (it is considered that the student answered the question correctly if his answer coincides 
 exactly with the correct answers).
 ```
-
+---
 # Database
 
 ```
 - You can create on your local machine by running sql/db_create.sql script
 - In order to configure db, you should change src/main/webapp/META-INF/context.xml
-
-- Here you can see db schema:
 ```
----
+` Here you can see db schema:`
+
  ![image](https://user-images.githubusercontent.com/90086332/215562680-89894f8b-b79e-4158-b9af-50a5ddfaf8ea.png)
 
 
