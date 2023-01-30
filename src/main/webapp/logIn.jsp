@@ -65,8 +65,8 @@
                 <a href="signUp.jsp"><fmt:message key="button.signUp"/></a>
             </div>
             <div class="registrTip">
-                <span class="registrTipText">Forgot your password?</span>
-                <a href="forgotPassword.jsp">Reset</a>
+                <span class="registrTipText"><fmt:message key="registrationForm.forgotPassword.label"/></span>
+                <a href="forgotPassword.jsp"><fmt:message key="registrationForm.reset.button"/></a>
             </div>
 
         </div>

@@ -1,6 +1,5 @@
 package com.epam.testing.controller.listener;
 
-import com.epam.testing.util.EmailSenderUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,7 +12,8 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 /**
- * Context listener
+ * Context listener class. Is used for Logging
+ * and I18n initialization
  *
  * @author rom4ik
  */

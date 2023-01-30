@@ -30,9 +30,9 @@
                     <input class="fileInput" type="file" value="Change avatar" name="file" onchange="this.form.submit()" accept="image/*">
                 </form>
                 <figure class="personal-figure">
-                    <av:avatarImage img="${requestScope.userAvatar}"
-                                    styleClass="personal-avatar"
-                                    onClickViewProfile="${false}"/>
+                    <av:avatar-image img="${requestScope.userAvatar}"
+                                     styleClass="personal-avatar"
+                                     onClickViewProfile="${false}"/>
                     <figcaption class="personal-figcaption">
                         <img src="https://raw.githubusercontent.com/ThiagoLuizNunes/angular-boilerplate/master/src/assets/imgs/camera-white.png">
                     </figcaption>
@@ -72,7 +72,7 @@
                            oninput="this.setCustomValidity('')">
                 </div>
                 <a href="${pageContext.request.contextPath}/controller?action=resetAvatar"
-                   class="btn btn-outline-danger">Reset avatar</a>
+                   class="btn btn-outline-danger"><fmt:message key="profile.resetAvatar.button"/></a>
                 <button class="btn btn-primary" id="edit-profile-btn" type="button" ><fmt:message key="button.edit"/></button>
                 <button class="btn btn-primary" id="submit-changes-btn" disabled type="submit" ><fmt:message key="button.submitChanges"/></button>
 

@@ -47,6 +47,10 @@ public class TestAccessFilter implements Filter {
         }
     }
 
+    /**
+     * @param request contains info about required test and related resources
+     * @return true if access permitted, else false
+     */
     private boolean accessAllowed(ServletRequest request) {
         LOGGER.debug("Test access filter");
         HttpServletRequest httpRequest = (HttpServletRequest) request;

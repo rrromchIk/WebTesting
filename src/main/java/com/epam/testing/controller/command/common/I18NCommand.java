@@ -40,6 +40,7 @@ public class I18NCommand implements Command {
     String command = request.getContextPath() + request.getParameter("command");
     command = checkOtherParameters(request, command);
 
+    LOGGER.info("Command to go: {}", command);
     LOGGER.debug("I18NCommand execution finished");
     return new DispatchInfo(true, command);
   }

@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
 /**
- * Encoding filter. Encode request in specified encoding
+ * Encoding filter. Encode request info in specified encoding
  *
  * @author rom4ik
  */
@@ -18,6 +18,7 @@ import java.io.IOException;
 public class EncodingFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(EncodingFilter.class);
     private String encoding;
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         LOGGER.debug("Encoding filter initialization");

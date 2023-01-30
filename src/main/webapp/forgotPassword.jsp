@@ -19,31 +19,31 @@
         </div>
     </nav>
 
-    <h1 id="forgotPasswordText">Forgot password?</h1>
+    <h1 id="forgotPasswordText"><fmt:message key="forgotPasswordForm.label"/></h1>
 
     <div id="forgotPasswordDIV">
         <div id="signInForm">
             <form method="post" action="${pageContext.request.contextPath}/controller?action=resetPassword">
                 <div class="form-group">
-                    <label class="color">We'll send you an email with a link to reset your password.</label>
+                    <label class="color"><fmt:message key="forgotPasswordForm.text"/></label>
                     <input class="form-control" type="text" name="email"  required title=""
                            pattern="[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*"
                            placeholder="<fmt:message key="registrationForm.email.placeholder"/>"  maxlength="45"
                            oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                            oninput="this.setCustomValidity('')">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Send</button>
+                <button type="submit" class="btn btn-primary btn-block"><fmt:message key="forgotPasswordForm.sendEmail.button"/></button>
                 <c:if test="${sessionScope.invalid eq true}">
                     <input type="hidden" class="is-invalid">
                     <div class="invalid-feedback">
-                        <h6 id="invalidFeedbackId">Failed to send email</h6>
+                        <h6 id="invalidFeedbackId"><fmt:message key="forgotPasswordForm.fail.label"/></h6>
                     </div>
                     <c:remove var="invalid" scope="session"/>
                 </c:if>
                 <c:if test="${sessionScope.success eq true}">
                     <input type="hidden" class="is-valid">
                     <div class="valid-feedback">
-                        <h6>Email sent successfully</h6>
+                        <h6><fmt:message key="forgotPasswordForm.success.label"/></h6>
                     </div>
                     <c:remove var="success" scope="session"/>
                 </c:if>
