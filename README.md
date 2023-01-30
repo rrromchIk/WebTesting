@@ -71,8 +71,10 @@ exactly with the correct answers).
 ```
 ---
 ## Running
+```
 1. Clone this project
 2. Create and configure database
 3. Configure Logging
 4. Download a Tomcat v9 
 5. Add a tomcat configuration and Run
+```
