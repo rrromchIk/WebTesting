@@ -2,7 +2,7 @@
 
 ## Project description:
 
-WebApplication based on MVC pattern that provides test-passing for users. For system is implemented:
+WebApplication based on MVC pattern that provides test-passing for users. For system is provided:
   -  user management system:
     - authentication service
     - authorization service
