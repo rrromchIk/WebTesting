@@ -9,7 +9,16 @@ WebApplication based on MVC pattern that provides test-passing for users. For sy
   - support of 2 languages(UA, ENG)
   - pagination mechanizm
   - logging
+  - module testing
+  - documentation
 
+For implementation are used: 
+- Java servlets
+- Jsp-page techology
+- JUnit5
+- Log4j2
+- JavaMail API
+-  JDBC API
 ---
 
 ## Task:
