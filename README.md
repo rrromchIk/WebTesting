@@ -1,14 +1,14 @@
 # WebTesting
-`
-Project description:
-`
+
+##Project description:
+
 ```
 asd
 ```
 ---
-`
-Task:
-`
+
+##Task:
+
 ```
 The student registers in the system and after registration can pass one or more Tests.
 There is a list of tests in the system. For the list it is necessary to implement:
@@ -35,7 +35,7 @@ of questions that the student answered correctly in relation to the total number
 exactly with the correct answers).
 ```
 ---
-# Database MySql
+## Database MySql
 
 ```
 - You can create on your local machine by running sql/db_create.sql script
