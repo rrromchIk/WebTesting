@@ -19,6 +19,7 @@ WebApplication based on MVC pattern that provides test-passing for users. For sy
 Java servlet API, Servlet Filters and Event Listeners, Jsp(JavaServer pages), 
 JUnit5, Log4j2, JavaMail API, JDBC API, iText(for pdf building)
 ```
+####Design Patterns user: Command, Builder, Singleton
 ---
 
 ## Task:
