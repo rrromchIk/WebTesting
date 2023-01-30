@@ -15,7 +15,7 @@ WebApplication based on MVC pattern that provides test-passing for users. For sy
   - documentation
 
 ### For implementation are used: 
-  Java servlet API, Servlet Filters and Event Listeners, Jsp(JavaServer pages), JUnit5, Log4j2, JavaMail API, JDBC API, iText(for pdf building)
+Java servlet API, Servlet Filters and Event Listeners, Jsp(JavaServer pages), JUnit5, Log4j2, JavaMail API, JDBC API, iText(for pdf building)
 ---
 
 ## Task:
