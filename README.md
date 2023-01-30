@@ -1,6 +1,7 @@
 # WebTesting
-```
+`
 Task:
+`
 ```
 The student registers in the system and after registration can pass one or more Tests.
 There is a list of tests in the system. For the list it is necessary to implement:
@@ -25,9 +26,10 @@ A question can have one or more correct answers. The result of the test is the p
 of questions that the student answered correctly in relation to the total number of questions
 (it is considered that the student answered the question correctly if his answer coincides 
 exactly with the correct answers).
-
-
+```
+`
 # Database
+`
 
 - You can create on your local machine by running sql/db_create.sql script
 - In order to configure db, you should change src/main/webapp/META-INF/context.xml
