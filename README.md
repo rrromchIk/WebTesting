@@ -44,7 +44,7 @@ exactly with the correct answers).
 
 ```
 - You can create on your local machine by running sql/db_create.sql script
-- In order to configure db, you should change ***src/main/webapp/META-INF/context.xml***
+- In order to configure db, you should change src/main/webapp/META-INF/context.xml
 ```
 ` Here you can see db schema:`
 
