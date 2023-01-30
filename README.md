@@ -3,7 +3,14 @@
 ## Project description:
 
 ```
-asd
+WebApplication based on MVC pattern that provides test-passing for users. For system is implemented:
+- authentication 
+- authorization
+- access mediation
+- support of 2 languages(UA, ENG)
+- pagination mechanizm
+- 
+- 
 ```
 ---
 
