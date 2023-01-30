@@ -3,8 +3,10 @@
 ## Project description:
 
 WebApplication based on MVC pattern that provides test-passing for users. For system is implemented:
-  - authentication 
-  - authorization
+  -  user management system:
+    - authentication service
+    - authorization service
+    - forgot password service
   - access mediation
   - support of 2 languages(UA, ENG)
   - pagination mechanizm
@@ -12,13 +14,7 @@ WebApplication based on MVC pattern that provides test-passing for users. For sy
   - module testing
   - documentation
 
-For implementation are used: 
-- Java servlets
-- Jsp-page techology
-- JUnit5
-- Log4j2
-- JavaMail API
--  JDBC API
+For implementation are used: Java servlet API, Servlet Filters and Event Listeners, Jsp(JavaServer pages), JUnit5, Log4j2, JavaMail API, JDBC API, iText(for pdf building)
 ---
 
 ## Task:
