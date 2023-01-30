@@ -4,9 +4,9 @@
 
 WebApplication based on MVC pattern that provides test-passing for users. For system is provided:
   -  user management system:
-    -- authentication service
-    -- authorization service
-    -- forgot password service
+      - authentication service
+      - authorization service
+      - forgot password service
   - access mediation
   - support of 2 languages(UA, ENG)
   - pagination mechanizm
