@@ -9,6 +9,7 @@ WebApplication based on MVC pattern that provides test-passing for users. For sy
   - access mediation
   - support of 2 languages(UA, ENG)
   - pagination mechanizm
+  - logging
 ```
 ---
 
