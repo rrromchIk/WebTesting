@@ -15,7 +15,7 @@ public interface Command {
   /**
    * Execution method for command.
    *
-   * @return Address to go once the command is executed and way to go
+   * @return Address to go once the command is executed and way to go(froward/redirect)
    */
   DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp);
 }

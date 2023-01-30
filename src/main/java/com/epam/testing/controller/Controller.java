@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Main Controller servlet
+ * Main Controller servlet. Handles all requests.
  *
  * @author rom4ik
  */

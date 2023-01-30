@@ -1,7 +1,7 @@
 package com.epam.testing.controller;
 
 /**
- * Class represents all jsp-pages and commands ina app.
+ * Class represents all jsp-pages and commands in webapp
  *
  * @author rom4ik
  */
@@ -20,7 +20,7 @@ public final class Path {
   public static final String PAGE_ADD_QUESTIONS = "/WEB-INF/jsp/admin/add-questions.jsp";
   public static final String PAGE_TEST_INFO = "/WEB-INF/jsp/admin/test-info.jsp";
   public static final String PAGE_FORGOT_PASSWORD = "forgotPassword.jsp";
-  public static final String PAGE_CHANGE_PASSWORD = "changePassword.jsp";
+  public static final String PAGE_CHANGE_PASSWORD = "resetPassword.jsp";
 
   public static final String COMMAND_LOGIN = "/controller?action=logIn";
   public static final String COMMAND_SIGNUP = "/controller?action=signUp";

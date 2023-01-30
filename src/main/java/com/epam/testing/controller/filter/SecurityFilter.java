@@ -22,7 +22,7 @@ import java.util.*;
 @WebFilter(filterName = "SecurityFilter",
         urlPatterns = "/controller",
         initParams = {
-                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n resetPassword"),
+                @WebInitParam(name = "guest", value = "logIn signUp logOut i18n resetPassword updatePassword"),
                 @WebInitParam(name = "client", value = "userMain profile editProfile startTest passTest " +
                         "submitAnswers endTest testResult uploadAvatar resetAvatar"),
                 @WebInitParam(name = "admin", value = "adminMain userInfo editUser deleteTest addTest " +
@@ -63,6 +63,10 @@ public class SecurityFilter implements Filter {
         }
     }
 
+    /**
+     * @param request contains info about required page and related resources
+     * @return true if access permitted, else false
+     */
     private boolean accessAllowed(ServletRequest request) {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String command = request.getParameter("action");
@@ -105,6 +109,10 @@ public class SecurityFilter implements Filter {
         LOGGER.debug("Security filter destroyed");
     }
 
+    /**
+     * @param param represents Filter initParam that need to be parsed
+     * @return parsed List of strings
+     */
     private List<String> asList(String param) {
         List<String> list = new ArrayList<>();
         StringTokenizer st = new StringTokenizer(param);
