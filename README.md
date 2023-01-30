@@ -35,7 +35,8 @@ exactly with the correct answers).
 - In order to configure db, you should change src/main/webapp/META-INF/context.xml
 
 - Here you can see db schema:
+```
 ---
   >  ![image](https://user-images.githubusercontent.com/90086332/215562680-89894f8b-b79e-4158-b9af-50a5ddfaf8ea.png)
 ---
-```
+
