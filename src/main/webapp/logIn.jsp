@@ -25,13 +25,13 @@
             <h1 id="signInText"><fmt:message key="registrationForm.signIn.label"/></h1>
             <div id="signInForm">
                 <form method="post" action="${pageContext.request.contextPath}/controller?action=logIn">
-
-                    <c:if test="${sessionScope.signUpSuccess eq true}">
+                    <c:if test="${sessionScope.success eq true}">
                         <input type="hidden" class="is-valid">
                         <div class="valid-feedback">
-                            <h6><fmt:message key="validation.signUpSuccess"/></h6>
+                            <h6><fmt:message key="${sessionScope.msg}"/></h6>
                         </div>
-                        <c:remove var="signUpSuccess" scope="session"/>
+                        <c:remove var="success" scope="session"/>
+                        <c:remove var="msg" scope="session"/>
                     </c:if>
                     <c:if test="${sessionScope.invalid eq true}">
                         <input type="hidden" class="is-invalid">
