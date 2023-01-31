@@ -10,4 +10,8 @@ public class UserTokenService {
     public boolean addUserToken(UserToken userToken) {
        return dao.create(userToken);
     }
+
+    public UserToken getUserToken(String token) {
+        return dao.read(token);
+    }
 }

@@ -57,6 +57,7 @@ public class ResetPasswordCommand implements Command {
                 session.setAttribute("success", true);
             } else {
                 session.setAttribute("invalid", true);
+                session.setAttribute("msg", "forgotPasswordForm.fail.label");
             }
         }
 
@@ -65,7 +66,7 @@ public class ResetPasswordCommand implements Command {
     }
 
     private String createMessage(HttpServletRequest request, String token) {
-        String url = String.format("http://localhost:8080/%s/%s?token=%s",
+        String url = String.format("http://localhost:8080%s/%s?token=%s",
                 request.getContextPath(),
                 Path.PAGE_CHANGE_PASSWORD,
                 token);

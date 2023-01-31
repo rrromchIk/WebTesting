@@ -157,10 +157,11 @@ public class UserDAOImpl implements UserDAO {
         try (Connection connection = datasource.getConnection();
              PreparedStatement statement = connection.prepareStatement(UserQueries.UPDATE.QUERY)) {
             statement.setString(1, user.getName());
-            statement.setString(2, user.getSurname());
-            statement.setString(3, user.getEmail());
-            statement.setString(4, user.getStatus().getName());
-            statement.setString(5, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getSurname());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getStatus().getName());
+            statement.setString(6, user.getLogin());
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.error(e.getMessage());
@@ -269,7 +270,7 @@ public class UserDAOImpl implements UserDAO {
         GET_BY_EMAIL("SELECT * FROM user WHERE email = ?"),
         INSERT("INSERT INTO user(login, password, name, surname, email) " +
                 "VALUES(?, sha1(?), ?, ?, ?)"),
-        UPDATE("UPDATE user SET name = ?, surname = ?, email = ?, status = ? WHERE login = ?"),
+        UPDATE("UPDATE user SET name = ?, password = sha1(?), surname = ?, email = ?, status = ? WHERE login = ?"),
         UPDATE_AVATAR("UPDATE user SET avatar = ? WHERE id = ?"),
         DELETE("DELETE FROM user WHERE login = ? AND password = ?"),
 

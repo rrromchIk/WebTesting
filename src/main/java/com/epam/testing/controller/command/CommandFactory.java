@@ -44,6 +44,7 @@ public class CommandFactory {
     commands.put("signup", new SignUpCommand());
     commands.put("i18n", new I18NCommand());
     commands.put("resetpassword", new ResetPasswordCommand());
+    commands.put("updatepassword", new UpdatePasswordCommand());
 
     commands.put("adminmain", new AdminMainCommand());
     commands.put("userinfo", new UserInfoCommand());

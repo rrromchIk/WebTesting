@@ -36,9 +36,10 @@
                 <c:if test="${sessionScope.invalid eq true}">
                     <input type="hidden" class="is-invalid">
                     <div class="invalid-feedback">
-                        <h6 id="invalidFeedbackId"><fmt:message key="forgotPasswordForm.fail.label"/></h6>
+                        <h6 id="invalidFeedbackId"><fmt:message key="${sessionScope.msg}"/></h6>
                     </div>
                     <c:remove var="invalid" scope="session"/>
+                    <c:remove var="msg" scope="session"/>
                 </c:if>
                 <c:if test="${sessionScope.success eq true}">
                     <input type="hidden" class="is-valid">
@@ -47,6 +48,7 @@
                     </div>
                     <c:remove var="success" scope="session"/>
                 </c:if>
+
             </form>
         </div>
 

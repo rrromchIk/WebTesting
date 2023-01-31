@@ -32,7 +32,8 @@ public class SignUpCommand implements Command {
 
         if(userService.addUser(user)) {
             LOGGER.info("Sign up success");
-            session.setAttribute("signUpSuccess", true);
+            session.setAttribute("success", true);
+            session.setAttribute("msg", "validation.signUpSuccess");
             page += Path.PAGE_LOGIN;
         } else {
             LOGGER.info("Sign up fault: login already in use");
