@@ -3,6 +3,7 @@ package com.epam.testing.model.entity.test;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * Test info entity for user_test table
@@ -16,6 +17,7 @@ public class TestInfo {
     private final String testName;
     private final String testSubject;
     private final TestDifficulty testDifficulty;
+    private final TestStatus testStatus;
     private Timestamp startingTime;
     private Timestamp endingTime;
     private Float result;
@@ -26,9 +28,14 @@ public class TestInfo {
         this.testName = builder.testName;
         this.testSubject = builder.testSubject;
         this.testDifficulty = builder.testDifficulty;
+        this.testStatus = builder.testStatus;
         this.startingTime = builder.startingTime;
         this.endingTime = builder.endingTime;
         this.result = builder.result;
+    }
+
+    public TestStatus getTestStatus() {
+        return testStatus;
     }
 
     public Long getUserId() {
@@ -62,21 +69,18 @@ public class TestInfo {
 
     public String getEndingTime() {
         LocalDateTime time;
-        String result;
+        String endingTimeStr;
         try {
             time = endingTime.toLocalDateTime();
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm-dd.MM.yyyy");
-            result = dateTimeFormatter.format(time);
+            endingTimeStr = dateTimeFormatter.format(time);
         } catch (RuntimeException e) {
-            result = "not ended";
+            endingTimeStr = "not ended";
         }
 
-        return result;
+        return endingTimeStr;
     }
 
-    public void setEndingTime(Timestamp endingTime) {
-        this.endingTime = endingTime;
-    }
 
     public Float getResult() {
         return result;
@@ -96,6 +100,21 @@ public class TestInfo {
                 ", result = " + result + "}";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TestInfo testInfo = (TestInfo) o;
+        return Objects.equals(userId, testInfo.userId) &&
+                Objects.equals(testId, testInfo.testId) &&
+                Objects.equals(testName, testInfo.testName) &&
+                Objects.equals(testSubject, testInfo.testSubject) &&
+                Objects.equals(testDifficulty.getValue(), testInfo.testDifficulty.getValue()) &&
+                Objects.equals(startingTime, testInfo.startingTime) &&
+                Objects.equals(endingTime, testInfo.endingTime) &&
+                Objects.equals(result, testInfo.result);
+    }
+
     /**
      * Builder.
      */
@@ -105,6 +124,7 @@ public class TestInfo {
         private String testName;
         private String testSubject;
         private TestDifficulty testDifficulty;
+        private TestStatus testStatus;
         private Timestamp startingTime;
         private Timestamp endingTime;
         private Float result;
@@ -148,6 +168,11 @@ public class TestInfo {
             this.testDifficulty = testDifficulty;
             return this;
         }
+        public TestInfoBuilder testStatus(TestStatus testStatus) {
+            this.testStatus = testStatus;
+            return this;
+        }
+
 
         public TestInfo build() {
             return new TestInfo(this);

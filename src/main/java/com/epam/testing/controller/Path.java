@@ -5,7 +5,6 @@ package com.epam.testing.controller;
  *
  * @author rom4ik
  */
-
 public final class Path {
   public static final String PAGE_INDEX = "/index.jsp";
   public static final String PAGE_LOGIN = "/logIn.jsp";

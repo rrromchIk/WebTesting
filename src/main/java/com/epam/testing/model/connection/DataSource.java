@@ -35,6 +35,9 @@ public class DataSource {
         LOGGER.debug("Datasource initialization finished");
     }
 
+    /**
+     * Don't let anyone instantiate this class.
+     */
     private DataSource() {}
 
     /**

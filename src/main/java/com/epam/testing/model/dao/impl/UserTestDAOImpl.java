@@ -18,8 +18,16 @@ import java.util.List;
  */
 
 public class UserTestDAOImpl implements UserTestDAO {
-    private final DataSource datasource = DataSource.getInstance();
     private static final Logger LOGGER = LogManager.getLogger(UserTestDAOImpl.class);
+    private final DataSource datasource;
+
+    public UserTestDAOImpl() {
+        datasource = DataSource.getInstance();
+    }
+
+    public UserTestDAOImpl(DataSource datasource) {
+        this.datasource = datasource;
+    }
 
     public int getAmountOfRecords(long userId) {
         int amount = 0;

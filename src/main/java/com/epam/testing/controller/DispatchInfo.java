@@ -1,11 +1,11 @@
 package com.epam.testing.controller;
+
 /**
  * Dispatch info class. Provides possibility in different situations
  * to make forward or redirect
  *
  * @author rom4ik
  */
-
 public class DispatchInfo {
     private boolean redirect;
     private String page;
