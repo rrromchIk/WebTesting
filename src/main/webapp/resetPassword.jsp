@@ -25,19 +25,24 @@
                       action="${pageContext.request.contextPath}/controller?action=updatePassword&token=${param.token}">
                     <div class="form-group">
                         <label class="color"><fmt:message key="resetPassword.newPassword.label"/></label>
-                        <input class="form-control" type="password" name="newPassword" required
+                        <input id="newPassword" class="form-control" type="password" name="newPassword" required
                                placeholder="<fmt:message key="registrationForm.password.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
                     </div>
                     <div class="form-group">
                         <label class="color"><fmt:message key="resetPassword.confirmPassword.label"/></label>
-                        <input class="form-control" type="password" name="confirmPassword" required
+                        <input id="confirmPassword" class="form-control" type="password" required
                                placeholder="<fmt:message key="registrationForm.password.placeholder"/>" maxlength="25"
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.reset.button"/></button>
+                    <input type="hidden" class="is-invalid">
+                    <div hidden id="feedBack" class="invalid-feedback">
+                        <h6>Passwords not equals</h6>
+                    </div>
+
+                    <button disabled id="resetButton" type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.reset.button"/></button>
                     <c:if test="${sessionScope.invalid eq true}">
                         <input type="hidden" class="is-invalid">
                         <div class="invalid-feedback">
@@ -47,10 +52,10 @@
                     </c:if>
                 </form>
             </div>
-
-
         </div>
+
         <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
+        <script src="${pageContext.request.contextPath}/js/reset-password.js"></script>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
 </html>
