@@ -98,7 +98,7 @@ class UserDAOImplTests {
         assertEquals(users.get(0), userExample);
 
         when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
-        assertEquals(0, userDAO.getAmountOfRecords());
+        assertTrue(userDAO.getAll(LIMIT, OFFSET).isEmpty());
     }
 
     @Test

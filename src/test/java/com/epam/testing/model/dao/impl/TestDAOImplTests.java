@@ -99,13 +99,13 @@ class TestDAOImplTests {
 
         when(mockResultSet.next()).thenReturn(Boolean.TRUE, Boolean.FALSE);
         when(mockResultSet.getInt(1)).thenReturn(5678);
-        assertEquals(5678, testDAO.getAmountOfRecords());
+        assertEquals(5678, testDAO.getAmountOnParticularSubject(testExample.getSubject()));
 
         when(mockResultSet.next()).thenReturn(Boolean.FALSE);
-        assertEquals(0, testDAO.getAmountOfRecords());
+        assertEquals(0, testDAO.getAmountOnParticularSubject(testExample.getSubject()));
 
         when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
-        assertEquals(0, testDAO.getAmountOfRecords());
+        assertEquals(0, testDAO.getAmountOnParticularSubject(testExample.getSubject()));
     }
 
     @Test
