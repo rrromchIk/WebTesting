@@ -10,6 +10,12 @@ public class DispatchInfo {
     private boolean redirect;
     private String page;
 
+    /**
+     * Constructor for creating instance
+     *
+     * @param redirect initializes redirect state
+     * @param page initializes redirect state
+     */
     public DispatchInfo(boolean redirect, String page) {
         this.redirect = redirect;
         this.page = page;

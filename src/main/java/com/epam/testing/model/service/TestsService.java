@@ -7,7 +7,15 @@ import com.epam.testing.model.entity.test.Test;
 import java.util.List;
 
 public class TestsService {
-    private final TestDAO dao = new TestDAOImpl();
+    private final TestDAO dao;
+
+    public TestsService() {
+        this.dao = new TestDAOImpl();
+    }
+
+    public TestsService(TestDAO dao) {
+        this.dao = dao;
+    }
 
     public Test getTestById(long testId) {
         return dao.getById(testId);

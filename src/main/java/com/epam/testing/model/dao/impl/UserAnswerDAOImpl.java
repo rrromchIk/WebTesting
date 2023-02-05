@@ -18,11 +18,12 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserAnswerDAOImpl.class);
     private final DataSource datasource = DataSource.getInstance();
 
-    /**Getting User's answers
+    /**
+     * Select User's answers
      *
      * @param userId for identification
      * @param questionId for identification
-     * @return valid entity if it exists, else empty list.
+     * @return not empty list if answers exist, else empty list.
      */
     @Override
     public List<String> getUserAnswers(long userId, long questionId) {
@@ -43,6 +44,14 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
         return userAnswers;
     }
 
+    /**
+     * Create User answer in database.
+     *
+     * @param userId for user identification.
+     * @param questionId for question identification.
+     * @param text represents answer content.
+     * @return true create success, else false.
+     */
     @Override
     public boolean create(long userId, long questionId, String text) {
         boolean result = false;
@@ -59,6 +68,13 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
         return result;
     }
 
+    /**
+     * Delete User answer by userId and questionId
+     *
+     * @param userId and
+     * @param questionId for answer identification
+     * @return true if answer was deleted. False if not.
+     */
     @Override
     public boolean delete(long userId, long questionId) {
         boolean result = false;
@@ -74,6 +90,9 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
         return result;
     }
 
+    /**
+     * Contains all used queries for user_answer table
+     */
     enum UserAnswerQueries {
         GET("SELECT * FROM user_answer WHERE user_id = ? AND question_id = ?"),
         CREATE("INSERT INTO user_answer(user_id, question_id, text) VALUES(?, ?, ?)"),
@@ -85,6 +104,9 @@ public class UserAnswerDAOImpl implements UserAnswerDAO {
         }
     }
 
+    /**
+     * Contains all fields in user_answer table
+     */
     enum UserAnswerFields {
         USER_ID("user_id"),
         QUESTION_ID("question_id"),

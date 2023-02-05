@@ -11,10 +11,27 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestQuestionService {
-    private final QuestionDAO questionDAO = new QuestionDAOImpl();
-    private final QuestionAnswerVariantsDAOImpl answerVariantDAO = new QuestionAnswerVariantsDAOImpl();
-    private final QuestionCorrectAnswersDAOImpl correctAnswerDAO = new QuestionCorrectAnswersDAOImpl();
-    private final UserAnswerService userAnswerService = new UserAnswerService();
+    private final QuestionDAO questionDAO;
+    private final QuestionAnswerVariantsDAOImpl answerVariantDAO;
+    private final QuestionCorrectAnswersDAOImpl correctAnswerDAO;
+    private final UserAnswerService userAnswerService;
+
+    public TestQuestionService() {
+        this.questionDAO = new QuestionDAOImpl();
+        this.answerVariantDAO = new QuestionAnswerVariantsDAOImpl();
+        this.correctAnswerDAO = new QuestionCorrectAnswersDAOImpl();
+        this.userAnswerService = new UserAnswerService();
+    }
+
+    public TestQuestionService(QuestionDAO questionDAO,
+                               QuestionAnswerVariantsDAOImpl answerVariantDAO,
+                               QuestionCorrectAnswersDAOImpl correctAnswerDAO,
+                               UserAnswerService userAnswerService) {
+        this.questionDAO = questionDAO;
+        this.answerVariantDAO = answerVariantDAO;
+        this.correctAnswerDAO = correctAnswerDAO;
+        this.userAnswerService = userAnswerService;
+    }
 
     public int getAmountOfAddedQuestions(long testId) {
         return questionDAO.getAmountOfRecordsByTestId(testId);

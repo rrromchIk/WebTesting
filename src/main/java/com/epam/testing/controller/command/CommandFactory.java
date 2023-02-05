@@ -26,6 +26,9 @@ public class CommandFactory {
   private static CommandFactory factory = new CommandFactory();
   private static final Map<String, Command> commands = new HashMap<>();
 
+  /**
+   * Don't let anyone instantiate this class.
+   */
   private CommandFactory() {}
 
   /**
@@ -72,6 +75,10 @@ public class CommandFactory {
     commands.put("resetavatar", new ResetAvatarCommand());
   }
 
+  /**
+   * @param request that contains command
+   * @return Command interface implementation from commands map
+   */
   public Command getCommand(HttpServletRequest request) {
     String action = request.getParameter("action");
     return commands.get(action.toLowerCase());

@@ -5,7 +5,15 @@ import com.epam.testing.model.dao.impl.UserTokenDAOImpl;
 import com.epam.testing.model.entity.user.UserToken;
 
 public class UserTokenService {
-    private final UserTokenDAO dao = new UserTokenDAOImpl();
+    private final UserTokenDAO dao;
+
+    public UserTokenService() {
+        this.dao = new UserTokenDAOImpl();
+    }
+
+    public UserTokenService(UserTokenDAO dao) {
+        this.dao = dao;
+    }
 
     public boolean addUserToken(UserToken userToken) {
        return dao.create(userToken);

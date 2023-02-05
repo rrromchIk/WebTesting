@@ -50,21 +50,49 @@ public class TestDAOImpl implements TestDAO {
         return test;
     }
 
+    /**
+     * Select all Tests sorted by number of questions.
+     *
+     * @param limit and
+     * @param offset for pagination implementation.
+     * @return not empty List of Test if exists. If not empty List.
+     */
     @Override
     public List<Test> getAllSortedByNumberOfQuestions(int limit, int offset) {
         return getMany(TestQueries.GET_ALL_SORTED_BY_NUMBER_OF_QUESTIONS.QUERY, limit, offset);
     }
 
+    /**
+     * Select all Tests sorted by name.
+     *
+     * @param limit and
+     * @param offset for pagination implementation.
+     * @return not empty List of Test if exists. If not empty List.
+     */
     @Override
     public List<Test> getAllSortedByName(int limit, int offset) {
         return getMany(TestQueries.GET_ALL_SORTED_BY_NAME.QUERY, limit, offset);
     }
 
+    /**
+     * Select all Tests sorted by difficulty.
+     *
+     * @param limit and
+     * @param offset for pagination implementation.
+     * @return not empty List of Test if exists. If not empty List.
+     */
     @Override
     public List<Test> getAllSortedByDifficulty(int limit, int offset) {
         return getMany(TestQueries.GET_ALL_SORTED_BY_DIFFICULTY.QUERY, limit, offset);
     }
 
+    /**
+     * Select all Tests on particular subject.
+     *
+     * @param limit and
+     * @param offset for pagination implementation.
+     * @return not empty List of Test if exists. If not empty List.
+     */
     @Override
     public List<Test> getAllOnParticularSubject(String subject, int limit, int offset) {
         List<Test> testArr = new ArrayList<>();
@@ -85,6 +113,11 @@ public class TestDAOImpl implements TestDAO {
         return testArr;
     }
 
+    /**
+     * Select all subjects.
+     *
+     * @return not empty List of subjects if exists. If not empty List.
+     */
     @Override
     public List<String> getAllTestsSubjects() {
         List<String> subjects = new ArrayList<>();
@@ -101,6 +134,11 @@ public class TestDAOImpl implements TestDAO {
         return subjects;
     }
 
+    /**
+     * Select amount of records on particular subject.
+     *
+     * @return number of records
+     */
     @Override
     public int getAmountOnParticularSubject(String subject) {
         int amount = 0;
@@ -119,6 +157,11 @@ public class TestDAOImpl implements TestDAO {
         return amount;
     }
 
+    /**
+     * Select amount of records.
+     *
+     * @return number of records
+     */
     @Override
     public int getAmountOfRecords() {
         int amount = 0;
@@ -281,6 +324,9 @@ public class TestDAOImpl implements TestDAO {
     }
 
 
+    /**
+     * Contains all used queries for test table
+     */
     enum TestQueries{
         INSERT("INSERT INTO test(name, subject, difficulty, duration, number_of_questions) VALUES(?, ?, ?, ?, ?)"),
         UPDATE("UPDATE test SET name = ?, subject = ?, difficulty = ?, duration = ?, number_of_questions = ?" +
@@ -305,6 +351,9 @@ public class TestDAOImpl implements TestDAO {
         }
     }
 
+    /**
+     * Contains all fields in test table
+     */
     enum TestFields {
         ID("id"),
         NAME("name"),

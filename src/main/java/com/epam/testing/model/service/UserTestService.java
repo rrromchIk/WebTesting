@@ -12,8 +12,18 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class UserTestService {
-    private final UserTestDAO userTestDao = new UserTestDAOImpl();
-    private final TestsService testsService = new TestsService();
+    private final UserTestDAO userTestDao;
+    private final TestsService testsService;
+
+    public UserTestService() {
+        this.userTestDao = new UserTestDAOImpl();
+        this.testsService = new TestsService();
+    }
+
+    public UserTestService(UserTestDAO userTestDao, TestsService testsService) {
+        this.userTestDao = userTestDao;
+        this.testsService = testsService;
+    }
 
     public int getAmountOfUserPassedTests(long userId) {
         return userTestDao.getAmountOfRecords(userId);

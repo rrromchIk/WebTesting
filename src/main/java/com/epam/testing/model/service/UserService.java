@@ -8,7 +8,15 @@ import java.io.InputStream;
 import java.util.List;
 
 public class UserService {
-    private static final UserDAOImpl dao = new UserDAOImpl();
+    private final UserDAOImpl dao;
+
+    public UserService() {
+        this.dao = new UserDAOImpl();
+    }
+
+    public UserService(UserDAOImpl dao) {
+        this.dao = dao;
+    }
 
     public boolean userIsBlocked(String login) {
         User user = dao.getByLogin(login);

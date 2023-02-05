@@ -52,6 +52,11 @@ public class UserDAOImpl implements UserDAO {
         return users;
     }
 
+    /**
+     * Select amount of records.
+     *
+     * @return number of records
+     */
     @Override
     public int getAmountOfRecords() {
         int amount = 0;
@@ -247,6 +252,13 @@ public class UserDAOImpl implements UserDAO {
         return user;
     }
 
+    /**
+     * Update User's avatar by id.
+     *
+     * @param img new user's avatar.
+     * @param userId for User identification
+     * @return True if success. False if fails.
+     */
     @Override
     public boolean updateAvatar(InputStream img, long userId) {
         boolean result = false;
@@ -262,6 +274,9 @@ public class UserDAOImpl implements UserDAO {
         return result;
     }
 
+    /**
+     * Contains all used queries for user table
+     */
     enum UserQueries {
         GET_ALL("SELECT * FROM user LIMIT ? OFFSET ?"),
         GET_BY_ID("SELECT * FROM user WHERE id = ?"),
@@ -282,6 +297,9 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+    /**
+     * Contains all fields in user table
+     */
     enum UserFields {
         ID("id"),
         LOGIN("login"),

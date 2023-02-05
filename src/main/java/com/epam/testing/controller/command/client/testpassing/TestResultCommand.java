@@ -19,6 +19,7 @@ public class TestResultCommand implements Command {
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
         LOGGER.debug("TestResultCommand execution started");
         String command = Path.COMMAND_USER_MAIN + "?tab=passedTests";
+
         long testId = Long.parseLong(req.getParameter("testId"));
         long userId = (long)req.getSession().getAttribute("userId");
 
@@ -26,6 +27,7 @@ public class TestResultCommand implements Command {
         if(testStatus.equals(TestStatus.PASSED)) {
             PdfBuilderUtil.createResultPdf(resp, userId, testId);
         } else {
+            req.setAttribute("commandToGoBack", command);
             command = Path.PAGE_ERROR_PAGE;
         }
 

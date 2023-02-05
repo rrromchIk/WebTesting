@@ -23,6 +23,11 @@ public class QuestionDAOImpl implements QuestionDAO {
         this.datasource = datasource;
     }
 
+    /**
+     * Select amount of records by test id.
+     *
+     * @return number of records
+     */
     @Override
     public int getAmountOfRecordsByTestId(long testId) {
         int amount = 0;
@@ -63,11 +68,11 @@ public class QuestionDAOImpl implements QuestionDAO {
         return questionArr;
     }
 
-    /** Map Question from ResultSet
+    /** Map Question from ResultSet.
      *
-     * @param resultSet for getting info
-     * @return entity Question from database
-     * @throws SQLException if something went wrong
+     * @param resultSet for getting info.
+     * @return entity Question from database.
+     * @throws SQLException if something went wrong.
      */
     public static Question mapQuestion(ResultSet resultSet) throws SQLException{
         Question question = new Question.QuestionBuilder()
@@ -84,8 +89,8 @@ public class QuestionDAOImpl implements QuestionDAO {
     /**
      * Create Question in database.
      *
-     * @param testId for identification
-     * @param question fot text and type to add
+     * @param testId for identification.
+     * @param question fot text and type to add.
      * @return false if Question already exist. If creating success true.
      */
     public long create(long testId, Question question) {
@@ -112,7 +117,7 @@ public class QuestionDAOImpl implements QuestionDAO {
     }
 
     /**
-     * Delete Question by name
+     * Delete Question by name.
      *
      * @param id for delete.
      * @return true if Question was deleted. False if Question not exist.
@@ -130,6 +135,9 @@ public class QuestionDAOImpl implements QuestionDAO {
         return result;
     }
 
+    /**
+     * Contains all used queries for question table
+     */
     enum QuestionQueries {
         INSERT("INSERT INTO question(test_id, text, type, max_score) values(?, ?, ?, ?)"),
         UPDATE("UPDATE question SET text = ? WHERE id = ?"),
@@ -144,6 +152,9 @@ public class QuestionDAOImpl implements QuestionDAO {
         }
     }
 
+    /**
+     * Contains all fields in question table
+     */
     enum QuestionFields {
         ID("id"),
         TEST_ID("test_id"),
