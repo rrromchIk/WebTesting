@@ -19,7 +19,7 @@ public class User extends Entity {
     private String email;
     private final UserRole userRole;
     private UserStatus userStatus;
-    private Blob avatar;
+    private final Blob avatar;
 
     private User(UserBuilder builder) {
         this.login = builder.login;
@@ -109,6 +109,10 @@ public class User extends Entity {
                 Objects.equals(userStatus.getName(), user.userStatus.getName());
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, password, name, surname, email, userRole, userStatus);
+    }
 
     /**
      * Builder.

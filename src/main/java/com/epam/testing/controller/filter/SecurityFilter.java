@@ -33,6 +33,7 @@ public class SecurityFilter implements Filter {
 
     private static final UserService userService = new UserService();
     private static final Map<UserRole, List<String>> accessMap = new HashMap<>();
+    private static final String ERROR_MESSAGE = "errorMessage";
 
     @Override
     public void init(FilterConfig config) {
@@ -75,7 +76,7 @@ public class SecurityFilter implements Filter {
         if(session == null) {
             String errorMessage = "Invalid session";
             LOGGER.warn("Access invalid -> {}", errorMessage);
-            request.setAttribute("errorMessage", errorMessage);
+            request.setAttribute(ERROR_MESSAGE, errorMessage);
             return false;
         }
 
@@ -92,14 +93,14 @@ public class SecurityFilter implements Filter {
 
         if(userLogin != null && userService.userIsBlocked(userLogin)) {
             LOGGER.warn("Access invalid -> User is blocked");
-            request.setAttribute("errorMessage","Seems that you are blocked(" );
+            request.setAttribute(ERROR_MESSAGE,"Seems that you are blocked(" );
             return false;
         }
 
         boolean result = accessMap.get(userRole).contains(command);
         if(!result) {
             LOGGER.warn("Access invalid -> Permission fails");
-            request.setAttribute("errorMessage", "You don't have permission to access the requested resource");
+            request.setAttribute(ERROR_MESSAGE, "You don't have permission to access the requested resource");
         }
         return result;
     }

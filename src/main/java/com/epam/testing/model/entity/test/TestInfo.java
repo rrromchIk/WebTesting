@@ -18,8 +18,8 @@ public class TestInfo {
     private final String testSubject;
     private final TestDifficulty testDifficulty;
     private final TestStatus testStatus;
-    private Timestamp startingTime;
-    private Timestamp endingTime;
+    private final Timestamp startingTime;
+    private final Timestamp endingTime;
     private Float result;
 
     private TestInfo(TestInfoBuilder builder) {
@@ -61,10 +61,6 @@ public class TestInfo {
     public String getStartingTime() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm-dd.MM.yyyy");
         return dateTimeFormatter.format(startingTime.toLocalDateTime());
-    }
-
-    public void setStartingTime(Timestamp startingTime) {
-        this.startingTime = startingTime;
     }
 
     public String getEndingTime() {
@@ -113,6 +109,11 @@ public class TestInfo {
                 Objects.equals(startingTime, testInfo.startingTime) &&
                 Objects.equals(endingTime, testInfo.endingTime) &&
                 Objects.equals(result, testInfo.result);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, testId, testName, testSubject, testDifficulty, startingTime, endingTime, result);
     }
 
     /**

@@ -1,5 +1,9 @@
 package com.epam.testing.model.dto;
 
+/**
+ * Checked answer dto class. Used to store answers with checked state,
+ * that means user have answered it earlier.
+ */
 public class CheckedAnswer {
     private final String text;
     private final boolean checked;

@@ -17,7 +17,7 @@ import java.util.Properties;
  */
 public class EmailSenderUtil {
     private static final Logger LOGGER = LogManager.getLogger(EmailSenderUtil.class);
-    private static final String emailToSend = "roman.nikitin.pz.2021@lpnu.ua";
+    private static final String EMAIL_PROPERTIES_PATH = "email.properties";
 
     /**
      * Don't let anyone instantiate this class.
@@ -32,7 +32,7 @@ public class EmailSenderUtil {
         LOGGER.info("Sending email starts");
         boolean success = true;
 
-        Properties properties = readProperties("email.properties");
+        Properties properties = readProperties();
         if(properties == null) {
             success = false;
             LOGGER.warn("Failed to read email.properties");
@@ -82,10 +82,10 @@ public class EmailSenderUtil {
         return result;
     }
 
-    private static Properties readProperties(String fileName) {
+    private static Properties readProperties() {
         Properties properties = new Properties();
         try {
-            properties.load(EmailSenderUtil.class.getClassLoader().getResourceAsStream(fileName));
+            properties.load(EmailSenderUtil.class.getClassLoader().getResourceAsStream(EMAIL_PROPERTIES_PATH));
         } catch (IOException e) {
             LOGGER.warn(e.getMessage());
             e.printStackTrace();

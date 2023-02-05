@@ -26,7 +26,7 @@ public class ImageConverterUtil {
     public static String getBase64String(Blob blob) {
         String base64Image = null;
         if(blob == null) {
-            return base64Image;
+            return null;
         }
 
         try(InputStream inputStream = blob.getBinaryStream();

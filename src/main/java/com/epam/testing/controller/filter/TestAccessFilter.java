@@ -27,7 +27,7 @@ public class TestAccessFilter implements Filter {
     private final UserTestService userTestService = new UserTestService();
 
     @Override
-    public void init(FilterConfig config) throws ServletException {
+    public void init(FilterConfig config) {
         LOGGER.debug("TestAccess filter initialization");
     }
 

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 @WebServlet("/controller")
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 1, //1MB
+@MultipartConfig(fileSizeThreshold = 1024 * 1024, //1MB
         maxFileSize = 1024 * 1024 * 10,       //10MB
         maxRequestSize = 1024 * 1024 * 100)   //100MB
 public class Controller extends HttpServlet {
@@ -36,15 +36,16 @@ public class Controller extends HttpServlet {
 
   private void processRequest(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
-    /**
-     * Command pattern implemented
-     */
+
+    /*
+      Command pattern implemented
+    */
     CommandFactory commandFactory = CommandFactory.commandFactory();
     Command command = commandFactory.getCommand(req);
     DispatchInfo dispatchInfo = command.execute(req, resp);
     String page = dispatchInfo.getPage();
 
-    /**
+    /*
      * PRG pattern implemented
      */
     if (dispatchInfo.isRedirect()) {

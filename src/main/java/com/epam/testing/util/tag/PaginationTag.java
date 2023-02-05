@@ -1,6 +1,5 @@
 package com.epam.testing.util.tag;
 
-import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
 
@@ -19,7 +18,7 @@ public class PaginationTag extends TagSupport {
     private String contextPath;
 
     @Override
-    public int doStartTag() throws JspException {
+    public int doStartTag() {
         JspWriter out = pageContext.getOut();
 
         String html = "";

@@ -67,10 +67,6 @@ public class TestQuestionService {
         }).collect(Collectors.toList());
     }
 
-    public List<String> getAnswerVariantsByQuestionId(long questionId) {
-        return answerVariantDAO.getAllByQuestionId(questionId);
-    }
-
     public boolean addQuestionToTheTest(long testId, Question question) {
         long id = questionDAO.create(testId, question);
         question.setId(id);
