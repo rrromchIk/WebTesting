@@ -107,7 +107,6 @@ footer {
     border-width: 2px;
     border-style: solid;
     width: 400px;
-    height: 530px;
     border-color: rgb(175, 175, 175);
     border-radius: 2%;
 }
@@ -404,7 +403,7 @@ input.form-check-input{
 }
 
 #signUpFormDIV {
-    min-height: calc(100vh - 120px);
+    min-height: calc(100vh - 30px);
 }
 
 #endAttemptButtonDIV {
