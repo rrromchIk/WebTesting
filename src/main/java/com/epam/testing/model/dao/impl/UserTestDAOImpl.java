@@ -95,10 +95,11 @@ public class UserTestDAOImpl implements UserTestDAO {
         return result;
     }
 
-    /**Getting Test's info
+    /**
+     * Select all Tests info of User
      *
      * @param userId for identification
-     * @return valid entity if it exists, else null.
+     * @return not empty list of entities if they exist, else empty list.
      */
     @Override
     public List<TestInfo> getTestsInfo(long userId, int limit, int offset) {
@@ -129,6 +130,12 @@ public class UserTestDAOImpl implements UserTestDAO {
         return userTestsInfo;
     }
 
+    /**
+     * Select TestInfo of  concrete User and Test
+     * @param userId for identification
+     * @param testId for identification
+     * @return valid entity if it exists, else null.
+     */
     @Override
     public TestInfo getTestInfo(long userId, long testId) {
         TestInfo userTestInfo = null;
@@ -157,6 +164,12 @@ public class UserTestDAOImpl implements UserTestDAO {
         return userTestInfo;
     }
 
+    /**
+     * Select Test's status
+     * @param userId for identification
+     * @param testId for identification
+     * @return valid status if record exist, else null
+     */
     @Override
     public TestStatus getStatus(long userId, long testId) {
         TestStatus testStatus = null;
@@ -176,6 +189,13 @@ public class UserTestDAOImpl implements UserTestDAO {
         return testStatus;
     }
 
+    /**
+     * Update Test status for User
+     * @param userId for identification
+     * @param testId for identification
+     * @param status new status
+     * @return true if update success, else false
+     */
     @Override
     public boolean updateStatus(long userId, long testId, TestStatus status) {
         boolean result = false;
@@ -193,6 +213,12 @@ public class UserTestDAOImpl implements UserTestDAO {
 
     }
 
+    /**
+     * Select Test starting time for User
+     * @param userId for identification
+     * @param testId for identification
+     * @return valid time if record exist, else null
+     */
     @Override
     public Timestamp getStartingTime(long userId, long testId) {
         Timestamp startingTime = null;
@@ -212,6 +238,9 @@ public class UserTestDAOImpl implements UserTestDAO {
         return startingTime;
     }
 
+    /**
+     * Contains all used queries for user_test table
+     */
     enum UserTestQueries {
         GET_TESTS_BY_USER_ID("SELECT name, subject, difficulty, duration," +
                 "number_of_questions FROM user_test JOIN test ON user_test.test_id = test.id WHERE user_id = ?"),
@@ -233,6 +262,9 @@ public class UserTestDAOImpl implements UserTestDAO {
         }
     }
 
+    /**
+     * Contains all fields in user_test table
+     */
     enum UserTestFields {
         USER_ID("user_id"),
         TEST_ID("test_id"),

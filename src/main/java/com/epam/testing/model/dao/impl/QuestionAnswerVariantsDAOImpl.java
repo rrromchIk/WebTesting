@@ -67,6 +67,9 @@ public class QuestionAnswerVariantsDAOImpl implements QuestionAnswerDAO {
         return result;
     }
 
+    /**
+     * Contains all used queries for question_answer_variants table
+     */
     enum AnswerQueries {
         INSERT("INSERT INTO question_answer_variants(question_id, text) VALUES(?, ?)"),
         GET_ALL_BY_ID("SELECT text FROM question_answer_variants WHERE question_id = ?");

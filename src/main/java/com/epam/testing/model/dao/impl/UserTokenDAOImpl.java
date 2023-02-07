@@ -19,6 +19,12 @@ public class UserTokenDAOImpl implements UserTokenDAO {
         this.datasource = datasource;
     }
 
+    /**
+     * Create UserToken in database.
+     *
+     * @param userToken for create.
+     * @return true is create success, else false
+     */
     @Override
     public boolean create(UserToken userToken) {
         boolean result = false;
@@ -37,6 +43,12 @@ public class UserTokenDAOImpl implements UserTokenDAO {
         return result;
     }
 
+    /**
+     * Select User in database.
+     *
+     * @param token for selecting
+     * @return valid entity if exist, else false
+     */
     @Override
     public UserToken read(String token) {
         UserToken userToken = null;
@@ -58,6 +70,9 @@ public class UserTokenDAOImpl implements UserTokenDAO {
         return userToken;
     }
 
+    /**
+     * Contains all used queries for user_token table
+     */
     enum UserTokenQueries {
         CREATE("INSERT INTO user_token " +
                 "VALUES(?, ?, ?)"),
@@ -69,6 +84,9 @@ public class UserTokenDAOImpl implements UserTokenDAO {
         }
     }
 
+    /**
+     * Contains all fields in user_token table
+     */
     enum UserTokenFields {
         USER_ID("user_id"),
         TOKEN("token"),

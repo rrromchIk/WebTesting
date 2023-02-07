@@ -23,6 +23,7 @@ public class ResetPasswordCommand implements Command {
     private final UserService userService = new UserService();
     private final UserTokenService userTokenService = new UserTokenService();
     private static final Integer TOKEN_EXPIRE_TIME_IN_MINUTES = 15;
+    private static final String HOST = "localhost:8080";
 
     @Override
     public DispatchInfo execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -66,7 +67,8 @@ public class ResetPasswordCommand implements Command {
     }
 
     private String createMessage(HttpServletRequest request, String token) {
-        String url = String.format("http://localhost:8080%s/%s?token=%s",
+        String url = String.format("http://%s%s/%s?token=%s",
+                HOST,
                 request.getContextPath(),
                 Path.PAGE_CHANGE_PASSWORD,
                 token);

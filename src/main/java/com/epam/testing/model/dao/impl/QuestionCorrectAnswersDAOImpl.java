@@ -67,6 +67,9 @@ public class QuestionCorrectAnswersDAOImpl implements QuestionAnswerDAO {
         return result;
     }
 
+    /**
+     * Contains all used queries for question_correct_answer table
+     */
     enum AnswerQueries {
         INSERT("INSERT INTO question_correct_answer(question_id, text) VALUES(?, ?)"),
         GET_ALL_BY_ID("SELECT text FROM question_correct_answer WHERE question_id = ?");
