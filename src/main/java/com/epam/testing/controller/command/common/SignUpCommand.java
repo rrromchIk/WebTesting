@@ -5,6 +5,7 @@ import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.user.User;
 import com.epam.testing.model.service.UserService;
+import com.epam.testing.util.VerifyRecaptcha;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +31,15 @@ public class SignUpCommand implements Command {
                 .email(req.getParameter("email"))
                 .build();
 
+        String gRecaptchaResponse = req.getParameter("g-recaptcha-response");
+        boolean verifyReCaptcha = VerifyRecaptcha.verify(gRecaptchaResponse);
+        if(!verifyReCaptcha) {
+            session.setAttribute("invalid", true);
+            session.setAttribute("msg", "validation.captcha.notVerified");
+            page += Path.PAGE_SIGNUP;
+            return new DispatchInfo(true, page);
+        }
+
         if(userService.addUser(user)) {
             LOGGER.info("Sign up success");
             session.setAttribute("success", true);
@@ -38,6 +48,7 @@ public class SignUpCommand implements Command {
         } else {
             LOGGER.info("Sign up fault: login already in use");
             session.setAttribute("invalid", true);
+            session.setAttribute("msg", "validation.loginAlreadyInUser");
             page += Path.PAGE_SIGNUP;
         }
 

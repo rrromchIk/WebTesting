@@ -56,7 +56,6 @@
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.fillThisField"/>')"
                                oninput="this.setCustomValidity('')">
                     </div>
-
                     <button type="submit" class="btn btn-primary btn-block"><fmt:message key="registrationForm.logIn.button"/></button>
                 </form>
             </div>
@@ -70,6 +69,7 @@
             </div>
 
         </div>
+
         <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>

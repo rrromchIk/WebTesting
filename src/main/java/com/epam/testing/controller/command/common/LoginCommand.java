@@ -5,6 +5,7 @@ import com.epam.testing.controller.Path;
 import com.epam.testing.controller.command.Command;
 import com.epam.testing.model.entity.user.User;
 import com.epam.testing.model.service.UserService;
+import com.epam.testing.util.VerifyRecaptcha;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,10 +21,10 @@ public class LoginCommand implements Command {
         LOGGER.debug("LoginCommand execution started");
         String page = req.getContextPath();
 
+        HttpSession httpSession = req.getSession();
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        HttpSession httpSession = req.getSession();
         if(userService.userExists(login, password)) {
             User user = userService.getUserByLogin(login);
             if(login.equals("admin") && password.equals("admin")) {

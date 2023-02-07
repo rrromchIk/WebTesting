@@ -34,9 +34,10 @@
                         <c:if test="${sessionScope.invalid eq true}">
                             <input type="hidden" class="is-invalid">
                             <div class="invalid-feedback">
-                                <h6><fmt:message key="validation.loginAlreadyInUser"/></h6>
+                                <h6><fmt:message key="${sessionScope.msg}"/></h6>
                             </div>
                             <c:remove var="invalid" scope="session"/>
+                            <c:remove var="msg" scope="session"/>
                         </c:if>
                     </div>
 
@@ -71,6 +72,10 @@
                                oninvalid="this.setCustomValidity('<fmt:message key="validation.badEmail"/>')"
                                oninput="this.setCustomValidity('')">
                     </div>
+                    <div class="g-recaptcha"
+                         data-sitekey="6Lf3vl4kAAAAACIW7IFZyqB5jLw646UmnvXTq6XY">
+                    </div>
+
                     <button class="btn btn-primary" id="signUpButton" type="submit" ><fmt:message key="registrationForm.signUp.button"/></button>
                 </form>
 
@@ -81,6 +86,7 @@
             </div>
         </div>
 
+        <script src="https://www.google.com/recaptcha/api.js"></script>
         <jsp:include page="/WEB-INF/templates/_footer.jsp"/>
         <jsp:include page="/WEB-INF/templates/_scripts.jsp"/>
     </body>
