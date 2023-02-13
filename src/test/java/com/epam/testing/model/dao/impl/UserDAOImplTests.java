@@ -15,6 +15,7 @@ import org.mockito.quality.Strictness;
 
 import static com.epam.testing.model.dao.impl.UserDAOImpl.UserFields.*;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
 
@@ -150,6 +151,35 @@ class UserDAOImplTests {
     }
 
     @Test
+    void updatePasswordTest() throws SQLException {
+        UserDAOImpl userDAO = new UserDAOImpl(mockDataSource);
+
+        when(mockPreparedStatement.executeUpdate()).thenReturn(-1);
+        assertFalse(userDAO.updatePassword(userExample.getPassword(), USER_ID));
+
+        when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+        assertTrue(userDAO.updatePassword(userExample.getPassword(), USER_ID));
+
+        when(mockPreparedStatement.executeUpdate()).thenThrow(SQLException.class);
+        assertFalse(userDAO.updatePassword(userExample.getPassword(), USER_ID));
+    }
+
+    @Test
+    void updateAvatarTest() throws SQLException {
+        UserDAOImpl userDAO = new UserDAOImpl(mockDataSource);
+        InputStream inputStream = null;
+
+        when(mockPreparedStatement.executeUpdate()).thenReturn(-1);
+        assertFalse(userDAO.updateAvatar(inputStream, USER_ID));
+
+        when(mockPreparedStatement.executeUpdate()).thenReturn(1);
+        assertTrue(userDAO.updateAvatar(inputStream, USER_ID));
+
+        when(mockPreparedStatement.executeUpdate()).thenThrow(SQLException.class);
+        assertFalse(userDAO.updateAvatar(inputStream, USER_ID));
+    }
+
+    @Test
     void deleteMethodTest() {
         UserDAOImpl userDAO = new UserDAOImpl(mockDataSource);
 
@@ -185,6 +215,20 @@ class UserDAOImplTests {
 
         when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
         assertNull(userDAO.getByLogin(userExample.getLogin()));
+    }
+
+    @Test
+    void getByEmailMethodTest() throws SQLException {
+        UserDAOImpl userDAO = new UserDAOImpl(mockDataSource);
+
+        makeResultSetReturnValidUser();
+        assertEquals(userExample, userDAO.getByEmail(userExample.getEmail()));
+
+        when(mockResultSet.next()).thenReturn(Boolean.FALSE);
+        assertNull(userDAO.getByEmail(userExample.getEmail()));
+
+        when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
+        assertNull(userDAO.getByEmail(userExample.getEmail()));
     }
 
     private void makeResultSetReturnValidUser() throws SQLException {

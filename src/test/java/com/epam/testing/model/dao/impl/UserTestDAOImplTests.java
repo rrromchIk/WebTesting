@@ -142,6 +142,20 @@ class UserTestDAOImplTests {
     }
 
     @Test
+    void getTestInfoMethodTest() throws SQLException {
+        UserTestDAOImpl userTestDAO = new UserTestDAOImpl(mockDataSource);
+
+        when(mockResultSet.next()).thenReturn(Boolean.FALSE);
+        assertNull(userTestDAO.getTestInfo(USER_ID, TEST_ID));
+
+        makeResultSetReturnValidTestInfo();
+        assertEquals(userTestDAO.getTestInfo(USER_ID, TEST_ID), testInfoExample);
+
+        when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
+        assertNull(userTestDAO.getTestInfo(USER_ID, TEST_ID));
+    }
+
+    @Test
     void getTestsInfoMethodTest() throws SQLException {
         UserTestDAOImpl userTestDAO = new UserTestDAOImpl(mockDataSource);
 
@@ -171,6 +185,23 @@ class UserTestDAOImplTests {
 
         when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
         assertNull(userTestDAO.getStatus(USER_ID, TEST_ID));
+    }
+
+    @Test
+    void getStartingTimeMethodTest() throws SQLException {
+        UserTestDAOImpl userTestDAO = new UserTestDAOImpl(mockDataSource);
+
+        when(mockResultSet.next()).thenReturn(Boolean.TRUE, Boolean.FALSE);
+        when(mockResultSet.getTimestamp(UserTestDAOImpl.UserTestFields.STARTING_TIME.FIELD))
+                .thenReturn(STARTING_TIME);
+        Timestamp startingTime = userTestDAO.getStartingTime(USER_ID, TEST_ID);
+        assertEquals(STARTING_TIME, startingTime);
+
+        when(mockResultSet.next()).thenReturn(Boolean.FALSE);
+        assertNull(userTestDAO.getStartingTime(USER_ID, TEST_ID));
+
+        when(mockPreparedStatement.executeQuery()).thenThrow(SQLException.class);
+        assertNull(userTestDAO.getStartingTime(USER_ID, TEST_ID));
     }
 
     private void makeResultSetReturnValidTestInfo() throws SQLException {
