@@ -9,7 +9,6 @@ import org.apache.commons.lang3.RandomStringUtils;
  * @author rom4ik
  */
 public class CryptoUtil {
-
     /**
      * Don't let anyone instantiate this class.
      */
