@@ -61,7 +61,6 @@ public class UpdatePasswordCommand implements Command {
     }
 
     private boolean updatePassword(User user, String newPassword) {
-        user.setPassword(newPassword);
-        return userService.updateUser(user);
+        return userService.updatePassword(newPassword, user.getId());
     }
 }

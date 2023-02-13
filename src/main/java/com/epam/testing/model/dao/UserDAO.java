@@ -14,4 +14,5 @@ public interface UserDAO extends DAO<User> {
     User getByLogin(String login);
     User getByEmail(String email);
     boolean updateAvatar(InputStream img, long userId);
+    boolean updatePassword(String password, long userId);
 }

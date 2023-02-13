@@ -61,4 +61,8 @@ public class UserService {
     public boolean setAvatar(InputStream img, long userId) {
         return dao.updateAvatar(img, userId);
     }
+
+    public boolean updatePassword(String password, long userId) {
+        return dao.updatePassword(password, userId);
+    }
 }

@@ -275,6 +275,28 @@ public class UserDAOImpl implements UserDAO {
     }
 
     /**
+     * Update User's password by id.
+     *
+     * @param password new user's password.
+     * @param userId for User identification
+     * @return True if success. False if fails.
+     */
+    @Override
+    public boolean updatePassword(String password, long userId) {
+        boolean result = false;
+        try (Connection connection = datasource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UserQueries.UPDATE_PASSWORD.QUERY)) {
+            statement.setString(1, password);
+            statement.setLong(2, userId);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage());
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
      * Contains all used queries for user table
      */
     enum UserQueries {
@@ -285,9 +307,11 @@ public class UserDAOImpl implements UserDAO {
         GET_BY_EMAIL("SELECT * FROM user WHERE email = ?"),
         INSERT("INSERT INTO user(login, password, name, surname, email) " +
                 "VALUES(?, sha1(?), ?, ?, ?)"),
-        UPDATE("UPDATE user SET name = ?, password = sha1(?), surname = ?, email = ?, status = ? WHERE login = ?"),
+        UPDATE("UPDATE user SET name = ?, password = ?, surname = ?, email = ?, status = ? WHERE login = ?"),
         UPDATE_AVATAR("UPDATE user SET avatar = ? WHERE id = ?"),
+        UPDATE_PASSWORD("UPDATE user SET password = sha1(?) WHERE id = ?"),
         DELETE("DELETE FROM user WHERE login = ? AND password = ?"),
+
 
         GET_AMOUNT_OF_RECORDS("SELECT COUNT(login) FROM user");
 
