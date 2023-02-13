@@ -37,7 +37,7 @@ public class Controller extends HttpServlet {
   private void processRequest(HttpServletRequest req, HttpServletResponse resp)
       throws ServletException, IOException {
 
-    /*
+    /**
       Command pattern implemented
     */
     CommandFactory commandFactory = CommandFactory.commandFactory();
@@ -45,7 +45,7 @@ public class Controller extends HttpServlet {
     DispatchInfo dispatchInfo = command.execute(req, resp);
     String page = dispatchInfo.getPage();
 
-    /*
+    /**
      * PRG pattern implemented
      */
     if (dispatchInfo.isRedirect()) {

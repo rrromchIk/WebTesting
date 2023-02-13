@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.util.Properties;
 
 import javax.json.Json;
 import javax.json.JsonObject;
@@ -22,14 +23,17 @@ import javax.net.ssl.HttpsURLConnection;
  */
 public class VerifyRecaptcha {
     private static final Logger LOGGER = LogManager.getLogger(VerifyRecaptcha.class);
-    public static final String VERIFY_URL = "https://www.google.com/recaptcha/api/siteverify";
-    public static final String SECRET_KEY = "6Lf3vl4kAAAAACXVO5rTc72bGt7Oh0lbYBSpKLlm";
-    private static final String USER_AGENT = "Mozilla/5.0";
+    private static final String RECAPTCHA_PROPERTIES_PATH="recaptcha.properties";
+    private static final Properties properties;
 
     /**
      * Don't let anyone instantiate this class.
      */
     private VerifyRecaptcha() {}
+
+    static {
+        properties = readProperties();
+    }
 
     /**
      * Sends request to google verify service
@@ -41,20 +45,22 @@ public class VerifyRecaptcha {
         if (gRecaptchaResponse == null || "".equals(gRecaptchaResponse)) {
             return false;
         }
-
+        Properties properties = readProperties();
         try {
-            URL obj = new URL(VERIFY_URL);
+            URL obj = new URL(properties.getProperty("verify.url"));
             HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
             addRequestHeader(con);
             sendPostRequest(con, gRecaptchaResponse);
 
             int responseCode = con.getResponseCode();
-            LOGGER.info("Sending 'POST' request to URL : {}", VERIFY_URL);
+            LOGGER.info("Sending 'POST' request to URL : {}", properties.getProperty("verify.url"));
             LOGGER.info("Response Code : {}", responseCode);
 
             String response = getResponse(con);
-            return parseResponseAndGetSuccessValue(response);
+            boolean success = parseResponseAndGetSuccessValue(response);
+            LOGGER.info("Verify: {}", success);
+            return success;
         }catch(Exception e){
             e.printStackTrace();
             LOGGER.warn(e.getMessage());
@@ -64,12 +70,12 @@ public class VerifyRecaptcha {
 
     private static void addRequestHeader(HttpsURLConnection connection) throws ProtocolException {
         connection.setRequestMethod("POST");
-        connection.setRequestProperty("User-Agent", USER_AGENT);
+        connection.setRequestProperty("User-Agent", properties.getProperty("user.agent"));
         connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
     }
 
     private static void sendPostRequest(HttpsURLConnection connection, String gRecaptchaResponse) throws IOException {
-        String postParams = "secret=" + SECRET_KEY + "&response="
+        String postParams = "secret=" + properties.getProperty("secrete.key") + "&response="
                 + gRecaptchaResponse;
 
         connection.setDoOutput(true);
@@ -98,5 +104,17 @@ public class VerifyRecaptcha {
             jsonObject = jsonReader.readObject();
         }
         return jsonObject.getBoolean("success");
+    }
+
+    private static Properties readProperties() {
+        Properties properties = new Properties();
+        try {
+            properties.load(EmailSenderUtil.class.getClassLoader().getResourceAsStream(RECAPTCHA_PROPERTIES_PATH));
+        } catch (IOException e) {
+            LOGGER.warn(e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+        return properties;
     }
 }

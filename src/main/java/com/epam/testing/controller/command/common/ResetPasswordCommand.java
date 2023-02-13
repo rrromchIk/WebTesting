@@ -37,20 +37,8 @@ public class ResetPasswordCommand implements Command {
             LOGGER.warn("No user with such email");
         } else {
             String token = CryptoUtil.generateToken();
-            String hashedToken = CryptoUtil.getHashedToken(token);
-            long userId = user.getId();
-            Timestamp expireTime = Timestamp.valueOf(
-                    LocalDateTime.now()
-                            .plusMinutes(TOKEN_EXPIRE_TIME_IN_MINUTES)
-            );
 
-            UserToken userToken = new UserToken.UserTokenBuilder()
-                    .userId(userId)
-                    .token(hashedToken)
-                    .expirationDate(expireTime)
-                    .build();
-            userTokenService.addUserToken(userToken);
-
+            userTokenService.addUserToken(createUserToken(user, token));
             String message = createMessage(req, token);
             String subject = "WebTesting";
 
@@ -73,5 +61,20 @@ public class ResetPasswordCommand implements Command {
                 Path.PAGE_CHANGE_PASSWORD,
                 token);
         return "Click to reset password: " + url;
+    }
+
+    private UserToken createUserToken(User user, String token) {
+        String hashedToken = CryptoUtil.getHashedToken(token);
+        long userId = user.getId();
+        Timestamp expireTime = Timestamp.valueOf(
+                LocalDateTime.now()
+                        .plusMinutes(TOKEN_EXPIRE_TIME_IN_MINUTES)
+        );
+
+        return new UserToken.UserTokenBuilder()
+                .userId(userId)
+                .token(hashedToken)
+                .expirationDate(expireTime)
+                .build();
     }
 }
