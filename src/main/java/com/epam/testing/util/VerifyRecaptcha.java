@@ -25,7 +25,6 @@ public class VerifyRecaptcha {
     private static final Logger LOGGER = LogManager.getLogger(VerifyRecaptcha.class);
     private static final String RECAPTCHA_PROPERTIES_PATH="recaptcha.properties";
     private static final Properties properties;
-
     /**
      * Don't let anyone instantiate this class.
      */
